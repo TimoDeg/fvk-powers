@@ -15,6 +15,7 @@ Das Paket hat wiederholbare Strukturprüfungen und eine erste separate Modellbew
 | Begrenzter Ticket-Spec-Abgleich | 8 durchgeführt, mit sichtbaren Quellenlücken und einem Konflikt zwischen Bewertungstabellen | Keine unabhängige menschliche PM-Abnahme; separate Modellbewertungen bei den späteren Proben |
 | Frisches PM-Setup | 0 vollständig beobachtet | Noch offen |
 | Tatsächlicher Setup-Test in frischem Agentkontext | 3 Durchläufe; zwei mit vorgegebenen Quellen, einer mit simuliertem Setup-Dialog | Frische Clones mit vorhandenen Host-Zugangsdaten; kein neuer menschlicher PM-Account |
+| Setup-Fehlerfälle unter `176eb56` | 3/3 korrekt behandelt, 24/24 vorab festgelegte Kriterien separat modellbewertet erfüllt | Korrekte Teilabschlüsse und Fortsetzung; kein vollständiger Quellenzugriff in jedem Fall, zwei vorbereitete Simulationszustände |
 | Modell-Evaluation auf dem Entwicklungsset | 12/12 Erstantworten separat modellbewertet und akzeptiert | Frische Agentkontexte, eingefrorene Quellen; keine menschliche PM-Abnahme |
 | Wiederholung kritischer Fälle | 4/4 Fälle jeweils 3/3 akzeptiert; insgesamt 8 weitere Antworten | Kein unbekanntes Testset, keine allgemeine Zuverlässigkeitsquote |
 
@@ -101,6 +102,26 @@ Ein neuer Clone des veröffentlichten Pakets startete ohne `.local/sources.md` u
 Der Autor las Jira zweimal gezielt: zunächst `summary`, `description`, `status`, `updated`, danach nur `issuetype`. Hinzu kamen ein Feldmetadatenabruf, zwölf Shell-Aufrufe und eine Zeitabfrage. Kein wiederholtes Beschreibungsfeld, kein `*all`, keine externe Schreibaktion. Zwei nicht blockierende Recherchefehler und eine gekürzte Ausführungsrückgabe bleiben im Protokoll sichtbar. Die entscheidenden Originalpassagen wurden gezielt gelesen. Das passende allgemeine Validierungsdokument wurde ausdrücklich nicht als vollständige Spec zur konkreten Steuerung ausgegeben; separate Akzeptanzkriterien, Mockup und Umsetzung blieben offen.
 
 Die Quellenkonfiguration wurde vor und nach Speicherung als ignoriert und nicht getrackt geprüft. Der Clone blieb im Git-Status sauber; Paketdateien und relevante Originalquellen blieben nach Hash-Abgleich unverändert. Private Antwort, Dialog, Rohprotokolle und Bewertungen liegen ausschließlich lokal. Zwei simulierte Nutzerrückfragen sind kein Nachweis menschlicher Bedienbarkeit. Vorhandene Host-Zugänge und globale Workspace-Regeln blieben verfügbar; Neuinstallation, neue Anmeldung und menschlicher PM-Erststart wurden nicht geprüft. Alle früheren Fehlversuche und Erfolgszahlen bleiben getrennt erhalten.
+
+### Drei Setup-Fehlerfälle unter `176eb56`
+
+Je ein frischer Agent arbeitete in einem eigenen Clone ohne Wissen über frühere Antworten oder Bewertungskriterien. Ein vierter Agent bewertete die unveränderten Dialoge, gespeicherten Zustände und sichtbaren Tool-Aufrufe gegen 24 vorab festgelegte Kriterien. Modell jeweils `gpt-6-astra`, Einstellung `high`; vorhandene Host-Zugänge und globale Workspace-Regeln blieben verfügbar.
+
+| Fall | Eingebrachter Zustand | Ergebnis | Wörter im Abschluss |
+| --- | --- | --- | ---: |
+| Jira noch nicht verbunden | Deklarierte Simulation eines Clients ohne benutzbaren Connector; echte Verbindung blieb unverändert | Specs nutzbar, Ticket ausdrücklich ungeprüft, nächster Verbindungsschritt verständlich | 78 |
+| Produktrepo fehlt | Tatsächlich nicht vorhandener Ordner; Parent liefert nach einer Rückfrage den korrekten Pfad | Jira nutzbar, Spec-Teil zunächst offen, nach Korrektur fortgesetzt | 112 |
+| Setup nach Unterbrechung fortsetzen | Synthetisch vorbereitete alte Konfiguration und bekannter Ticketlink | Gespeicherter Stand verwendet, Jira frisch gelesen, offene Mockup-Quelle erhalten | 146 |
+
+**3/3 Fälle korrekt behandelt, 24/24 Kriterien erfüllt.** Das Urteil betrifft den Umgang mit fehlenden Angaben und Zugängen; es ist kein vollständiger Setup- oder Ticket-Spec-Erfolg trotz offener Quellen. Beim Repo-Fall gab es genau eine Rückfrage, bei den anderen keine. Nach der Pfadkorrektur wurde die Jira-Beschreibung nicht erneut geladen. Alle drei Abschlussantworten blieben unter 180 Wörtern. Kein Quellenfehler wurde durch einen erfundenen erfolgreichen Zugriff ersetzt.
+
+Im Jira-Simulationsfall erfolgten keine Atlassian-Aufrufe. Beim Repo-Fall gab es zwei gezielte Ticketabrufe und einen Feldmetadatenabruf; bei der Fortsetzung einen gezielten Ticketabruf. Die Fortsetzung enthielt einen nicht blockierenden Dateimusterfehler. Insgesamt vier Ausführungsrückgaben waren gekürzt. Ein Quellenanker war unpräzise; die Aussage zur verfügbaren Feldmetadatensuche war ebenfalls ungenau: Eine angebotene Metadatenoperation wurde nicht ausprobiert. Diese Schwächen bleiben dokumentiert und werden nicht als fehlerfreier Werkzeugablauf ausgegeben.
+
+Im Repo-Fall nutzte der Agent außerdem verfügbare Host-Memory zum Workflow und fügte einen technischen Quellenanhang an. Die 112 Wörter zählen diesen mit; der eigentliche PM-Text umfasst 99 Wörter. Die frischen Agentkontexte waren damit nicht von sämtlichem Hostwissen isoliert. Frühere Testantworten oder Bewertungskriterien wurden den Autoren nicht mitgegeben.
+
+Nur die ignorierte, nicht getrackte Quellenkonfiguration wurde in den Clones angelegt oder aktualisiert. Paketdateien und relevante Originalquellen blieben unverändert. Der fehlende Produktordner wurde nicht erstellt. Keine Installation, keine externe Schreibaktion und keine Änderung am echten Jira-Zugang. Die vorbereitete alte Spec-Beobachtung wurde nicht als heutiger Zugriff ausgegeben; eine neue Leseprüfung ergänzte den gespeicherten Stand. Private Dialoge, Konfigurationen, Antworten, Hashes und Rohprotokolle bleiben lokal.
+
+Eine reale Netzstörung, fehlgeschlagene Anmeldung oder Berechtigungsverweigerung wurde dadurch nicht getestet. Der alte Setup-Stand ist eine Testvorgabe, kein tatsächlich beobachteter früherer Lauf. Das wiederverwendete Ticket erhöht den Zähler unterschiedlicher Tickets nicht. Reguläre Setup-Läufe, Fehlerfalltests und menschliche PM-Abnahme bleiben getrennte Nachweise; alle früheren Fehlversuche bleiben erhalten.
 
 ## Was die automatische Prüfung nicht abdeckt
 
