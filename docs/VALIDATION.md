@@ -7,7 +7,9 @@ Das Paket hat wiederholbare Strukturprüfungen. Die Antwortqualität und ein fri
 | Prüfung | Ergebnis | Aussagegrenze |
 | --- | --- | --- |
 | Regressionen des Paketprüfers | 12/12 bestanden, lokal mit Python 3.14.4 | Prüft den Checker gegen gültige und absichtlich fehlerhafte Pakete |
-| Paketprüfung | 5 Prüfgruppen; aktuelles Ergebnis im CI-Workflow | Einstiegsdateien, private Dateipfade, lokale Markdown-Dateilinks, portable Dokumentation, Eval-Datenstruktur |
+| Paketprüfung | 5/5 Prüfgruppen lokal bestanden | Einstiegsdateien, private Dateipfade, lokale Markdown-Dateilinks, portable Dokumentation, Eval-Datenstruktur |
+| Isolierter Clone | Paketchecker und 12 Tests bestanden, Aufruf aus fremdem Arbeitsverzeichnis funktioniert | Keine persönlichen Dateien oder Produktquellen erforderlich; kein frischer PM-Chat |
+| GitHub Actions | Vorlage vorbereitet, Aktivierung blockiert | GitHub lehnt Workflow-Veröffentlichung mit dem aktuellen OAuth-Zugang ohne `workflow`-Berechtigung ab; kein CI-Erfolg behauptet |
 | Kontextpfade im lokalen Produktrepo | 17/17 vorhanden; beide Spec-Einstiege lesbar | Keine vollständige Code-/Dokumentabdeckung und kein Beleg der jüngsten Remote-Version |
 | Jira-Lesezugriff | 1 exaktes, aus einer Original-Spec verlinktes Ticket erfolgreich gelesen | Nur der aktuelle Maintainer-Zugang, nicht der Zugang eines anderen PMs |
 | Begrenzter Ticket-Spec-Abgleich | 1 durchgeführt, mit sichtbaren Quellenlücken | Selbst durchgeführter Quellencheck, keine unabhängige Bewertung der Antwortqualität |
@@ -44,7 +46,7 @@ Messdefinitionen und Freigabekriterien: [Eval-Plan](../evals/README.md). Neue Er
 | Jira plus Original-Specs, Konflikte, Aktualität, Quellenbelege | Enthalten; ein begrenzter Live-Quellencheck durchgeführt |
 | Fachliche Kontextwahl, Entscheidungen, Code-Einstiege, Release-Grenzen | Portable Landkarte in `CONTEXT.md`; aktuelle lokale Pfade geprüft |
 | PM-Formatierung, Ideen, Abnahmeplanung | Profil und Beispiele enthalten; unabhängige Qualitätsmessung offen |
-| Paketprüfungen und wiederholbare Regressionen | Lokaler Checker und GitHub-Workflow enthalten |
+| Paketprüfungen und wiederholbare Regressionen | Lokaler Checker und inaktive GitHub-Workflow-Vorlage enthalten; Workflow-Berechtigung fehlt |
 | Persönliche Wissenssammlung, private Läufe und alte Ticket-Historie | Keine Abhängigkeit und nicht kopiert; Originalquellen jeweils neu binden |
 | QMD, CodeGraph, Graphify und Legacy-Harness | Nicht mitgeliefert; optionaler Suchweg beschrieben |
 | Produktimplementierung, App-Tests, Deployment | Keine portierte Automation; expliziter Übergang zu den Regeln des Produktrepos |

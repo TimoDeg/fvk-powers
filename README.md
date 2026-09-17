@@ -2,11 +2,11 @@
 
 **Rewrite verstehen. Tickets schärfen. Abnahmen vorbereiten.**
 
-[![Package checks](https://github.com/TimoDeg/fvk-powers/actions/workflows/check.yml/badge.svg)](https://github.com/TimoDeg/fvk-powers/actions/workflows/check.yml)
+**Paketchecks: lokal bestanden · CI: vorbereitet, noch nicht aktiv · PM-Pilot: offen**
 
 Ein Assistent für PMs, der Jira mit den passenden Original-Specs verbindet und verständlich antwortet. Kundenwirkung und fachliche Entscheidungen stehen im Vordergrund. Technische Keywords werden nur verwendet, wenn sie helfen, und kurz erklärt.
 
-> **Stand: Vorbereitung für den PM-Pilot.** Der Quellenzugriff wurde am bestehenden Arbeitsplatz geprüft. Ein frisches PM-Setup und unabhängig bewertete Antworten stehen noch aus. Der grüne Workflow prüft das Paket, nicht die Qualität der KI-Antworten.
+> **Stand: Vorbereitung für den PM-Pilot.** Der Quellenzugriff wurde am bestehenden Arbeitsplatz geprüft. Ein frisches PM-Setup und unabhängig bewertete Antworten stehen noch aus. Die Paketchecks prüfen Struktur und Prüflogik, nicht die Qualität der KI-Antworten.
 
 ## In einem Satz starten
 
@@ -46,7 +46,8 @@ Momentaufnahme vom **17.09.2026**. Details und Grenzen stehen im [Prüfbericht](
 | Kennzahl | Stand | Was sie belegt |
 | --- | ---: | --- |
 | Regressionstests des Paketprüfers | **12 / 12 bestanden** | Beschädigte Links, private Dateien, fehlende Einstiege und ungültige Eval-Fälle werden erkannt |
-| Automatische Paket-Prüfgruppen | **5** | Wiederholbare Offline-Prüfung; aktueller Lauf über das Badge oben |
+| Automatische Paket-Prüfgruppen | **5 / 5 bestanden** | Wiederholbare Offline-Prüfung, aktuell lokal ausgeführt |
+| Isolierter frischer Paket-Clone | **1 bestanden** | Checks ohne persönlichen Kontext oder Produktcheckout lauffähig; kein PM-Chat-Test |
 | Kontext-Einstiege im lokalen Produktrepo | **17 / 17 vorhanden** | Die geprüften Pfade existieren; kein Vollständigkeitsversprechen |
 | Live-Quellenchecks Jira + Spec | **1** | Zugriff und begrenzter Abgleich am bestehenden Arbeitsplatz |
 | Vorbereitete Antwort-Eval-Fälle | **12** | Entwicklungsset für Fakten, Konflikte, Setup, Sicherheit und Sprache |
@@ -99,6 +100,8 @@ python3 tools/check.py --product-repo ../fvk
 ```
 
 Die nächsten Schritte sind ein **frisches PM-Setup**, die **12 Antwortfälle** und **drei echte Tickets mit PM-Bewertung**. Setup-Zeit, Rückfragen, fachliche Fehler und Verständlichkeit werden dabei getrennt erfasst. [Prüfplan und Freigabekriterien](evals/README.md).
+
+Die [CI-Vorlage](docs/ci/check.yml) ist vorbereitet, aber nicht aktiviert: GitHub hat das Anlegen eines aktiven Workflows mit dem vorhandenen OAuth-Zugang wegen fehlender `workflow`-Berechtigung abgelehnt. Zur Aktivierung benötigt der veröffentlichende Zugang diese Berechtigung; anschließend die Vorlage nach `.github/workflows/check.yml` verschieben, veröffentlichen und den ersten Lauf prüfen. Bis dahin sind die oben ausgewiesenen Ergebnisse lokale Prüfungen.
 
 | Datei | Zweck |
 | --- | --- |
