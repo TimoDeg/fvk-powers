@@ -22,6 +22,14 @@ Vollständige Antworten, Bewertungen und geprüfter Regelstand: [Modelltest vom 
 
 Der tatsächliche Setup-Test zeigte einen unnötig breiten Jira-Abruf (`*all`). Anschließend wurde die gemeinsame Regel auf gezielte Anfangsfelder und bedarfsgerechtes Nachladen begrenzt. Die 20 synthetischen Antworten gehören ausdrücklich zum vorherigen Regelstand. Die Änderung wurde in einem zweiten frischen Agentkontext mit tatsächlichem Quellenzugriff geprüft.
 
+## Nachschärfung der Antwort- und Rechercheregeln
+
+Nach den oben genannten Modell- und Setup-Läufen wurden vier Punkte präzisiert: kurze Ticketüberblicke mit zunächst drei priorisierten Abnahmefällen, konkrete Entscheidungen bei unklarem Umfang, kein breiter Jira-Folgeabruf als Ersatz für fehlende Feldmetadaten und eine klare Trennung zwischen Spec-Hinweis und bestätigter Fehlerursache. Entscheidende Bedingungen bleiben auch in kurzen Antworten erhalten; vollständige Abnahmeaufträge bleiben vollständig.
+
+Ein frischer Testagent hat anschließend einen synthetischen Ticketüberblick und eine simulierte Entscheidung bei fehlendem Jira-Feldzugriff bearbeitet. Die Sichtprüfung durch den verantwortlichen Agenten bestätigte drei priorisierte Abnahmefälle, die offene Umfangsentscheidung, eine ausdrücklich ungeklärte Ursache und den Verzicht auf den breiten Folgeabruf. Das ist eine begrenzte Modellprobe ohne tatsächliche Jira-Aufrufe und ohne unabhängige PM-Bewertung; sie wird nicht zu den früheren Erfolgsquoten addiert.
+
+Die bisherigen Erfolgszahlen gehören zu den jeweils dokumentierten älteren Regelständen. Ein neuer tatsächlicher Jira-Durchlauf nach dieser Änderung steht aus; Paketchecks allein belegen nicht, dass ein Assistent die Abrufregel einhält.
+
 ## Einrichtung praktisch geprüft
 
 Der erste Durchlauf nutzte Baseline `348ab8fca2f4d2e55c50c5c2c9902d83329cdf42`. Der zweite nutzte denselben Stand mit der gezielten `AGENTS.md`-Änderung, SHA-256 `d270202c19db31e66617d76000b01ae29db6b60102b519ba58b176ed8ef57bd3`. Beide starteten ohne lokale Quellenkonfiguration. Repo-Pfad und Ticketlink waren in der Testanfrage ausdrücklich vorgegeben; ihre Ermittlung durch einen unerfahrenen PM wurde damit nicht getestet.
