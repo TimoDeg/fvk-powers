@@ -1,5 +1,69 @@
 # Was benötigt wird
 
+Für den hier beschriebenen Einstieg installierst du **die Desktop-App mit Codex und Git**. Dazu kommen dein freigegebener ChatGPT-Zugang, die Jira-Verbindung und Lesezugriff auf das Rewrite-Produktrepo. Python brauchst du nur, wenn du als Maintainer die Paketchecks ausführen möchtest.
+
+## Einrichtung von Anfang an
+
+Diese Anleitung führt durch macOS und Windows. Bereits erledigte Schritte kannst du überspringen. Auf einem verwalteten Firmenrechner nutze das Softwareportal bzw. die IT, falls eine Installation oder Verbindung gesperrt ist.
+
+### Codex einrichten
+
+1. Öffne die [offizielle Desktop-Anleitung mit Download](https://learn.chatgpt.com/docs/app); für Windows gibt es eine [eigene Installationsseite](https://learn.chatgpt.com/docs/windows/windows-app). Wähle den Download für dein Betriebssystem und öffne die Installationsdatei bzw. den dort verlinkten Store.
+2. Folge der Installation und öffne die App. Die aktuelle OpenAI-Dokumentation nennt sie **ChatGPT-Desktop-App**; darin wählst du **Codex**. Bei einer bestehenden Codex-App kannst du diese verwenden.
+3. Melde dich mit dem für deine Arbeit freigegebenen ChatGPT-Konto an und wähle den vorgesehenen Workspace. Wenn Codex dort fehlt, kläre den Zugang mit dem Workspace-Administrator.
+4. Lass die App geöffnet. Den lokalen Projektordner fügst du nach dem Download des Repos hinzu.
+
+Für diesen Einstieg brauchst du keinen separat angelegten OpenAI-API-Schlüssel. Die Anleitung verwendet die Anmeldung mit deinem ChatGPT-Konto.
+
+### Git installieren
+
+Öffne auf macOS **Terminal** über die Spotlight-Suche, auf Windows **PowerShell** über das Startmenü. Gib ein:
+
+```sh
+git --version
+```
+
+Erscheint `git version …`, ist Git vorhanden. Andernfalls nutze den passenden Weg:
+
+| Betriebssystem | Installation |
+| --- | --- |
+| macOS | Im Terminal `xcode-select --install` eingeben und den Installationsdialog abschließen. Die Apple Command Line Tools enthalten Git; die vollständige Xcode-App ist dafür nicht nötig. [Offizielle Git-Anleitung](https://git-scm.com/install/mac) |
+| Windows | In PowerShell `winget install --id Git.Git -e --source winget` ausführen. Ohne `winget` den passenden Installer über [Git für Windows](https://git-scm.com/install/windows) herunterladen und ausführen. |
+
+Öffne danach ein neues Terminal bzw. PowerShell-Fenster und prüfe erneut mit `git --version`. Falls die bereits geöffnete Codex-App Git nicht findet, starte sie neu.
+
+### Repo öffnen und Setup starten
+
+1. Wechsle im Terminal in einen Ordner, in dem du das Projekt speichern möchtest. Führe dort `git clone https://github.com/TimoDeg/fvk-powers.git` aus. Das legt den Unterordner `fvk-powers` an. Existiert er schon, verwende die vorhandene Kopie; überschreibe sie nicht.
+2. Öffne in der Desktop-App die Projektansicht und füge den heruntergeladenen Ordner als **lokales Projekt** hinzu. Bei einem vorhandenen Projekt: Projektmenü → **Edit project** → **Add folder**. Wähle `fvk-powers`; bei mehreren Ordnern setze ihn über **Make primary** als Hauptordner. So werden seine Projektanweisungen geladen. [Offizielle Projektanleitung](https://learn.chatgpt.com/docs/projects)
+3. Starte in diesem Projekt einen neuen Codex-Chat und schreibe: **„Richte fvk-powers für mich ein.“**
+
+Der Assistent prüft die Projektdateien und vorhandenen Quellen. Halte einen lesbaren Rewrite-Ticketlink und den Ordner oder internen Link zum Rewrite-Produktrepo bereit. Der öffentliche Download von fvk-powers benötigt keine Jira-Anmeldung und gewährt keine internen Zugriffsrechte.
+
+### Jira verbinden
+
+Wenn der Assistent bereits ein Ticket lesen kann, ist keine neue Verbindung nötig. Andernfalls:
+
+1. Öffne in der Desktop-App **Plugins** und suche nach **Atlassian Rovo** bzw. dem für eure Organisation freigegebenen Jira-Plugin. Der Name kann je nach Workspace abweichen.
+2. Öffne den Eintrag, prüfe den angebotenen Jira-Zugriff und installiere ihn über **+** bzw. die angezeigte Installationsschaltfläche. Ist er bereits installiert, fahre mit der Verbindung fort.
+3. Folge der Aufforderung zum Verbinden und melde dich im geöffneten Anmeldedialog mit deinem Arbeitskonto bei Atlassian an. Verwende die Jira-Site, zu der dein Ticket gehört. Die Anmeldung kann bei der Installation oder bei der ersten Nutzung erscheinen.
+4. Starte nach der Installation einen neuen Codex-Chat im Projekt `fvk-powers`. Schreibe **„Setup weiter. Prüfe den Jira-Zugriff auf dieses Ticket: …“** und füge den echten Ticketlink ein. Noch nicht gespeicherte Angaben aus dem alten Chat bei Bedarf erneut nennen.
+5. Erst wenn der Assistent das konkrete Ticket gelesen hat, ist der Zugriff geprüft. Ein installiertes Plugin allein reicht nicht.
+
+Fehlt das Plugin oder ist die Verbindung gesperrt, bitte den Workspace-Administrator um den freigegebenen Jira-Zugang. Ist nur das Ticket nicht lesbar, prüfe zunächst, ob du es mit demselben Konto im Browser öffnen kannst, und kläre die Ticketberechtigung intern. Passwörter und Tokens gehören nicht in den Chat.
+
+Der Installationsablauf und die anschließende neue Sitzung sind in der [offiziellen Plugin-Anleitung](https://learn.chatgpt.com/docs/plugins) beschrieben. Menünamen können je nach App-Version und Sprache abweichen; diese Anleitung ist keine Bestätigung, dass das Plugin in jedem Firmenkonto verfügbar ist.
+
+### Rewrite-Specs anbinden
+
+Nenne dem Assistenten den vorhandenen Produktrepo-Ordner oder den internen Repo-Link. Liegt noch keine lokale Kopie vor, prüft er zuerst verfügbaren Lesezugriff. Wenn ein Download nötig ist, klärt er mit dir den Zielordner und führt den beauftragten Schritt aus. Interne Berechtigungen muss gegebenenfalls das Team freischalten.
+
+Der Assistent prüft eine Original-Spec und versucht den ersten Ticket-Spec-Abgleich. Er zeigt zum Abschluss getrennt, ob **Jira**, **Specs** und **lokale Speicherung** geprüft oder noch offen sind. Bei einer fehlenden Quelle bleibt die Arbeit mit der anderen möglich. Mit **„Setup weiter“** setzt du die Einrichtung fort.
+
+**Für die PM-Nutzung musst du kein Node, PHP, Docker, keine Datenbank und keine zusätzlichen npm-/Python-Pakete installieren.** Auch ein zusätzlicher Editor oder die Codex CLI sind für diesen Desktop-Weg nicht nötig.
+
+Installationsquellen geprüft am **17.09.2026**. Ein vollständiger Erststart auf einem neuen PM-Rechner ist weiterhin offen; [Prüfstand](VALIDATION.md).
+
 ## Für PMs
 
 | Voraussetzung | Wofür? | Prüfung im Chat |

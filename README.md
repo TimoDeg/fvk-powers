@@ -4,6 +4,8 @@ Jira-Tickets verstehen, mit den Rewrite-Specs abgleichen und Abnahmen vorbereite
 
 ## Starten in drei Schritten
 
+**Zum ersten Mal hier?** [Codex und Git installieren, Jira verbinden](docs/DEPENDENCIES.md#einrichtung-von-anfang-an). Wenn Codex und Git bereits eingerichtet sind, starte direkt mit Schritt 1.
+
 Du brauchst **Codex oder einen vergleichbaren Assistenten mit Dateizugriff**, **Git** zum Klonen und für den vollständigen Abgleich Lesezugriff auf **Jira und das Rewrite-Produktrepo**. Die Specs sind die fachlichen Beschreibungen im Produktrepo. Eine laufende Produktanwendung brauchst du nicht.
 
 ### 1. Repo herunterladen
@@ -52,7 +54,7 @@ Der Assistent liest die verfügbaren Quellen und antwortet kurz, verständlich u
 
 ## Wenn beim Setup etwas fehlt
 
-- **Jira noch nicht verbunden:** Verbinde den freigegebenen Jira-/Atlassian-Zugang in deinem Assistenten. Mit erreichbaren Specs kannst du bereits Produktfragen stellen.
+- **Jira noch nicht verbunden:** Folge der [Anleitung zur Jira-Verbindung](docs/DEPENDENCIES.md#jira-verbinden). Mit erreichbaren Specs kannst du bereits Produktfragen stellen.
 - **Rewrite-Repo fehlt:** Nenne den internen Repo-Link oder den lokalen Ordner. Ohne Zugriff auf die Specs kann der Assistent lesbare Tickets erklären, aber keinen Spec-Abgleich bestätigen.
 - **Zugriff verweigert:** Lass die benötigte Leseberechtigung intern freischalten. Das öffentliche fvk-powers-Repo gewährt keinen Zugang zu Jira oder zum Produktrepo.
 
