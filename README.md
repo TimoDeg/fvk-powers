@@ -12,7 +12,7 @@ Ein Assistent für PMs, der Jira mit den passenden Original-Specs verbindet und 
 
 ## In einem Satz starten
 
-Dieses private Repo lokal klonen, als Projekt in Codex öffnen und im Chat schreiben:
+Dieses Repo lokal klonen, als Projekt in Codex öffnen und im Chat schreiben:
 
 > **Richte fvk-powers für mich ein.**
 
@@ -138,3 +138,9 @@ Der [GitHub-Workflow](.github/workflows/check.yml) führt bei Pushes und Pull Re
 | [Eval-Plan](evals/README.md) | Messdefinitionen und Testfälle |
 
 Standardmäßig arbeitet der Assistent lesend. Jira-Änderungen, Nachrichten an andere, Produktänderungen und Veröffentlichungen brauchen den jeweiligen ausdrücklichen Auftrag. Lokale Quellenangaben und private Belege bleiben unter dem ausgeschlossenen `.local/`; dieses Repo verteilt keine Ticketkopien oder Zugangsdaten.
+
+## Lizenz
+
+Dieses Paket steht unter der [MIT-Lizenz](LICENSE). Kopieren, Ändern, Weitergeben und kommerzielle Nutzung sind erlaubt; der Urheber- und Lizenzhinweis müssen in allen Kopien oder wesentlichen Teilen erhalten bleiben. Copyright (c) 2026 Timofey Degtyarev.
+
+Die Lizenz gilt für die Inhalte dieses Repos, nicht für externe Rewrite-Produktquellen, Jira-Inhalte oder andere verlinkte Materialien.
