@@ -11,10 +11,10 @@ Das Paket hat wiederholbare Strukturprüfungen und eine erste separate Modellbew
 | Isolierter Clone | Paketchecker und 12 Tests bestanden, Aufruf aus fremdem Arbeitsverzeichnis funktioniert | Keine persönlichen Dateien oder Produktquellen erforderlich; kein frischer PM-Chat |
 | GitHub Actions | [Erster Lauf bestanden](https://github.com/TimoDeg/fvk-powers/actions/runs/35212239595): 12 Tests und 5 Prüfgruppen, Ubuntu / Python 3.12.3 | Geprüfter Commit `0886026`; ausschließlich Paketchecks, keine Jira-Zugänge oder Modellantworten |
 | Kontextpfade im lokalen Produktrepo | 17/17 vorhanden; beide Spec-Einstiege lesbar | Keine vollständige Code-/Dokumentabdeckung und kein Beleg der jüngsten Remote-Version |
-| Jira-Lesezugriff | 7 unterschiedliche Tickets in ausgewerteten Durchläufen erfolgreich gelesen; reine Kandidatensichtung nicht mitgezählt | Nur der aktuelle Maintainer-Zugang, nicht der Zugang eines anderen PMs |
-| Begrenzter Ticket-Spec-Abgleich | 7 durchgeführt, mit sichtbaren Quellenlücken und einem Konflikt zwischen Bewertungstabellen | Durch den verantwortlichen Agenten geprüft, keine unabhängige PM-Abnahme |
+| Jira-Lesezugriff | 8 unterschiedliche Tickets in ausgewerteten Durchläufen erfolgreich gelesen; reine Kandidatensichtung nicht mitgezählt | Nur der aktuelle Maintainer-Zugang, nicht der Zugang eines anderen PMs |
+| Begrenzter Ticket-Spec-Abgleich | 8 durchgeführt, mit sichtbaren Quellenlücken und einem Konflikt zwischen Bewertungstabellen | Keine unabhängige menschliche PM-Abnahme; separate Modellbewertungen bei den späteren Proben |
 | Frisches PM-Setup | 0 vollständig beobachtet | Noch offen |
-| Tatsächlicher Setup-Test in frischem Agentkontext | 2 Durchläufe vor/nach Eingrenzung der Jira-Felder; Jira, Original-Spec und lokale Speicherung jeweils erfolgreich | Derselbe Einstieg in zwei neuen Clones mit vorhandenen Host-Zugangsdaten; kein neuer menschlicher PM-Account |
+| Tatsächlicher Setup-Test in frischem Agentkontext | 3 Durchläufe; zwei mit vorgegebenen Quellen, einer mit simuliertem Setup-Dialog | Frische Clones mit vorhandenen Host-Zugangsdaten; kein neuer menschlicher PM-Account |
 | Modell-Evaluation auf dem Entwicklungsset | 12/12 Erstantworten separat modellbewertet und akzeptiert | Frische Agentkontexte, eingefrorene Quellen; keine menschliche PM-Abnahme |
 | Wiederholung kritischer Fälle | 4/4 Fälle jeweils 3/3 akzeptiert; insgesamt 8 weitere Antworten | Kein unbekanntes Testset, keine allgemeine Zuverlässigkeitsquote |
 
@@ -92,6 +92,16 @@ Der lokale Produktcheckout enthielt fremde Änderungen. Er wurde nur gelesen. Ti
 
 Der Quellencheck zeigte, warum die Trennung nötig ist: Ein abgeschlossener Jira-Status und ältere Aussagen einer Spec zur Umsetzung dürfen nicht ungeprüft als derselbe Stand behandelt werden. Der Repo-Einstieg verweist für Spec-Status und Zuständigkeit auf eine separate Statusquelle; dieser Zugriff wurde nicht geprüft. Es wurden keine Kommentare, Anhänge, Anwendungstests, Deployments oder produktiven Abläufe vollständig validiert.
 
+### Vollständiger Agenten-Erststart unter `ffafc16`
+
+Ein neuer Clone des veröffentlichten Pakets startete ohne `.local/sources.md` und ohne Produktrepo am Standard-Nachbarpfad. Der frische Agent erhielt zunächst nur „Richte fvk-powers für mich ein.“ Er fragte nacheinander nach Ticketlink und Produktordner. Der Parent simulierte den PM und lieferte nur die erfragten Angaben sowie den Auftrag zu einer kurzen Erklärung mit drei Abnahmesituationen. Keine Recherche- oder Formulierungshilfe. Ein bisher in dieser Testreihe ungenutztes Ticket wurde vorab anhand von Thema und Quelleninhalt ausgewählt; keine Zufallsstichprobe.
+
+**Separate Modellbewertung: Setup 6/6, Antwort 8/8 Kriterien bestanden.** Die unveränderte Antwort umfasst 164 Wörter einschließlich Setupblock, 152 ohne ihn, und genau drei Prüfsituationen. Beide Agenten verwendeten `gpt-6-astra`, Einstellung `high`; der Bewerter kannte die vorab festgelegten Kriterien und prüfte tatsächliche Aufrufe, Rückgaben und Originalquellen.
+
+Der Autor las Jira zweimal gezielt: zunächst `summary`, `description`, `status`, `updated`, danach nur `issuetype`. Hinzu kamen ein Feldmetadatenabruf, zwölf Shell-Aufrufe und eine Zeitabfrage. Kein wiederholtes Beschreibungsfeld, kein `*all`, keine externe Schreibaktion. Zwei nicht blockierende Recherchefehler und eine gekürzte Ausführungsrückgabe bleiben im Protokoll sichtbar. Die entscheidenden Originalpassagen wurden gezielt gelesen. Das passende allgemeine Validierungsdokument wurde ausdrücklich nicht als vollständige Spec zur konkreten Steuerung ausgegeben; separate Akzeptanzkriterien, Mockup und Umsetzung blieben offen.
+
+Die Quellenkonfiguration wurde vor und nach Speicherung als ignoriert und nicht getrackt geprüft. Der Clone blieb im Git-Status sauber; Paketdateien und relevante Originalquellen blieben nach Hash-Abgleich unverändert. Private Antwort, Dialog, Rohprotokolle und Bewertungen liegen ausschließlich lokal. Zwei simulierte Nutzerrückfragen sind kein Nachweis menschlicher Bedienbarkeit. Vorhandene Host-Zugänge und globale Workspace-Regeln blieben verfügbar; Neuinstallation, neue Anmeldung und menschlicher PM-Erststart wurden nicht geprüft. Alle früheren Fehlversuche und Erfolgszahlen bleiben getrennt erhalten.
+
 ## Was die automatische Prüfung nicht abdeckt
 
 - Befolgt ein frischer Assistent die Anweisungen tatsächlich?
@@ -115,7 +125,7 @@ Messdefinitionen und Freigabekriterien: [Eval-Plan](../evals/README.md). Neue Er
 | Baustein | Stand in fvk-powers |
 | --- | --- |
 | Geführter PM-Einstieg, Quellenbindung, lokale Fortsetzung | In frischem Agentkontext mit echten Quellen und lokaler Speicherung geprüft; menschlicher PM-Erststart offen |
-| Jira plus Original-Specs, Konflikte, Aktualität, Quellenbelege | Enthalten; sieben begrenzte Live-Quellenchecks durchgeführt |
+| Jira plus Original-Specs, Konflikte, Aktualität, Quellenbelege | Enthalten; acht begrenzte Live-Quellenchecks durchgeführt |
 | Fachliche Kontextwahl, Entscheidungen, Code-Einstiege, Release-Grenzen | Portable Landkarte in `CONTEXT.md`; aktuelle lokale Pfade geprüft |
 | PM-Formatierung, Ideen, Abnahmeplanung | Profil, redaktionelle Beispiele und 20 separat modellbewertete Antworten enthalten; PM-Abnahme offen |
 | Paketprüfungen und wiederholbare Regressionen | Lokaler Checker und GitHub-Workflow für Pushes und Pull Requests enthalten |

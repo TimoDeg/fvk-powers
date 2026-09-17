@@ -51,18 +51,19 @@ Momentaufnahme vom **17.09.2026**. Details und Grenzen stehen im [Prüfbericht](
 | Automatische Paket-Prüfgruppen | **5 / 5 bestanden** | Wiederholbare Offline-Prüfung, aktuell lokal ausgeführt |
 | Isolierter frischer Paket-Clone | **1 bestanden** | Checks ohne persönlichen Kontext oder Produktcheckout lauffähig; kein PM-Chat-Test |
 | Kontext-Einstiege im lokalen Produktrepo | **17 / 17 vorhanden** | Die geprüften Pfade existieren; kein Vollständigkeitsversprechen |
-| Unterschiedliche echte Tickets mit begrenztem Quellenabgleich | **7** | Am bestehenden Arbeitsplatz geprüft; keine PM-Abnahmen |
+| Unterschiedliche echte Tickets mit begrenztem Quellenabgleich | **8** | Am bestehenden Arbeitsplatz geprüft; keine PM-Abnahmen |
 | Vorbereitete Antwort-Eval-Fälle | **14** | Entwicklungsset für Fakten, Konflikte, Setup, Sicherheit und Sprache |
 | Separat modellbewertete Erstantworten | **12 / 12 akzeptiert (Baseline v1)** | Synthetisches Entwicklungsset, keine menschliche Bewertung |
 | Kritische Fälle mit drei akzeptierten Versuchen | **4 / 4** | Konflikt, fehlende Spec, veralteter Status, Anweisungen in Quellen; insgesamt 8 zusätzliche Antworten |
 | Neue echte Ticketfragen am Ausgabeprofil `6e74a65` | **2 / 3 akzeptiert** | Separate Modellbewertung; alle unter 180 Wörtern, ein fachlicher Mangel durch fehlende Ausgangsbedingung |
 | Abnahmeproben nach präzisierter Bedingungsregel | **2 / 3 akzeptiert** | Gespeicherte Originalquellen; Bedingungen und Länge 3/3 erfüllt, eine Antwort noch zu technisch |
 | Gezielte Wiederholung nach zusätzlicher Sprachregel | **1 / 1 akzeptiert** | Zuvor zu technische Antwort: 171 Wörter, drei fachlich belegte Situationen; erster Versuch bleibt gezählt |
+| Vollständiger Agenten-Erststart unter `ffafc16` | **1 / 1 akzeptiert** | Neuer Clone, zwei Setup-Rückfragen, echte Quellen; 164 Wörter und drei Abnahmesituationen, separat bewertet |
 | Frische PM-Setups vollständig beobachtet | **0** | Pilotabnahme noch offen |
-| Echter Setup-Test mit frischem Agenten | **2 Durchläufe erfolgreich** | Derselbe Einstieg vor/nach gezielter Jira-Feldauswahl; isolierte Clones und bestehende Host-Zugangsdaten |
+| Echter Setup-Test mit frischem Agenten | **3 Durchläufe erfolgreich** | Zwei mit vorgegebenen Quellen, einer mit simuliertem Setup-Dialog; frische Clones und bestehende Host-Zugangsdaten |
 | Zusätzliche Python-/npm-Pakete | **0** | Paketchecker nutzt Standardbibliothek; externe Client- und Quellenzugänge bleiben nötig |
 
-Die 20 Modellantworten sind protokolliert; jede wurde in einem frischen Agentkontext erzeugt und danach separat bewertet. Zwei kleine Hinweise zur Quellenbezeichnung und Setup-Erklärung bleiben. Nach dieser Baseline wurde der Jira-Abruf auf gezielte Felder eingegrenzt und im echten Setup erneut erfolgreich geprüft. Danach wurden kürzere Ticketüberblicke, konkrete Umfangsentscheidungen, die Trennung von Spec-Hinweis und Fehlerursache sowie das Vermeiden breiter Jira-Folgeabrufe präzisiert. Die 20 Antworten und die zwei Setup-Tests bewerten diese jüngsten Änderungen nicht. Ein kleines bekanntes Entwicklungsset belegt keine allgemeine Zuverlässigkeit. [Ergebnisse, Grenzen und unveränderte Ausgaben](evals/results/2026-09-17-v1.md) · [Messmethodik](evals/README.md).
+Die 20 Modellantworten der ursprünglichen Baseline sind protokolliert; jede wurde in einem frischen Agentkontext erzeugt und danach separat bewertet. Zwei kleine Hinweise zur Quellenbezeichnung und Setup-Erklärung bleiben. Nach dieser Baseline wurde der Jira-Abruf auf gezielte Felder eingegrenzt und im echten Setup erneut erfolgreich geprüft. Danach wurden kürzere Ticketüberblicke, konkrete Umfangsentscheidungen, die Trennung von Spec-Hinweis und Fehlerursache sowie das Vermeiden breiter Jira-Folgeabrufe präzisiert. Die 20 Antworten und die ersten zwei Setup-Tests bewerten diese jüngsten Änderungen nicht; der spätere vollständige Agenten-Erststart steht separat in der Tabelle. Ein kleines bekanntes Entwicklungsset belegt keine allgemeine Zuverlässigkeit. [Ergebnisse, Grenzen und unveränderte Ausgaben](evals/results/2026-09-17-v1.md) · [Messmethodik](evals/README.md).
 
 Das neue Ausgabeprofil wurde separat erprobt: **166 Wörter / 3 Prüfsituationen** mit gespeichertem echten Quellenmaterial; **7 von 7 Fällen** bei ausdrücklich vollständiger synthetischer Abnahme. Bewertung durch den verantwortlichen Agenten, kein neuer Jira-Durchlauf und keine PM-Abnahme. [Prüfgrenzen](docs/VALIDATION.md).
 
