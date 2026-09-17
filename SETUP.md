@@ -12,6 +12,8 @@ Verwende Deutsch und das PM-Profil als Standard. Frage nicht zuerst nach Rolle, 
 
 Lies vorhandene Angaben aus `.local/sources.md`, falls vorhanden, und berücksichtige den laufenden Chat. Prüfe die tatsächlich verfügbaren Datei- und Jira-Werkzeuge; suche gegebenenfalls in den angebotenen Connector-Werkzeugen. Erfinde keine Toolnamen. Prüfe den bekannten Produktpfad oder den Kandidaten `../fvk` auf lesbare Specs. Suche nicht pauschal auf dem gesamten Rechner.
 
+Die [Voraussetzungen](docs/DEPENDENCIES.md) unterscheiden nötige Zugänge von optionalen Werkzeugen. Der [Kontexteinstieg](CONTEXT.md) beschreibt weitere Originalquellen. Lade daraus nur das gerade Benötigte. Die optionale Python-Paketprüfung ist keine Voraussetzung für den PM-Chat und ersetzt keinen Jira-Test.
+
 Kündige bevorstehende Schritte kurz mit ihrem Zweck an. Zeige relevante Ergebnisse, keine Befehlsausgaben und internen Diagnosepakete. Ein gespeicherter Erfolgsstatus ist eine alte Beobachtung und muss für einen erneuten Setup-Check frisch geprüft werden.
 
 ## 2. Fehlendes nacheinander klären
