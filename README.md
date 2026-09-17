@@ -2,7 +2,7 @@
 
 **Rewrite verstehen. Tickets schärfen. Abnahmen vorbereiten.**
 
-**Paketchecks: lokal bestanden · PM-Pilot: offen**
+**Paketchecks: lokal und in GitHub Actions bestanden · PM-Pilot: offen**
 
 [![Package checks](https://github.com/TimoDeg/fvk-powers/actions/workflows/check.yml/badge.svg)](https://github.com/TimoDeg/fvk-powers/actions/workflows/check.yml)
 
@@ -115,7 +115,7 @@ python3 tools/check.py --product-repo ../fvk
 
 Die nächsten Schritte sind ein **frisches menschliches PM-Setup**, **unbekannte Antwortfälle** und **die fachliche PM-Bewertung dreier echter Tickets**. Setup-Zeit, Rückfragen, fachliche Fehler und Verständlichkeit werden dabei getrennt erfasst. [Prüfplan und Freigabekriterien](evals/README.md).
 
-Der [GitHub-Workflow](.github/workflows/check.yml) führt bei Pushes und Pull Requests die 12 Checker-Tests und die Paketprüfung aus. Er kann auch manuell gestartet werden. Den aktuellen Laufstatus zeigt das Badge oben. Die CI liest keine Jira-Tickets und bewertet keine Modellantworten.
+Der [GitHub-Workflow](.github/workflows/check.yml) führt bei Pushes und Pull Requests die 12 Checker-Tests und die Paketprüfung aus. Er kann auch manuell gestartet werden. Der [erste Lauf](https://github.com/TimoDeg/fvk-powers/actions/runs/35212239595) hat alle 12 Tests und 5 Prüfgruppen bestanden. Den aktuellen Laufstatus zeigt das Badge oben. Die CI liest keine Jira-Tickets und bewertet keine Modellantworten.
 
 | Datei | Zweck |
 | --- | --- |

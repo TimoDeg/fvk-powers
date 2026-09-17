@@ -9,7 +9,7 @@ Das Paket hat wiederholbare Strukturprüfungen und eine erste separate Modellbew
 | Regressionen des Paketprüfers | 12/12 bestanden, lokal mit Python 3.14.4 | Prüft den Checker gegen gültige und absichtlich fehlerhafte Pakete |
 | Paketprüfung | 5/5 Prüfgruppen lokal bestanden | Einstiegsdateien, private Dateipfade, lokale Markdown-Dateilinks, portable Dokumentation, Eval-Datenstruktur |
 | Isolierter Clone | Paketchecker und 12 Tests bestanden, Aufruf aus fremdem Arbeitsverzeichnis funktioniert | Keine persönlichen Dateien oder Produktquellen erforderlich; kein frischer PM-Chat |
-| GitHub Actions | Workflow aktiviert; erster Lauf noch zu prüfen | Prüft ausschließlich das Paket unter Ubuntu, keine Jira-Zugänge oder Modellantworten |
+| GitHub Actions | [Erster Lauf bestanden](https://github.com/TimoDeg/fvk-powers/actions/runs/35212239595): 12 Tests und 5 Prüfgruppen, Ubuntu / Python 3.12.3 | Geprüfter Commit `0886026`; ausschließlich Paketchecks, keine Jira-Zugänge oder Modellantworten |
 | Kontextpfade im lokalen Produktrepo | 17/17 vorhanden; beide Spec-Einstiege lesbar | Keine vollständige Code-/Dokumentabdeckung und kein Beleg der jüngsten Remote-Version |
 | Jira-Lesezugriff | 3 unterschiedliche, aus Original-Specs verlinkte Tickets erfolgreich gelesen | Nur der aktuelle Maintainer-Zugang, nicht der Zugang eines anderen PMs |
 | Begrenzter Ticket-Spec-Abgleich | 3 durchgeführt, mit sichtbaren Quellenlücken und einem Konflikt zwischen Bewertungstabellen | Durch den verantwortlichen Agenten geprüft, keine unabhängige PM-Abnahme |
