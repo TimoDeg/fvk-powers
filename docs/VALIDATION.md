@@ -11,8 +11,8 @@ Das Paket hat wiederholbare Strukturprüfungen und eine erste separate Modellbew
 | Isolierter Clone | Paketchecker und 12 Tests bestanden, Aufruf aus fremdem Arbeitsverzeichnis funktioniert | Keine persönlichen Dateien oder Produktquellen erforderlich; kein frischer PM-Chat |
 | GitHub Actions | [Erster Lauf bestanden](https://github.com/TimoDeg/fvk-powers/actions/runs/35212239595): 12 Tests und 5 Prüfgruppen, Ubuntu / Python 3.12.3 | Geprüfter Commit `0886026`; ausschließlich Paketchecks, keine Jira-Zugänge oder Modellantworten |
 | Kontextpfade im lokalen Produktrepo | 17/17 vorhanden; beide Spec-Einstiege lesbar | Keine vollständige Code-/Dokumentabdeckung und kein Beleg der jüngsten Remote-Version |
-| Jira-Lesezugriff | 4 unterschiedliche Tickets erfolgreich gelesen; eines direkt aus dem Chat beauftragt | Nur der aktuelle Maintainer-Zugang, nicht der Zugang eines anderen PMs |
-| Begrenzter Ticket-Spec-Abgleich | 4 durchgeführt, mit sichtbaren Quellenlücken und einem Konflikt zwischen Bewertungstabellen | Durch den verantwortlichen Agenten geprüft, keine unabhängige PM-Abnahme |
+| Jira-Lesezugriff | 7 unterschiedliche Tickets in ausgewerteten Durchläufen erfolgreich gelesen; reine Kandidatensichtung nicht mitgezählt | Nur der aktuelle Maintainer-Zugang, nicht der Zugang eines anderen PMs |
+| Begrenzter Ticket-Spec-Abgleich | 7 durchgeführt, mit sichtbaren Quellenlücken und einem Konflikt zwischen Bewertungstabellen | Durch den verantwortlichen Agenten geprüft, keine unabhängige PM-Abnahme |
 | Frisches PM-Setup | 0 vollständig beobachtet | Noch offen |
 | Tatsächlicher Setup-Test in frischem Agentkontext | 2 Durchläufe vor/nach Eingrenzung der Jira-Felder; Jira, Original-Spec und lokale Speicherung jeweils erfolgreich | Derselbe Einstieg in zwei neuen Clones mit vorhandenen Host-Zugangsdaten; kein neuer menschlicher PM-Account |
 | Modell-Evaluation auf dem Entwicklungsset | 12/12 Erstantworten separat modellbewertet und akzeptiert | Frische Agentkontexte, eingefrorene Quellen; keine menschliche PM-Abnahme |
@@ -37,6 +37,24 @@ Daraufhin wurde ausschließlich das PM-Ausgabeprofil weiter präzisiert: Standar
 Zwei frische Testagenten prüften das neue Profil getrennt vom Quellenabruf. Eine Antwort auf Basis ausgewählter, unveränderter Werkzeugrückgaben des vorherigen echten Ticketdurchlaufs hatte **166 Wörter und drei konkrete Prüfsituationen**. Die Sichtprüfung durch den verantwortlichen Agenten bestätigte beide gemeldeten Symptome samt Zahlen, den Unterschied der Preisangaben in den Quellen, die ungeklärte Ursache, die Umfangsentscheidung und die Kennzeichnung nicht ausgeführter Prüfungen. Es erfolgte kein neuer Jira-Abruf und kein vollständiger erneuter Pipeline-Test; der Vergleich mit der älteren Antwort ist kein kontrolliertes A/B-Experiment.
 
 Ein ausdrücklich vollständiger synthetischer Abnahmeauftrag erhielt **alle sieben geforderten Fälle in 212 Wörtern**, einschließlich unverändertem gespeichertem Stand bei Speicherfehlern. Damit griff im Test die Ausnahme von Wort- und Falllimit. Wortzählung: durch Leerraum getrennte Einheiten, Markdown-Links auf Labels reduziert. Die Ausgaben wurden unverändert lokal aufbewahrt. Diese zwei Modellproben sind keine menschliche PM-Abnahme und keine neue Bewertung der 20 Baseline-Antworten. Der zusätzlich vorbereitete Fall `compact-overview` wurde noch nicht separat ausgeführt; für die Kürzeprobe diente das gespeicherte echte Quellenmaterial.
+
+## Drei neue echte Ticketfragen unter `6e74a65`
+
+Drei bisher in dieser Testreihe nicht verwendete Tickets wurden vor den Antwortläufen anhand von Thema und Original-Spec-Verweisen ausgewählt. Je ein frischer Agent bearbeitete Erklärung, Spec-Abgleich und Abnahme mit tatsächlichem Jira-Lesezugriff und lokalen Original-Specs. Ein vierter Agent bewertete die unveränderten Antworten separat anhand vorab festgelegter Kriterien und Quellen. Hostmodell: `gpt-6-astra`, Einstellung `high`. Kein Gesprächswissen aus den früheren Testläufen; vorhandene Host-Zugänge und Workspace-Regeln blieben verfügbar. Keine Zufallsstichprobe und keine allgemeine Erfolgswahrscheinlichkeit.
+
+| Falltyp | Wörter ohne Linkziele | Modellurteil | Befund |
+| --- | ---: | --- | --- |
+| Einfache Erklärung | 164 | Akzeptiert | Entscheidende Regeln und Quellenlücken erhalten; keine behauptete Live-Prüfung |
+| Spec-Abgleich | 164 | Akzeptiert | Konkrete Unterschiede fachlich belegt; zwei Zeilenverweise könnten präziser sein |
+| Abnahme | 151 | Nicht akzeptiert | Genau drei Situationen, aber eine nötige Ausgangsbedingung für ein erwartetes Ergebnis fehlt |
+
+**2/3 akzeptiert, 3/3 unter dem Längenlimit.** Alle 27 Einzelkriterien und unveränderten Antworten bleiben lokal protokolliert. Das Ergebnis wurde nicht durch Nachbessern oder die Auswahl eines besseren Wiederholungsversuchs ersetzt. Wortzählung wie bei den Formatter-Proben: Leerraumtrennung nach Reduktion von Markdown-Links auf Labels. Die fehlende Ausgangsbedingung ist ein fachlicher Mangel trotz korrekter Länge. Die Ausgabeanweisungen wurden während dieser Messung nicht verändert.
+
+Jeder Antwortlauf nutzte zwei gezielte Ticketabrufe, einen Feldmetadatenabruf und eine Atlassian-Werkzeug-Discovery. Kein wiederholtes Beschreibungsfeld, kein `*all` und kein breiter `evidence`-Fallback. Beim umfangreicheren Spec-Abgleich gab es fünf Kürzungshinweise in Ausführungsrückgaben; die entscheidenden Passagen wurden danach gezielt gelesen. Lokale Such- und Ausgabeökonomie bleibt verbesserbar.
+
+Der Produktcheckout änderte sich durch andere Arbeit während der Testphase. Die für die Bewertung relevanten sechs Spec-Dateien blieben nach Hash-Abgleich unverändert. Paketregeln ebenfalls unverändert; gespeicherte Antworten stimmen mit den finalen Agentenantworten überein. Keine Produkt-, Jira- oder sonstigen externen Mutationen durch die Testagenten, keine Anwendungstests. Private Ticketinhalte und Rohbelege wurden nicht in dieses Verteilungsrepo übernommen.
+
+Der menschliche PM-Erststart wurde auf Nutzerwunsch zurückgestellt; diese Runde umfasst ausschließlich Agententests. Alle älteren Baseline-Zahlen bleiben getrennt und sind kein Nachweis für diesen Regelstand.
 
 ## Einrichtung praktisch geprüft
 
@@ -73,7 +91,7 @@ Messdefinitionen und Freigabekriterien: [Eval-Plan](../evals/README.md). Neue Er
 | Baustein | Stand in fvk-powers |
 | --- | --- |
 | Geführter PM-Einstieg, Quellenbindung, lokale Fortsetzung | In frischem Agentkontext mit echten Quellen und lokaler Speicherung geprüft; menschlicher PM-Erststart offen |
-| Jira plus Original-Specs, Konflikte, Aktualität, Quellenbelege | Enthalten; vier begrenzte Live-Quellenchecks durchgeführt |
+| Jira plus Original-Specs, Konflikte, Aktualität, Quellenbelege | Enthalten; sieben begrenzte Live-Quellenchecks durchgeführt |
 | Fachliche Kontextwahl, Entscheidungen, Code-Einstiege, Release-Grenzen | Portable Landkarte in `CONTEXT.md`; aktuelle lokale Pfade geprüft |
 | PM-Formatierung, Ideen, Abnahmeplanung | Profil, redaktionelle Beispiele und 20 separat modellbewertete Antworten enthalten; PM-Abnahme offen |
 | Paketprüfungen und wiederholbare Regressionen | Lokaler Checker und GitHub-Workflow für Pushes und Pull Requests enthalten |
