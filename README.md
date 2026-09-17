@@ -8,7 +8,7 @@
 
 Ein Assistent für PMs, der Jira mit den passenden Original-Specs verbindet und verständlich antwortet. Kundenwirkung und fachliche Entscheidungen stehen im Vordergrund. Technische Keywords werden nur verwendet, wenn sie helfen, und kurz erklärt.
 
-> **Stand: Vorbereitung für den PM-Pilot.** Quellenzugriffe und synthetische Antworten wurden geprüft. Die synthetische Baseline erreichte 12/12 akzeptierte Erstantworten. Bei drei neuen echten Ticketfragen wurden zuletzt 2/3 Antworten separat modellbewertet akzeptiert; eine menschliche PM-Abnahme bleibt offen. Paketchecks, Modelltests und echte PM-Nutzung sind getrennte Nachweise.
+> **Stand: Vorbereitung für den PM-Pilot.** Quellenzugriffe und synthetische Antworten wurden geprüft. Die synthetische Baseline erreichte 12/12 akzeptierte Erstantworten. Drei echte Ticketfragen erreichten unter dem damaligen Ausgabeprofil 2/3 akzeptierte Antworten. Spätere Formatter-Proben stehen unten separat; eine menschliche PM-Abnahme bleibt offen. Paketchecks, Modelltests und echte PM-Nutzung sind getrennte Nachweise.
 
 ## In einem Satz starten
 
@@ -56,6 +56,8 @@ Momentaufnahme vom **17.09.2026**. Details und Grenzen stehen im [Prüfbericht](
 | Separat modellbewertete Erstantworten | **12 / 12 akzeptiert (Baseline v1)** | Synthetisches Entwicklungsset, keine menschliche Bewertung |
 | Kritische Fälle mit drei akzeptierten Versuchen | **4 / 4** | Konflikt, fehlende Spec, veralteter Status, Anweisungen in Quellen; insgesamt 8 zusätzliche Antworten |
 | Neue echte Ticketfragen am Ausgabeprofil `6e74a65` | **2 / 3 akzeptiert** | Separate Modellbewertung; alle unter 180 Wörtern, ein fachlicher Mangel durch fehlende Ausgangsbedingung |
+| Abnahmeproben nach präzisierter Bedingungsregel | **2 / 3 akzeptiert** | Gespeicherte Originalquellen; Bedingungen und Länge 3/3 erfüllt, eine Antwort noch zu technisch |
+| Gezielte Wiederholung nach zusätzlicher Sprachregel | **1 / 1 akzeptiert** | Zuvor zu technische Antwort: 171 Wörter, drei fachlich belegte Situationen; erster Versuch bleibt gezählt |
 | Frische PM-Setups vollständig beobachtet | **0** | Pilotabnahme noch offen |
 | Echter Setup-Test mit frischem Agenten | **2 Durchläufe erfolgreich** | Derselbe Einstieg vor/nach gezielter Jira-Feldauswahl; isolierte Clones und bestehende Host-Zugangsdaten |
 | Zusätzliche Python-/npm-Pakete | **0** | Paketchecker nutzt Standardbibliothek; externe Client- und Quellenzugänge bleiben nötig |

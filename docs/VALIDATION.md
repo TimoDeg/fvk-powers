@@ -56,6 +56,30 @@ Der Produktcheckout änderte sich durch andere Arbeit während der Testphase. Di
 
 Der menschliche PM-Erststart wurde auf Nutzerwunsch zurückgestellt; diese Runde umfasst ausschließlich Agententests. Alle älteren Baseline-Zahlen bleiben getrennt und sind kein Nachweis für diesen Regelstand.
 
+## Abnahmebedingungen beim Kürzen erhalten
+
+Nach dem fachlichen Fehler wurde das PM-Profil gezielt ergänzt: Die Ausgangslage muss die Voraussetzungen für das erwartete Ergebnis enthalten. Vor dem Senden wird geprüft, ob dieselbe Ausgangslage laut Quelle zu einem anderen Ergebnis führen könnte. Dann wird die Bedingung präzisiert oder die offene Erwartung benannt.
+
+Drei frische Antwortagenten erhielten eingefrorene Originalquellen und Fragen, aber keine alten Antworten oder Bewertungskriterien. Ein separater Agent bewertete sie anhand vorab festgelegter Kriterien. Ein Fall wiederholt den bisherigen Fehlerfall; zwei weitere sind neue Abnahmefragen zu gespeicherten Suchen und zur Weiterleitung nach Anmeldung. **Formatter-Test mit gespeicherten Quellen, kein neuer Jira-Abruf und kein weiterer vollständiger Recherchetest.** Die zwei neuen Fragen sind keine neuen Jira-Tickets und erhöhen deren Zähler nicht.
+
+| Abnahmefrage | Wörter ohne Linkziele | Fachliche Bedingungen | Gesamturteil der Modellbewertung |
+| --- | ---: | --- | --- |
+| Bisheriger Fehlerfall | 148 | Erhalten; erforderlicher bisheriger Speicherzustand genannt | Akzeptiert |
+| Gespeicherte Suchen | 172 | Erhalten; gleiche und unterschiedliche Fahrräder sowie freie Plätze berücksichtigt | Akzeptiert |
+| Weiterleitung nach Anmeldung | 153 | Erhalten; Ausnahmen und Sitzungsgrenze berücksichtigt | Nicht akzeptiert: unnötige HTTP-Codes, interne Feldnamen und Cookie-Bezeichnungen |
+
+**Bedingungen 3/3, Länge 3/3, Gesamturteil 2/3.** Je ein Versuch; keine Auswahl des besten Outputs. Alle drei enthalten genau drei Prüfsituationen. Die frühere fehlerhafte Antwort und die vorherigen 2/3-Ergebnisse bleiben unverändert. Die neue Regel und die Antworten wurden zusammen mit Quellenhashes und sichtbaren Werkzeugaufrufen lokal aufbewahrt. Vorhandene Host-Regeln blieben verfügbar; Modell `gpt-6-astra`, Einstellung `high`. Einmalige Proben belegen keine allgemeine Zuverlässigkeit oder kausale Verbesserung gegenüber dem alten Profil.
+
+Die Antwortagenten verwendeten ausschließlich lokale Lese- und Schreibwerkzeuge für Quellen und eigene Antworten. Zwei umfangreiche Leserückgaben waren abgeschnitten; die sichtbaren Protokolle bewahren die tatsächlich zurückgegebenen Inhalte, nicht die fehlenden Bytes. Der Merklisten-Agent las einen relevanten Abschnitt anschließend gezielt nach. Werkzeuginterne Abläufe und interne Modellüberlegungen sind nicht Teil der Protokolle. Private Quellen, Antworten und Rohprotokolle bleiben in `.local/`.
+
+### Gezielte Wiederholung nach Sprachkorrektur
+
+Der Verständlichkeitsfehler führte zu einer zweiten kleinen Präzisierung im Profil: Technische Voraussetzungen sollen als fachliche Zustände formuliert werden, soweit die Bedeutung erhalten bleibt. Nur die betroffene Anmeldungsfrage wurde danach mit unveränderter Frage und Quelle in einem weiteren frischen Antwortagenten wiederholt. Ein neuer Bewertungsagent prüfte dieselben neun Kriterien ohne Kenntnis der früheren Antwort oder Bewertung.
+
+**1/1 akzeptiert: 171 Wörter, genau drei Situationen, 9/9 Kriterien erfüllt.** Mitgliedschaft, Merklisten-Ausnahme und Ablehnung in derselben Sitzung bleiben erhalten; HTTP-Codes, interne Feldnamen und Cookie-Bezeichnungen entfallen. Der erste Versuch bleibt als nicht akzeptiert dokumentiert. Das ist eine gezielte Wiederholung, keine nachträgliche Aufwertung der ersten Runde auf 3/3 und kein erneuter Lauf der anderen beiden Fälle unter dem zuletzt geänderten Profil.
+
+Auch dieser Autor verwendete nur lokale Quellen und schrieb seine Antwort. Eine Leserückgabe enthielt einen Kürzungshinweis; die für die Bewertung relevanten Passagen wurden vom Bewertungsagenten gezielt gelesen. Der abschließende Profilstand ist über SHA-256 `e2897dd06a823486d828b8d4fde63582de2cdefd4c797d11dcc3ae2245e29e8d` an die lokal gespeicherten Antworten und Belege gebunden. Die Paketchecks und zwölf Checker-Tests bleiben getrennte Nachweise.
+
 ## Einrichtung praktisch geprüft
 
 Der erste Durchlauf nutzte Baseline `348ab8fca2f4d2e55c50c5c2c9902d83329cdf42`. Der zweite nutzte denselben Stand mit der gezielten `AGENTS.md`-Änderung, SHA-256 `d270202c19db31e66617d76000b01ae29db6b60102b519ba58b176ed8ef57bd3`. Beide starteten ohne lokale Quellenkonfiguration. Repo-Pfad und Ticketlink waren in der Testanfrage ausdrücklich vorgegeben; ihre Ermittlung durch einen unerfahrenen PM wurde damit nicht getestet.
