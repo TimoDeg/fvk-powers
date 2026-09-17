@@ -11,8 +11,8 @@ Das Paket hat wiederholbare Strukturprüfungen und eine erste separate Modellbew
 | Isolierter Clone | Paketchecker und 12 Tests bestanden, Aufruf aus fremdem Arbeitsverzeichnis funktioniert | Keine persönlichen Dateien oder Produktquellen erforderlich; kein frischer PM-Chat |
 | GitHub Actions | [Erster Lauf bestanden](https://github.com/TimoDeg/fvk-powers/actions/runs/35212239595): 12 Tests und 5 Prüfgruppen, Ubuntu / Python 3.12.3 | Geprüfter Commit `0886026`; ausschließlich Paketchecks, keine Jira-Zugänge oder Modellantworten |
 | Kontextpfade im lokalen Produktrepo | 17/17 vorhanden; beide Spec-Einstiege lesbar | Keine vollständige Code-/Dokumentabdeckung und kein Beleg der jüngsten Remote-Version |
-| Jira-Lesezugriff | 3 unterschiedliche, aus Original-Specs verlinkte Tickets erfolgreich gelesen | Nur der aktuelle Maintainer-Zugang, nicht der Zugang eines anderen PMs |
-| Begrenzter Ticket-Spec-Abgleich | 3 durchgeführt, mit sichtbaren Quellenlücken und einem Konflikt zwischen Bewertungstabellen | Durch den verantwortlichen Agenten geprüft, keine unabhängige PM-Abnahme |
+| Jira-Lesezugriff | 4 unterschiedliche Tickets erfolgreich gelesen; eines direkt aus dem Chat beauftragt | Nur der aktuelle Maintainer-Zugang, nicht der Zugang eines anderen PMs |
+| Begrenzter Ticket-Spec-Abgleich | 4 durchgeführt, mit sichtbaren Quellenlücken und einem Konflikt zwischen Bewertungstabellen | Durch den verantwortlichen Agenten geprüft, keine unabhängige PM-Abnahme |
 | Frisches PM-Setup | 0 vollständig beobachtet | Noch offen |
 | Tatsächlicher Setup-Test in frischem Agentkontext | 2 Durchläufe vor/nach Eingrenzung der Jira-Felder; Jira, Original-Spec und lokale Speicherung jeweils erfolgreich | Derselbe Einstieg in zwei neuen Clones mit vorhandenen Host-Zugangsdaten; kein neuer menschlicher PM-Account |
 | Modell-Evaluation auf dem Entwicklungsset | 12/12 Erstantworten separat modellbewertet und akzeptiert | Frische Agentkontexte, eingefrorene Quellen; keine menschliche PM-Abnahme |
@@ -28,7 +28,15 @@ Nach den oben genannten Modell- und Setup-Läufen wurden vier Punkte präzisiert
 
 Ein frischer Testagent hat anschließend einen synthetischen Ticketüberblick und eine simulierte Entscheidung bei fehlendem Jira-Feldzugriff bearbeitet. Die Sichtprüfung durch den verantwortlichen Agenten bestätigte drei priorisierte Abnahmefälle, die offene Umfangsentscheidung, eine ausdrücklich ungeklärte Ursache und den Verzicht auf den breiten Folgeabruf. Das ist eine begrenzte Modellprobe ohne tatsächliche Jira-Aufrufe und ohne unabhängige PM-Bewertung; sie wird nicht zu den früheren Erfolgsquoten addiert.
 
-Die bisherigen Erfolgszahlen gehören zu den jeweils dokumentierten älteren Regelständen. Ein neuer tatsächlicher Jira-Durchlauf nach dieser Änderung steht aus; Paketchecks allein belegen nicht, dass ein Assistent die Abrufregel einhält.
+Ein erneuter tatsächlicher Ticketdurchlauf unter Commit `480cb04` nutzte zwei gezielte Ticketabrufe und einen Feldmetadatenabruf ohne wiederholte Beschreibung oder breiten Fallback. Die PM-Ausgabe verfehlte das Kürzungsziel: ungefähr 434 statt 307 Wort-Einheiten, mit sieben Prüfsituationen in drei nummerierten Punkten. Die Quellenbasis war erweitert und die Kontexte unterschiedlich; das ist kein kontrollierter A/B-Vergleich. Private Antworten und Werkzeugbelege bleiben lokal.
+
+Daraufhin wurde ausschließlich das PM-Ausgabeprofil weiter präzisiert: Standardantworten meist 100–160, höchstens 180 Wörter ohne Linkziele; maximal drei tatsächliche Prüfsituationen statt bloß drei Überschriften. Weitere Details bleiben im Arbeitskontext, sofern sie die Antwort nicht entscheidend verändern. Ausdrücklich vollständige Aufträge bleiben vollständig. Zwei zusätzliche synthetische Regressionsfälle prüfen Kürze und diese Ausnahme. Die bisherigen Erfolgszahlen gehören weiterhin zu den jeweils dokumentierten älteren Regelständen.
+
+## Gezielte Tests des gekürzten Ausgabeprofils
+
+Zwei frische Testagenten prüften das neue Profil getrennt vom Quellenabruf. Eine Antwort auf Basis ausgewählter, unveränderter Werkzeugrückgaben des vorherigen echten Ticketdurchlaufs hatte **166 Wörter und drei konkrete Prüfsituationen**. Die Sichtprüfung durch den verantwortlichen Agenten bestätigte beide gemeldeten Symptome samt Zahlen, den Unterschied der Preisangaben in den Quellen, die ungeklärte Ursache, die Umfangsentscheidung und die Kennzeichnung nicht ausgeführter Prüfungen. Es erfolgte kein neuer Jira-Abruf und kein vollständiger erneuter Pipeline-Test; der Vergleich mit der älteren Antwort ist kein kontrolliertes A/B-Experiment.
+
+Ein ausdrücklich vollständiger synthetischer Abnahmeauftrag erhielt **alle sieben geforderten Fälle in 212 Wörtern**, einschließlich unverändertem gespeichertem Stand bei Speicherfehlern. Damit griff im Test die Ausnahme von Wort- und Falllimit. Wortzählung: durch Leerraum getrennte Einheiten, Markdown-Links auf Labels reduziert. Die Ausgaben wurden unverändert lokal aufbewahrt. Diese zwei Modellproben sind keine menschliche PM-Abnahme und keine neue Bewertung der 20 Baseline-Antworten. Der zusätzlich vorbereitete Fall `compact-overview` wurde noch nicht separat ausgeführt; für die Kürzeprobe diente das gespeicherte echte Quellenmaterial.
 
 ## Einrichtung praktisch geprüft
 
@@ -65,7 +73,7 @@ Messdefinitionen und Freigabekriterien: [Eval-Plan](../evals/README.md). Neue Er
 | Baustein | Stand in fvk-powers |
 | --- | --- |
 | Geführter PM-Einstieg, Quellenbindung, lokale Fortsetzung | In frischem Agentkontext mit echten Quellen und lokaler Speicherung geprüft; menschlicher PM-Erststart offen |
-| Jira plus Original-Specs, Konflikte, Aktualität, Quellenbelege | Enthalten; drei begrenzte Live-Quellenchecks durchgeführt |
+| Jira plus Original-Specs, Konflikte, Aktualität, Quellenbelege | Enthalten; vier begrenzte Live-Quellenchecks durchgeführt |
 | Fachliche Kontextwahl, Entscheidungen, Code-Einstiege, Release-Grenzen | Portable Landkarte in `CONTEXT.md`; aktuelle lokale Pfade geprüft |
 | PM-Formatierung, Ideen, Abnahmeplanung | Profil, redaktionelle Beispiele und 20 separat modellbewertete Antworten enthalten; PM-Abnahme offen |
 | Paketprüfungen und wiederholbare Regressionen | Lokaler Checker und GitHub-Workflow für Pushes und Pull Requests enthalten |

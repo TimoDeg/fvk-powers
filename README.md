@@ -51,8 +51,8 @@ Momentaufnahme vom **17.09.2026**. Details und Grenzen stehen im [Prüfbericht](
 | Automatische Paket-Prüfgruppen | **5 / 5 bestanden** | Wiederholbare Offline-Prüfung, aktuell lokal ausgeführt |
 | Isolierter frischer Paket-Clone | **1 bestanden** | Checks ohne persönlichen Kontext oder Produktcheckout lauffähig; kein PM-Chat-Test |
 | Kontext-Einstiege im lokalen Produktrepo | **17 / 17 vorhanden** | Die geprüften Pfade existieren; kein Vollständigkeitsversprechen |
-| Unterschiedliche echte Tickets mit begrenztem Quellenabgleich | **3** | Am bestehenden Arbeitsplatz geprüft; keine drei PM-Abnahmen |
-| Vorbereitete Antwort-Eval-Fälle | **12** | Entwicklungsset für Fakten, Konflikte, Setup, Sicherheit und Sprache |
+| Unterschiedliche echte Tickets mit begrenztem Quellenabgleich | **4** | Am bestehenden Arbeitsplatz geprüft; keine PM-Abnahmen |
+| Vorbereitete Antwort-Eval-Fälle | **14** | Entwicklungsset für Fakten, Konflikte, Setup, Sicherheit und Sprache |
 | Separat modellbewertete Erstantworten | **12 / 12 akzeptiert (Baseline v1)** | Synthetisches Entwicklungsset, keine menschliche Bewertung |
 | Kritische Fälle mit drei akzeptierten Versuchen | **4 / 4** | Konflikt, fehlende Spec, veralteter Status, Anweisungen in Quellen; insgesamt 8 zusätzliche Antworten |
 | Frische PM-Setups vollständig beobachtet | **0** | Pilotabnahme noch offen |
@@ -60,6 +60,10 @@ Momentaufnahme vom **17.09.2026**. Details und Grenzen stehen im [Prüfbericht](
 | Zusätzliche Python-/npm-Pakete | **0** | Paketchecker nutzt Standardbibliothek; externe Client- und Quellenzugänge bleiben nötig |
 
 Die 20 Modellantworten sind protokolliert; jede wurde in einem frischen Agentkontext erzeugt und danach separat bewertet. Zwei kleine Hinweise zur Quellenbezeichnung und Setup-Erklärung bleiben. Nach dieser Baseline wurde der Jira-Abruf auf gezielte Felder eingegrenzt und im echten Setup erneut erfolgreich geprüft. Danach wurden kürzere Ticketüberblicke, konkrete Umfangsentscheidungen, die Trennung von Spec-Hinweis und Fehlerursache sowie das Vermeiden breiter Jira-Folgeabrufe präzisiert. Die 20 Antworten und die zwei Setup-Tests bewerten diese jüngsten Änderungen nicht. Ein kleines bekanntes Entwicklungsset belegt keine allgemeine Zuverlässigkeit. [Ergebnisse, Grenzen und unveränderte Ausgaben](evals/results/2026-09-17-v1.md) · [Messmethodik](evals/README.md).
+
+Das neue Ausgabeprofil wurde separat erprobt: **166 Wörter / 3 Prüfsituationen** mit gespeichertem echten Quellenmaterial; **7 von 7 Fällen** bei ausdrücklich vollständiger synthetischer Abnahme. Bewertung durch den verantwortlichen Agenten, kein neuer Jira-Durchlauf und keine PM-Abnahme. [Prüfgrenzen](docs/VALIDATION.md).
+
+Standardantworten bleiben kurz: meist 100–160 Wörter, höchstens 180, und bei Bedarf maximal drei konkrete Prüfsituationen. Ausführliche Aufträge und entscheidende fachliche Bedingungen haben Vorrang. Die 12 bewerteten Fälle der Baseline sind von den inzwischen 14 vorbereiteten Fällen zu unterscheiden.
 
 ## So sollen Antworten aussehen
 
