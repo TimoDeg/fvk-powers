@@ -1,6 +1,6 @@
 # Antwortqualität und Setup messen
 
-Paketprüfungen, Quellenzugriff und Produktnutzen sind getrennte Messungen. Die [synthetischen Fälle](cases.json) sind vorbereitete Aufgaben mit Erwartungen, keine ausgeführten Modelltests. Die [Stilbeispiele](../examples/pm.md) sind redaktionell geschriebene Beispiele, keine Benchmark-Ausgaben.
+Paketprüfungen, Quellenzugriff und Produktnutzen sind getrennte Messungen. Die [synthetischen Fälle](cases.json) definieren Aufgaben und Erwartungen; tatsächliche Durchläufe stehen separat in [Ergebnisse vom 17.09.2026](results/2026-09-17-v1.md). Die [Stilbeispiele](../examples/pm.md) sind redaktionell geschriebene Beispiele, keine Benchmark-Ausgaben.
 
 ## Vor dem Teamstart
 
@@ -28,4 +28,4 @@ Ein Lauf braucht lokal: Fall-ID, Zeit, Repo-Commit und lokale Abweichungen, Mode
 
 Vor Pilotstart: Paketchecks grün, ein frisches PM-Setup samt erstem Ticket-Spec-Abgleich beobachtet und ein PM bestätigt Verständlichkeit. Vor breitem Teameinsatz: alle Entwicklungsfälle bewertet, keine offenen kritischen Fakten-/Quellen-/Zugriffsfehler, die genannten Wiederholungen erfolgreich und die drei echten Ticketfälle fachlich akzeptiert. Diese Schwellen sind vereinbarte Prüfziele, keine statistisch belegte allgemeine Zuverlässigkeit.
 
-Der aktuelle [Prüfbericht](../docs/VALIDATION.md) nennt ausgeführte Checks und offene Nachweise. README-Zahlen dürfen nur daraus bzw. aus tatsächlichen Messbelegen stammen. Bei jeder Änderung an Anweisungen frühere Antwortbewertungen als ältere Baseline kennzeichnen; die aktuelle CI prüft ausschließlich das Paket.
+Der aktuelle [Prüfbericht](../docs/VALIDATION.md) nennt ausgeführte Checks und offene Nachweise. README-Zahlen dürfen nur daraus bzw. aus tatsächlichen Messbelegen stammen. Bei jeder Änderung an Anweisungen frühere Antwortbewertungen als ältere Baseline kennzeichnen; die vorbereitete CI prüft ausschließlich das Paket.

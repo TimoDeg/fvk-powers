@@ -6,7 +6,7 @@
 
 Ein Assistent für PMs, der Jira mit den passenden Original-Specs verbindet und verständlich antwortet. Kundenwirkung und fachliche Entscheidungen stehen im Vordergrund. Technische Keywords werden nur verwendet, wenn sie helfen, und kurz erklärt.
 
-> **Stand: Vorbereitung für den PM-Pilot.** Der Quellenzugriff wurde am bestehenden Arbeitsplatz geprüft. Ein frisches PM-Setup und unabhängig bewertete Antworten stehen noch aus. Die Paketchecks prüfen Struktur und Prüflogik, nicht die Qualität der KI-Antworten.
+> **Stand: Vorbereitung für den PM-Pilot.** Quellenzugriffe und synthetische Antworten wurden geprüft. Die separate Modellbewertung akzeptiert 12/12 Erstantworten; eine menschliche PM-Abnahme bleibt offen. Paketchecks, Modelltests und echte PM-Nutzung sind getrennte Nachweise.
 
 ## In einem Satz starten
 
@@ -49,13 +49,15 @@ Momentaufnahme vom **17.09.2026**. Details und Grenzen stehen im [Prüfbericht](
 | Automatische Paket-Prüfgruppen | **5 / 5 bestanden** | Wiederholbare Offline-Prüfung, aktuell lokal ausgeführt |
 | Isolierter frischer Paket-Clone | **1 bestanden** | Checks ohne persönlichen Kontext oder Produktcheckout lauffähig; kein PM-Chat-Test |
 | Kontext-Einstiege im lokalen Produktrepo | **17 / 17 vorhanden** | Die geprüften Pfade existieren; kein Vollständigkeitsversprechen |
-| Live-Quellenchecks Jira + Spec | **1** | Zugriff und begrenzter Abgleich am bestehenden Arbeitsplatz |
+| Unterschiedliche echte Tickets mit begrenztem Quellenabgleich | **3** | Am bestehenden Arbeitsplatz geprüft; keine drei PM-Abnahmen |
 | Vorbereitete Antwort-Eval-Fälle | **12** | Entwicklungsset für Fakten, Konflikte, Setup, Sicherheit und Sprache |
-| Unabhängig bewertete Modellfälle | **0 / 12** | Antwortqualität noch nicht gemessen |
+| Separat modellbewertete Erstantworten | **12 / 12 akzeptiert (Baseline v1)** | Synthetisches Entwicklungsset, keine menschliche Bewertung |
+| Kritische Fälle mit drei akzeptierten Versuchen | **4 / 4** | Konflikt, fehlende Spec, veralteter Status, Anweisungen in Quellen; insgesamt 8 zusätzliche Antworten |
 | Frische PM-Setups vollständig beobachtet | **0** | Pilotabnahme noch offen |
+| Echter Setup-Test mit frischem Agenten | **2 Durchläufe erfolgreich** | Derselbe Einstieg vor/nach gezielter Jira-Feldauswahl; isolierte Clones und bestehende Host-Zugangsdaten |
 | Zusätzliche Python-/npm-Pakete | **0** | Paketchecker nutzt Standardbibliothek; externe Client- und Quellenzugänge bleiben nötig |
 
-Keine erfundene Erfolgsquote: Vorbereitete Fälle und redaktionelle Beispiele zählen nicht als bestandene KI-Tests. [So messen wir Qualität, Verständlichkeit und Setup-Aufwand](evals/README.md).
+Die 20 Modellantworten sind protokolliert; jede wurde in einem frischen Agentkontext erzeugt und danach separat bewertet. Zwei kleine Hinweise zur Quellenbezeichnung und Setup-Erklärung bleiben. Nach dieser Baseline wurde der Jira-Abruf auf gezielte Felder eingegrenzt und im echten Setup erneut erfolgreich geprüft; die 20 Antworten sind keine erneute Bewertung dieses geänderten Regelstands. Ein kleines bekanntes Entwicklungsset belegt keine allgemeine Zuverlässigkeit. [Ergebnisse, Grenzen und unveränderte Ausgaben](evals/results/2026-09-17-v1.md) · [Messmethodik](evals/README.md).
 
 ## So sollen Antworten aussehen
 
@@ -88,6 +90,16 @@ Die Beispiele sind **erfunden und redaktionell geschrieben**, keine beobachteten
 
 [Weitere Beispiele und Setup-Abnahmefälle](examples/pm.md).
 
+### Beobachtete Antwort aus dem Modelltest
+
+**Testfrage:** „Ist das Feature jetzt live?“ Die synthetischen Quellen enthielten einen eine Woche alten Done-Status und keine Deploymentbelege. Unveränderte Ausgabe:
+
+> Ob das Feature jetzt live ist, ist nicht bestätigt. Das Ticket stand vor einer Woche auf „Done“; die Spec beschreibt nur, dass das Feature vorgesehen ist. Belege für eine Veröffentlichung fehlen.
+>
+> Als Nächstes müssen wir den aktuellen Ticketstand, einen Deploymentbeleg für die Produktivumgebung und das dort sichtbare Verhalten prüfen.
+
+[Alle Antworten und Bewertungen](evals/results/2026-09-17-v1.json).
+
 ## Prüfen und weiterentwickeln
 
 Für Maintainer, ohne zusätzliche Pakete:
@@ -99,7 +111,7 @@ python3 tools/check.py
 python3 tools/check.py --product-repo ../fvk
 ```
 
-Die nächsten Schritte sind ein **frisches PM-Setup**, die **12 Antwortfälle** und **drei echte Tickets mit PM-Bewertung**. Setup-Zeit, Rückfragen, fachliche Fehler und Verständlichkeit werden dabei getrennt erfasst. [Prüfplan und Freigabekriterien](evals/README.md).
+Die nächsten Schritte sind ein **frisches menschliches PM-Setup**, **unbekannte Antwortfälle** und **die fachliche PM-Bewertung dreier echter Tickets**. Setup-Zeit, Rückfragen, fachliche Fehler und Verständlichkeit werden dabei getrennt erfasst. [Prüfplan und Freigabekriterien](evals/README.md).
 
 Die [CI-Vorlage](docs/ci/check.yml) ist vorbereitet, aber nicht aktiviert: GitHub hat das Anlegen eines aktiven Workflows mit dem vorhandenen OAuth-Zugang wegen fehlender `workflow`-Berechtigung abgelehnt. Zur Aktivierung benötigt der veröffentlichende Zugang diese Berechtigung; anschließend die Vorlage nach `.github/workflows/check.yml` verschieben, veröffentlichen und den ersten Lauf prüfen. Bis dahin sind die oben ausgewiesenen Ergebnisse lokale Prüfungen.
 
