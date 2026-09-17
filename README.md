@@ -5,8 +5,8 @@ Ein Rewrite-Assistent für Produktmanager: Jira und passende Specs verstehen, An
 ## Einstieg
 
 1. Dieses private Repo lokal klonen und als Projekt in Codex öffnen.
-2. Einen freigegebenen Jira-Connector im eigenen Client verbinden. Zugriff auf das Rewrite-Produktrepo bereitstellen, zum Beispiel als lokalen Checkout neben diesem Repo. Zugangsdaten bleiben im Connector bzw. im vorgesehenen Zugangssystem.
-3. Im Chat schreiben: **„Richte fvk-powers für mich als PM ein. Prüfe meine Quellen und erkläre mir, was noch fehlt.“** Der Assistent klärt den Produktrepo-Pfad und die Jira-Quelle und prüft die tatsächlich verfügbaren Lesezugriffe. Für den Jira-Test ein konkretes Ticket nennen. Das Produkt muss dafür nicht lokal laufen.
+2. Im Chat schreiben: **„Richte fvk-powers für mich ein.“** Auch „Setup“ oder „Wie starte ich?“ reicht.
+3. Der Assistent prüft vorhandene Quellen, erklärt den nächsten Schritt und führt durch fehlende Zugänge. Er fragt nur nach dem, was noch fehlt, etwa einem Ticketlink oder dem Ordner mit den Rewrite-Specs. Anmeldung und Zugriffsfreigaben erfolgen im vorgesehenen Dienst, niemals durch Passwörter im Chat. Am Ende zeigt er, was bereits nutzbar ist und was noch fehlt. Das Produkt muss dafür nicht lokal laufen.
 4. Danach eine Frage stellen, zum Beispiel:
    - „Erkläre mir dieses Ticket und gleiche es mit den passenden Specs ab: [Ticketlink].“
    - „Welche fachlichen Entscheidungen fehlen noch?“
@@ -14,6 +14,8 @@ Ein Rewrite-Assistent für Produktmanager: Jira und passende Specs verstehen, An
    - „Welche kleinen Verbesserungen wären sinnvoll? Trenne Ideen von Anforderungen.“
 
 Wenn der Produktcheckout anders heißt oder woanders liegt, genügt sein Pfad im Chat. Lokale Quellenangaben können bei der beauftragten Einrichtung unter `.local/sources.md` gespeichert werden. Dieser Ordner wird nicht veröffentlicht. Kein Token und kein Passwort gehört in diese Datei.
+
+Der [geführte Setup-Dialog](SETUP.md) bleibt vollständig im Chat. Vorhandene Angaben werden wiederverwendet. Wenn ein Zugang fehlt, erklärt der Assistent konkret, wie es weitergeht; eine verfügbare Quelle kann schon für erste Fragen genutzt werden.
 
 ## So arbeitet der Assistent
 

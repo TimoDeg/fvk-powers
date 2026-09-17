@@ -6,6 +6,8 @@ Dieses Repo enthält den gemeinsamen Arbeitsablauf für Rewrite-Fragen. Standard
 
 Bearbeite standardmäßig eine Frage bzw. ein Ticket mit einem verantwortlichen Agenten. Nutze vorhandene Datei- und Jira-Werkzeuge des Clients. Kein zusätzlicher Harness, kein globaler Skill und kein Indexaufbau ist Voraussetzung.
 
+Bei „Setup“, „Einrichten“, „Loslegen“, „Wie starte ich?“ oder einem vergleichbaren Einstiegsauftrag lies [SETUP.md](SETUP.md) und führe den Dialog im Chat. Verweise den Nutzer nicht einfach auf eine Anleitung. Bei einer normalen Produktfrage ohne eingerichtete Quellen prüfe zuerst die verfügbaren Quellen und ergänze nur die für diese Frage fehlenden Setup-Schritte; der Nutzer muss kein besonderes Startkommando kennen.
+
 ## Quellen beim ersten Auftrag binden
 
 - Verwende die im Chat bestätigten Quellen oder vorhandene Angaben aus `.local/sources.md`. Fehlen sie, prüfe zuerst, ob `../fvk/docs/specs/features/` existiert. Behandle den Pfad als Kandidaten, nicht als Beweis für den richtigen oder aktuellen Checkout.
@@ -18,7 +20,7 @@ Bearbeite standardmäßig eine Frage bzw. ein Ticket mit einem verantwortlichen 
 
 1. Übernimm exakte Ticketlinks und Schlüssel aus dem Auftrag. Rate keinen Schlüssel und ersetze Rewrite-Quellen nicht durch Legacy-Belege.
 2. Lies das Ticket über den verfügbaren internen Jira-Connector. Prüfe Schlüssel, Titel, vollständige Beschreibung, vorhandene Akzeptanzkriterien und aktuellen Status. Notiere die Abrufzeit. Lade entscheidungsrelevante Kommentare, verknüpfte Tickets und Anhänge gezielt nach, wenn sie für die Frage gebraucht werden. Melde fehlenden Zugriff oder abgeschnittene Inhalte. Ein verlinkter Anhang ist nicht automatisch gelesen.
-3. Lies passende Original-Specs unter `docs/specs/features/` im bestätigten Produktrepo. Beginne bei Ticketverweisen, sonst suche nach fachlichen Begriffen und Synonymen. Lies Ausnahmen, offene Fragen und für die Anforderung relevante verlinkte Abschnitte mit. Ein erfolgloser Suchlauf beweist nicht das Fehlen einer Spec.
+3. Lies passende Original-Specs unter `docs/specs/features/` im bestätigten Produktrepo, lokal oder über freigegebenen Remote-Lesezugriff. Beginne bei Ticketverweisen, sonst suche nach fachlichen Begriffen und Synonymen. Lies Ausnahmen, offene Fragen und für die Anforderung relevante verlinkte Abschnitte mit. Ein erfolgloser Suchlauf beweist nicht das Fehlen einer Spec.
 4. Unterscheide Jira-Anforderung, dokumentiertes Soll, aktuell beobachtetes Verhalten, Schlussfolgerung und Vorschlag. Prüfe bei Widersprüchen Geltungsbereich und ausdrückliche Ablösung. Ein jüngeres Datum allein löst keinen fachlichen Konflikt. Bleibt der Konflikt offen, nenne beide Aussagen und die benötigte Entscheidung.
 5. Für „Wie funktioniert es tatsächlich?“ reichen Specs nicht. Prüfe gezielt aktuelle Implementierungs- oder Laufzeitbelege, soweit zugänglich und vom Auftrag gedeckt. Beachte bei Produktarbeit die dort geltenden Regeln. Fehlen Belege, sage, welches Verhalten noch nicht bestätigt ist.
 6. Verlinke die tatsächlich gelesenen Quellen nahe an der Aussage. Verwende bestätigte Jira-Links und portable Repo-Links, sofern vorhanden; sonst direkt zugängliche lokale Dateilinks. Erfinde weder Ticketlinks noch Remote-Pfade.

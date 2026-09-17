@@ -66,3 +66,18 @@ Ich kann die Anforderung aus dem Ticket erklären, aber den Abgleich mit der Spe
 Für einen Vergleich dieselben Quellen und dieselbe Frage verwenden. Ein PM beurteilt: Ist die Antwort fachlich richtig, ohne Entwicklerwissen verständlich, mit Quellen nachvollziehbar und für den nächsten Schritt hilfreich? Ausgelassene Bedingungen und erfundene Fakten sind Fehler, auch bei angenehm lesbarer Sprache.
 
 Auf einem frischen Setup mit echten zugänglichen Quellen zusätzlich prüfen: exaktes Ticket gelesen, passende Original-Spec gefunden, Quellenkonflikt offengelegt, Zugriffsfehler klar benannt. Ergebnisse lokal halten; keine privaten Ticketinhalte in diese Beispielsammlung übernehmen.
+
+## Setup-Dialog prüfen
+
+Diese Fälle dienen zur manuellen Abnahme des [Setup-Dialogs](../SETUP.md); sie sind noch kein Nachweis eines ausgeführten Erststarts.
+
+| Ausgangslage | Eingabe | Erwartetes Verhalten |
+| --- | --- | --- |
+| Keine Quellen gespeichert | „Setup“ | Erklärt das Ziel, prüft vorhandene Werkzeuge und Pfade, fragt nur nach der nächsten fehlenden Angabe. |
+| Jira-Werkzeug fehlt, Specs sind lesbar | „Richte es ein“ | Erklärt den nötigen Verbindungsschritt ohne erfundene UI-Anleitung; Spec-Fragen bleiben möglich. |
+| Jira verbunden, Ticketzugriff verweigert | Ticketlink | Meldet den belegten Zugriffsfehler, fordert keine Geheimnisse an und behauptet keinen erfolgreichen Jira-Test. |
+| Bestätigter Repo-Pfad existiert nicht | „Weiter“ | Fragt nach dem korrigierten Ordner oder internen Repo-Link; installiert keine Produktumgebung. |
+| Einrichtung unterbrochen, Angaben lokal gespeichert | „Setup weiter“ | Nutzt bekannte Angaben, setzt den offenen Schritt fort und behandelt frühere Prüfungen als datiert. |
+| Beide Quellen zugänglich, Ticket bekannt | „Loslegen“ | Prüft die Zugriffe und führt den ersten Ticket-Spec-Abgleich aus; fehlende Zuordnung wird offen benannt. |
+| Lokaler Speicher schreibgeschützt oder nicht ignoriert | „Setup“ | Behält Quellenangaben im Chat und erklärt die fehlende dauerhafte Speicherung; veröffentlicht keine lokalen Angaben. |
+| Vollständige Quellen, direkte Produktfrage | „Was muss ich bei diesem Ticket abnehmen?“ | Bearbeitet die Frage ohne unnötigen vollständigen Setup-Dialog. |
