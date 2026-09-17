@@ -1,143 +1,81 @@
 # fvk-powers
 
-**Rewrite verstehen. Tickets schärfen. Abnahmen vorbereiten.**
+Jira-Tickets verstehen, mit den Rewrite-Specs abgleichen und Abnahmen vorbereiten — ein Arbeitsablauf für PMs im KI-Assistenten.
 
-**Paketchecks: lokal und in GitHub Actions bestanden · PM-Pilot: offen**
+## Starten in drei Schritten
+
+Du brauchst **Codex oder einen vergleichbaren Assistenten mit Dateizugriff**, **Git** zum Klonen und für den vollständigen Abgleich Lesezugriff auf **Jira und das Rewrite-Produktrepo**. Die Specs sind die fachlichen Beschreibungen im Produktrepo. Eine laufende Produktanwendung brauchst du nicht.
+
+### 1. Repo herunterladen
+
+Im Terminal in dem Ordner ausführen, in dem du das Projekt ablegen möchtest:
+
+```sh
+git clone https://github.com/TimoDeg/fvk-powers.git
+```
+
+### 2. Im Assistenten öffnen
+
+Öffne den heruntergeladenen Ordner **fvk-powers** als Projekt in Codex. Bei anderen Assistenten muss der Client die Projektanweisungen aus `AGENTS.md` lesen können.
+
+### 3. Einrichtung starten
+
+Schreibe im Projektchat:
+
+```text
+Richte fvk-powers für mich ein.
+```
+
+Der Assistent prüft vorhandene Zugänge und führt dich durch fehlende Schritte. Halte einen **Link zu einem Rewrite-Ticket** und den **Ordner oder internen Link zum Rewrite-Produktrepo** bereit. Er fragt danach, wenn die Angaben fehlen. Falls die Jira-Verbindung noch fehlt, hilft er dir beim nächsten Verbindungsschritt. Melde dich im jeweiligen Dienst an; Passwörter gehören nicht in den Chat.
+
+**Unterbrochen?** Schreibe „Setup weiter“. Bereits lokal gespeicherte Angaben werden wiederverwendet.
+
+[Voraussetzungen im Detail](docs/DEPENDENCIES.md) · [Ablauf der geführten Einrichtung](SETUP.md)
+
+## Deine erste Frage
+
+Füge einen Ticketlink ein und schreibe zum Beispiel:
+
+> Erkläre mir dieses Ticket: Was soll sich für Kunden ändern und was muss ich abnehmen?
+
+Der Assistent liest die verfügbaren Quellen und antwortet kurz, verständlich und mit Quellenlinks. Fehlende Informationen und Widersprüche werden benannt. Vorgeschlagene Abnahmeschritte sind noch keine ausgeführten Tests.
+
+| Du möchtest … | Frage im Chat |
+| --- | --- |
+| Ein Ticket verstehen | „Was soll sich für Kunden ändern?“ |
+| Anforderungen abgleichen | „Passt das Ticket zur Spec? Was fehlt oder widerspricht sich?“ |
+| Eine Abnahme vorbereiten | „Welche konkreten Situationen sollte ich prüfen?“ |
+| Eine Verbesserung finden | „Welche Verbesserung wäre sinnvoll und warum?“ |
+| Den Release-Stand klären | „Ist das schon live? Welche Belege gibt es dafür?“ |
+
+[Beispielantworten ansehen](examples/pm.md)
+
+## Wenn beim Setup etwas fehlt
+
+- **Jira noch nicht verbunden:** Verbinde den freigegebenen Jira-/Atlassian-Zugang in deinem Assistenten. Mit erreichbaren Specs kannst du bereits Produktfragen stellen.
+- **Rewrite-Repo fehlt:** Nenne den internen Repo-Link oder den lokalen Ordner. Ohne Zugriff auf die Specs kann der Assistent lesbare Tickets erklären, aber keinen Spec-Abgleich bestätigen.
+- **Zugriff verweigert:** Lass die benötigte Leseberechtigung intern freischalten. Das öffentliche fvk-powers-Repo gewährt keinen Zugang zu Jira oder zum Produktrepo.
+
+## Was du erwarten kannst
+
+**Stand: Vorbereitung für den PM-Pilot.** Paketprüfungen und begrenzte Modelltests wurden durchgeführt; die menschliche PM-Abnahme steht noch aus. Ergebnisse und Grenzen stehen im [Prüfbericht](docs/VALIDATION.md), die [Modelltest-Ergebnisse](evals/results/2026-09-17-v1.md) sind separat dokumentiert.
+
+Standardmäßig liest und erklärt der Assistent. Änderungen, Nachrichten und Veröffentlichungen brauchen einen ausdrücklichen Auftrag. Persönliche Quellenangaben bleiben lokal im von Git ausgeschlossenen Ordner `.local/`. Dieses Repo enthält keine privaten Ticketkopien oder Zugangsdaten.
+
+## Für Maintainer
 
 [![Package checks](https://github.com/TimoDeg/fvk-powers/actions/workflows/check.yml/badge.svg)](https://github.com/TimoDeg/fvk-powers/actions/workflows/check.yml)
 
-Ein Assistent für PMs, der Jira mit den passenden Original-Specs verbindet und verständlich antwortet. Kundenwirkung und fachliche Entscheidungen stehen im Vordergrund. Technische Keywords werden nur verwendet, wenn sie helfen, und kurz erklärt.
-
-> **Stand: Vorbereitung für den PM-Pilot.** Quellenzugriffe und synthetische Antworten wurden geprüft. Die synthetische Baseline erreichte 12/12 akzeptierte Erstantworten. Drei echte Ticketfragen erreichten unter dem damaligen Ausgabeprofil 2/3 akzeptierte Antworten. Spätere Formatter-Proben stehen unten separat; eine menschliche PM-Abnahme bleibt offen. Paketchecks, Modelltests und echte PM-Nutzung sind getrennte Nachweise.
-
-## In einem Satz starten
-
-Dieses Repo lokal klonen, als Projekt in Codex öffnen und im Chat schreiben:
-
-> **Richte fvk-powers für mich ein.**
-
-Der Assistent erklärt den nächsten Schritt, prüft vorhandene Quellen und fragt nur nach fehlenden Angaben. Anmeldung erfolgt im vorgesehenen Dienst; keine Passwörter im Chat. „Setup weiter“ setzt bei der offenen Stelle fort. [So funktioniert der Setup-Dialog](SETUP.md).
-
-Du brauchst einen Assistenten mit Dateizugriff, einen freigegebenen Jira-Lesezugang und Zugriff auf das Rewrite-Repo. Für PM-Fragen ist keine laufende Produktanwendung nötig. [Alle Voraussetzungen und optionalen Werkzeuge](docs/DEPENDENCIES.md).
-
-## Die Pipeline
-
-```mermaid
-flowchart LR
-    A[Frage oder Ticket] --> B[Jira und Original-Specs]
-    B --> C[Passenden Kontext ergänzen]
-    C --> D[Anforderungen und Konflikte prüfen]
-    D --> E[Verständliche PM-Antwort]
-    E --> F[Abnahme, Entscheidung oder Idee]
-```
-
-| Du fragst | Du bekommst |
-| --- | --- |
-| „Was bedeutet dieses Ticket?“ | Fachliches Ziel, Kundenwirkung und wichtige Bedingungen |
-| „Passt das zur Spec?“ | Übereinstimmungen, Widersprüche und fehlende Entscheidungen mit Quellen |
-| „Was muss ich abnehmen?“ | Konkrete Ausgangslagen, Schritte und erwartete Ergebnisse |
-| „Welche Verbesserung wäre sinnvoll?“ | Begründete Ideen, erkennbar getrennt von verbindlichen Anforderungen |
-| „Ist das schon live?“ | Den belegbaren Stand und die noch fehlenden Release-/Laufzeitnachweise |
-
-Die [Kontextlandkarte](CONTEXT.md) führt zu fachlichen Beschreibungen, Architekturentscheidungen, passenden Codebereichen und Testquellen. Specs bleiben im Produktrepo gepflegt. Persönliche Skills, private Wissenskopien und Suchindizes sind keine Voraussetzung. Der vollständige Implementierungs- und Deployment-Ablauf ist nicht portiert; [enthaltene und offene Teile](docs/VALIDATION.md).
-
-## Zahlen mit klarer Bedeutung
-
-Momentaufnahme vom **17.09.2026**. Details und Grenzen stehen im [Prüfbericht](docs/VALIDATION.md).
-
-| Kennzahl | Stand | Was sie belegt |
-| --- | ---: | --- |
-| Regressionstests des Paketprüfers | **12 / 12 bestanden** | Beschädigte Links, private Dateien, fehlende Einstiege und ungültige Eval-Fälle werden erkannt |
-| Automatische Paket-Prüfgruppen | **5 / 5 bestanden** | Wiederholbare Offline-Prüfung, aktuell lokal ausgeführt |
-| Isolierter frischer Paket-Clone | **1 bestanden** | Checks ohne persönlichen Kontext oder Produktcheckout lauffähig; kein PM-Chat-Test |
-| Kontext-Einstiege im lokalen Produktrepo | **17 / 17 vorhanden** | Die geprüften Pfade existieren; kein Vollständigkeitsversprechen |
-| Unterschiedliche echte Tickets mit begrenztem Quellenabgleich | **9** | Am bestehenden Arbeitsplatz geprüft; keine PM-Abnahmen |
-| Vorbereitete Antwort-Eval-Fälle | **14** | Entwicklungsset für Fakten, Konflikte, Setup, Sicherheit und Sprache |
-| Separat modellbewertete Erstantworten | **12 / 12 akzeptiert (Baseline v1)** | Synthetisches Entwicklungsset, keine menschliche Bewertung |
-| Kritische Fälle mit drei akzeptierten Versuchen | **4 / 4** | Konflikt, fehlende Spec, veralteter Status, Anweisungen in Quellen; insgesamt 8 zusätzliche Antworten |
-| Neue echte Ticketfragen am Ausgabeprofil `6e74a65` | **2 / 3 akzeptiert** | Separate Modellbewertung; alle unter 180 Wörtern, ein fachlicher Mangel durch fehlende Ausgangsbedingung |
-| Abnahmeproben nach präzisierter Bedingungsregel | **2 / 3 akzeptiert** | Gespeicherte Originalquellen; Bedingungen und Länge 3/3 erfüllt, eine Antwort noch zu technisch |
-| Gezielte Wiederholung nach zusätzlicher Sprachregel | **1 / 1 akzeptiert** | Zuvor zu technische Antwort: 171 Wörter, drei fachlich belegte Situationen; erster Versuch bleibt gezählt |
-| Vollständiger Agenten-Erststart unter `ffafc16` | **1 / 1 akzeptiert** | Neuer Clone, zwei Setup-Rückfragen, echte Quellen; 164 Wörter und drei Abnahmesituationen, separat bewertet |
-| Setup-Fehlerfälle unter `176eb56` | **3 / 3 korrekt behandelt** | 24 Kriterien separat modellbewertet; Jira-Lücke und alter Setup-Stand simuliert, fehlender Repo-Ordner real |
-| Gezielter Recherchetest nach `338754e` | **10/12, danach 11/12 Kriterien** | 194 → 171 Wort-Einheiten; beide Gesamturteile nicht akzeptiert, breite Werkzeugsuche bleibt offen; unterschiedliche Anhangsabdeckung |
-| Frische PM-Setups vollständig beobachtet | **0** | Pilotabnahme noch offen |
-| Reguläre Setup-Tests mit frischen Agenten | **3 Durchläufe erfolgreich** | Zwei mit vorgegebenen Quellen, einer mit simuliertem Setup-Dialog; Fehlerfälle separat gezählt, bestehende Host-Zugangsdaten |
-| Zusätzliche Python-/npm-Pakete | **0** | Paketchecker nutzt Standardbibliothek; externe Client- und Quellenzugänge bleiben nötig |
-
-Die 20 Modellantworten der ursprünglichen Baseline sind protokolliert; jede wurde in einem frischen Agentkontext erzeugt und danach separat bewertet. Zwei kleine Hinweise zur Quellenbezeichnung und Setup-Erklärung bleiben. Nach dieser Baseline wurde der Jira-Abruf auf gezielte Felder eingegrenzt und im echten Setup erneut erfolgreich geprüft. Danach wurden kürzere Ticketüberblicke, konkrete Umfangsentscheidungen, die Trennung von Spec-Hinweis und Fehlerursache sowie das Vermeiden breiter Jira-Folgeabrufe präzisiert. Die 20 Antworten und die ersten zwei Setup-Tests bewerten diese jüngsten Änderungen nicht; der spätere vollständige Agenten-Erststart steht separat in der Tabelle. Ein kleines bekanntes Entwicklungsset belegt keine allgemeine Zuverlässigkeit. [Ergebnisse, Grenzen und unveränderte Ausgaben](evals/results/2026-09-17-v1.md) · [Messmethodik](evals/README.md).
-
-Das neue Ausgabeprofil wurde separat erprobt: **166 Wörter / 3 Prüfsituationen** mit gespeichertem echten Quellenmaterial; **7 von 7 Fällen** bei ausdrücklich vollständiger synthetischer Abnahme. Bewertung durch den verantwortlichen Agenten, kein neuer Jira-Durchlauf und keine PM-Abnahme. [Prüfgrenzen](docs/VALIDATION.md).
-
-Standardantworten bleiben kurz: meist 100–160 Wörter, höchstens 180, und bei Bedarf maximal drei konkrete Prüfsituationen. Ausführliche Aufträge und entscheidende fachliche Bedingungen haben Vorrang. Die 12 bewerteten Fälle der Baseline sind von den inzwischen 14 vorbereiteten Fällen zu unterscheiden.
-
-## So sollen Antworten aussehen
-
-Die Beispiele sind **erfunden und redaktionell geschrieben**, keine beobachteten Benchmark-Ausgaben. In echten Antworten stehen Links zu den tatsächlich gelesenen Quellen.
-
-### Ein Ticket verstehen
-
-**PM:** „Was sollen die Favoriten können, und was fehlt noch?“
-
-> Kunden sollen bis zu drei Angebote als Favoriten markieren können. Wählen sie ein viertes aus, erscheint laut Beispiel-Spec ein Hinweis; die bisherigen drei bleiben erhalten.
->
-> Offen ist, ob die Auswahl nach dem Schließen und erneuten Öffnen der Seite noch vorhanden sein soll. Das sollten wir vor der Abnahme klären. Ob die Funktion schon umgesetzt ist, ist hier nicht geprüft.
-
-### Einen Widerspruch erkennen
-
-**PM:** „Kann ich das Auswahl-Limit so abnehmen?“
-
-> Das Ticket nennt drei Favoriten, die Spec fünf. Damit fehlt für diesen Punkt ein eindeutiges Abnahmekriterium. Klärt zuerst, welches Limit gelten soll. Die widersprüchlichen Angaben allein beweisen noch keinen Fehler in der Anwendung.
-
-<details>
-<summary><strong>Abnahme und Verbesserungsidee ansehen</strong></summary>
-
-**PM:** „Was sollte ich testen? Gibt es eine kleine Verbesserung?“
-
-> Wähle zunächst drei Favoriten aus und versuche, ein viertes Angebot hinzuzufügen. Erwartung laut Beispiel-Spec: Ein Hinweis erscheint, die ursprünglichen drei bleiben ausgewählt. Diese Prüfung ist vorgeschlagen, noch nicht ausgeführt.
->
-> **Idee:** Ein Zähler wie „2 von 3 ausgewählt“ könnte das Limit früher verständlich machen. Das ist ein zusätzlicher Vorschlag. Prüft vorher, ob Kunden mit dem bisherigen Hinweis bereits zurechtkommen.
-
-</details>
-
-[Weitere Beispiele und Setup-Abnahmefälle](examples/pm.md).
-
-### Beobachtete Antwort aus dem Modelltest
-
-**Testfrage:** „Ist das Feature jetzt live?“ Die synthetischen Quellen enthielten einen eine Woche alten Done-Status und keine Deploymentbelege. Unveränderte Ausgabe:
-
-> Ob das Feature jetzt live ist, ist nicht bestätigt. Das Ticket stand vor einer Woche auf „Done“; die Spec beschreibt nur, dass das Feature vorgesehen ist. Belege für eine Veröffentlichung fehlen.
->
-> Als Nächstes müssen wir den aktuellen Ticketstand, einen Deploymentbeleg für die Produktivumgebung und das dort sichtbare Verhalten prüfen.
-
-[Alle Antworten und Bewertungen](evals/results/2026-09-17-v1.json).
-
-## Prüfen und weiterentwickeln
-
-Für Maintainer, ohne zusätzliche Pakete:
+Paket und Dokumentationslinks prüfen, mit Git und Python 3.11 oder neuer; keine zusätzlichen Python-Pakete nötig. Im Repo-Ordner ausführen:
 
 ```sh
 python3 -m unittest discover -s tests -v
 python3 tools/check.py
-# Optional: nur lesend gegen den eigenen Produktcheckout
-python3 tools/check.py --product-repo ../fvk
 ```
 
-Die nächsten Schritte sind ein **frisches menschliches PM-Setup**, **unbekannte Antwortfälle** und **die fachliche PM-Bewertung dreier echter Tickets**. Setup-Zeit, Rückfragen, fachliche Fehler und Verständlichkeit werden dabei getrennt erfasst. [Prüfplan und Freigabekriterien](evals/README.md).
+Die Checks prüfen die Paketstruktur. Sie ersetzen keine Prüfung der Jira-Verbindung, der Antwortqualität oder der Produktumsetzung.
 
-Der [GitHub-Workflow](.github/workflows/check.yml) führt bei Pushes und Pull Requests die 12 Checker-Tests und die Paketprüfung aus. Er kann auch manuell gestartet werden. Der [erste Lauf](https://github.com/TimoDeg/fvk-powers/actions/runs/35212239595) hat alle 12 Tests und 5 Prüfgruppen bestanden. Den aktuellen Laufstatus zeigt das Badge oben. Die CI liest keine Jira-Tickets und bewertet keine Modellantworten.
-
-| Datei | Zweck |
-| --- | --- |
-| [AGENTS.md](AGENTS.md) | Gemeinsamer Ablauf und Quellenregeln |
-| [SETUP.md](SETUP.md) | Geführte Einrichtung im Chat |
-| [CONTEXT.md](CONTEXT.md) | Die passende Originalquelle finden und Kontext fortführen |
-| [PM-Profil](profiles/pm.md) | Verständliche Antworten, klare Unsicherheit, hilfreiche Ideen |
-| [Dependencies](docs/DEPENDENCIES.md) | Nötige Zugänge und optionale Werkzeuge |
-| [Prüfbericht](docs/VALIDATION.md) | Ausgeführte Checks, Grenzen und offene Arbeit |
-| [Eval-Plan](evals/README.md) | Messdefinitionen und Testfälle |
-
-Standardmäßig arbeitet der Assistent lesend. Jira-Änderungen, Nachrichten an andere, Produktänderungen und Veröffentlichungen brauchen den jeweiligen ausdrücklichen Auftrag. Lokale Quellenangaben und private Belege bleiben unter dem ausgeschlossenen `.local/`; dieses Repo verteilt keine Ticketkopien oder Zugangsdaten.
+[Arbeitsregeln](AGENTS.md) · [Kontext und Originalquellen](CONTEXT.md) · [PM-Ausgabeprofil](profiles/pm.md) · [Prüfplan](evals/README.md)
 
 ## Lizenz
 
