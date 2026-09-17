@@ -2,7 +2,9 @@
 
 **Rewrite verstehen. Tickets schärfen. Abnahmen vorbereiten.**
 
-**Paketchecks: lokal bestanden · CI: vorbereitet, noch nicht aktiv · PM-Pilot: offen**
+**Paketchecks: lokal bestanden · PM-Pilot: offen**
+
+[![Package checks](https://github.com/TimoDeg/fvk-powers/actions/workflows/check.yml/badge.svg)](https://github.com/TimoDeg/fvk-powers/actions/workflows/check.yml)
 
 Ein Assistent für PMs, der Jira mit den passenden Original-Specs verbindet und verständlich antwortet. Kundenwirkung und fachliche Entscheidungen stehen im Vordergrund. Technische Keywords werden nur verwendet, wenn sie helfen, und kurz erklärt.
 
@@ -113,7 +115,7 @@ python3 tools/check.py --product-repo ../fvk
 
 Die nächsten Schritte sind ein **frisches menschliches PM-Setup**, **unbekannte Antwortfälle** und **die fachliche PM-Bewertung dreier echter Tickets**. Setup-Zeit, Rückfragen, fachliche Fehler und Verständlichkeit werden dabei getrennt erfasst. [Prüfplan und Freigabekriterien](evals/README.md).
 
-Die [CI-Vorlage](docs/ci/check.yml) ist vorbereitet, aber nicht aktiviert: GitHub hat das Anlegen eines aktiven Workflows mit dem vorhandenen OAuth-Zugang wegen fehlender `workflow`-Berechtigung abgelehnt. Zur Aktivierung benötigt der veröffentlichende Zugang diese Berechtigung; anschließend die Vorlage nach `.github/workflows/check.yml` verschieben, veröffentlichen und den ersten Lauf prüfen. Bis dahin sind die oben ausgewiesenen Ergebnisse lokale Prüfungen.
+Der [GitHub-Workflow](.github/workflows/check.yml) führt bei Pushes und Pull Requests die 12 Checker-Tests und die Paketprüfung aus. Er kann auch manuell gestartet werden. Den aktuellen Laufstatus zeigt das Badge oben. Die CI liest keine Jira-Tickets und bewertet keine Modellantworten.
 
 | Datei | Zweck |
 | --- | --- |
