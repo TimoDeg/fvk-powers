@@ -51,7 +51,7 @@ Momentaufnahme vom **17.09.2026**. Details und Grenzen stehen im [Prüfbericht](
 | Automatische Paket-Prüfgruppen | **5 / 5 bestanden** | Wiederholbare Offline-Prüfung, aktuell lokal ausgeführt |
 | Isolierter frischer Paket-Clone | **1 bestanden** | Checks ohne persönlichen Kontext oder Produktcheckout lauffähig; kein PM-Chat-Test |
 | Kontext-Einstiege im lokalen Produktrepo | **17 / 17 vorhanden** | Die geprüften Pfade existieren; kein Vollständigkeitsversprechen |
-| Unterschiedliche echte Tickets mit begrenztem Quellenabgleich | **8** | Am bestehenden Arbeitsplatz geprüft; keine PM-Abnahmen |
+| Unterschiedliche echte Tickets mit begrenztem Quellenabgleich | **9** | Am bestehenden Arbeitsplatz geprüft; keine PM-Abnahmen |
 | Vorbereitete Antwort-Eval-Fälle | **14** | Entwicklungsset für Fakten, Konflikte, Setup, Sicherheit und Sprache |
 | Separat modellbewertete Erstantworten | **12 / 12 akzeptiert (Baseline v1)** | Synthetisches Entwicklungsset, keine menschliche Bewertung |
 | Kritische Fälle mit drei akzeptierten Versuchen | **4 / 4** | Konflikt, fehlende Spec, veralteter Status, Anweisungen in Quellen; insgesamt 8 zusätzliche Antworten |
@@ -60,6 +60,7 @@ Momentaufnahme vom **17.09.2026**. Details und Grenzen stehen im [Prüfbericht](
 | Gezielte Wiederholung nach zusätzlicher Sprachregel | **1 / 1 akzeptiert** | Zuvor zu technische Antwort: 171 Wörter, drei fachlich belegte Situationen; erster Versuch bleibt gezählt |
 | Vollständiger Agenten-Erststart unter `ffafc16` | **1 / 1 akzeptiert** | Neuer Clone, zwei Setup-Rückfragen, echte Quellen; 164 Wörter und drei Abnahmesituationen, separat bewertet |
 | Setup-Fehlerfälle unter `176eb56` | **3 / 3 korrekt behandelt** | 24 Kriterien separat modellbewertet; Jira-Lücke und alter Setup-Stand simuliert, fehlender Repo-Ordner real |
+| Gezielter Recherchetest nach `338754e` | **10/12, danach 11/12 Kriterien** | 194 → 171 Wort-Einheiten; beide Gesamturteile nicht akzeptiert, breite Werkzeugsuche bleibt offen; unterschiedliche Anhangsabdeckung |
 | Frische PM-Setups vollständig beobachtet | **0** | Pilotabnahme noch offen |
 | Reguläre Setup-Tests mit frischen Agenten | **3 Durchläufe erfolgreich** | Zwei mit vorgegebenen Quellen, einer mit simuliertem Setup-Dialog; Fehlerfälle separat gezählt, bestehende Host-Zugangsdaten |
 | Zusätzliche Python-/npm-Pakete | **0** | Paketchecker nutzt Standardbibliothek; externe Client- und Quellenzugänge bleiben nötig |

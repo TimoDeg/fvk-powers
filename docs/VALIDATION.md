@@ -11,8 +11,8 @@ Das Paket hat wiederholbare Strukturprüfungen und eine erste separate Modellbew
 | Isolierter Clone | Paketchecker und 12 Tests bestanden, Aufruf aus fremdem Arbeitsverzeichnis funktioniert | Keine persönlichen Dateien oder Produktquellen erforderlich; kein frischer PM-Chat |
 | GitHub Actions | [Erster Lauf bestanden](https://github.com/TimoDeg/fvk-powers/actions/runs/35212239595): 12 Tests und 5 Prüfgruppen, Ubuntu / Python 3.12.3 | Geprüfter Commit `0886026`; ausschließlich Paketchecks, keine Jira-Zugänge oder Modellantworten |
 | Kontextpfade im lokalen Produktrepo | 17/17 vorhanden; beide Spec-Einstiege lesbar | Keine vollständige Code-/Dokumentabdeckung und kein Beleg der jüngsten Remote-Version |
-| Jira-Lesezugriff | 8 unterschiedliche Tickets in ausgewerteten Durchläufen erfolgreich gelesen; reine Kandidatensichtung nicht mitgezählt | Nur der aktuelle Maintainer-Zugang, nicht der Zugang eines anderen PMs |
-| Begrenzter Ticket-Spec-Abgleich | 8 durchgeführt, mit sichtbaren Quellenlücken und einem Konflikt zwischen Bewertungstabellen | Keine unabhängige menschliche PM-Abnahme; separate Modellbewertungen bei den späteren Proben |
+| Jira-Lesezugriff | 9 unterschiedliche Tickets in ausgewerteten Durchläufen erfolgreich gelesen; reine Kandidatensichtung nicht mitgezählt | Nur der aktuelle Maintainer-Zugang, nicht der Zugang eines anderen PMs |
+| Begrenzter Ticket-Spec-Abgleich | 9 durchgeführt, mit sichtbaren Quellenlücken und Konflikten zwischen Quellen | Keine unabhängige menschliche PM-Abnahme; separate Modellbewertungen bei den späteren Proben |
 | Frisches PM-Setup | 0 vollständig beobachtet | Noch offen |
 | Tatsächlicher Setup-Test in frischem Agentkontext | 3 Durchläufe; zwei mit vorgegebenen Quellen, einer mit simuliertem Setup-Dialog | Frische Clones mit vorhandenen Host-Zugangsdaten; kein neuer menschlicher PM-Account |
 | Setup-Fehlerfälle unter `176eb56` | 3/3 korrekt behandelt, 24/24 vorab festgelegte Kriterien separat modellbewertet erfüllt | Korrekte Teilabschlüsse und Fortsetzung; kein vollständiger Quellenzugriff in jedem Fall, zwei vorbereitete Simulationszustände |
@@ -123,6 +123,20 @@ Nur die ignorierte, nicht getrackte Quellenkonfiguration wurde in den Clones ang
 
 Eine reale Netzstörung, fehlgeschlagene Anmeldung oder Berechtigungsverweigerung wurde dadurch nicht getestet. Der alte Setup-Stand ist eine Testvorgabe, kein tatsächlich beobachteter früherer Lauf. Das wiederverwendete Ticket erhöht den Zähler unterschiedlicher Tickets nicht. Reguläre Setup-Läufe, Fehlerfalltests und menschliche PM-Abnahme bleiben getrennte Nachweise; alle früheren Fehlversuche bleiben erhalten.
 
+## Gezielte Prüfung von Feldzugriff, Suche und Quellenankern
+
+Ein weiteres vom Nutzer ausgewähltes Ticket wurde in zwei frischen Autorenkontexten geprüft. Ausgangspunkt war `338754e` mit lokalen Regeländerungen: angebotene passende Feldmetadaten tatsächlich lesen, Suchbereiche begrenzen und Quellenanker verifizieren. Nach dem ersten Versuch wurden nur Suchanweisung und Beschreibung der bestehenden Wortzählung präzisiert. Auftrag und zwölf vorab festgelegte Kriterien blieben gleich. Beide Antworten wurden unverändert gespeichert und separat modellbewertet; das Ticket zählt genau einmal zu den neun unterschiedlichen Tickets.
+
+Im ersten Versuch wurden **10/12 Kriterien erfüllt**. Breite Werkzeugsuche und vier nicht vorhandene Suchpfade verletzten das Recherchekriterium; 194 gezählte Einheiten überschritten die Grenze von 180. Ohne Memory-Anhang blieben 181, rein sprachlich 163 Wörter. Maßgeblich bleibt die bisherige konservative Messung: Markdown-Links auf Labels reduzieren, am Leerraum trennen, Tabellenzeichen und Quellenanhänge mitzählen. Die Regeln erläutern diese Messung jetzt ausdrücklich; der erste Versuch wird dadurch nicht nachträglich akzeptiert.
+
+Die unabhängige Bewertung der Wiederholung ergibt **11/12 Kriterien, weiterhin nicht akzeptiert**. Der verbleibende Verstoß betrifft die breite Werkzeugsuche. Länge und übrige Kriterien sind erfüllt; der ausgelassene Screenshot bleibt eine gesonderte Abdeckungsgrenze, kein nachträglich hinzugefügtes Ausschlusskriterium.
+
+Die Wiederholung umfasst **171 Einheiten, davon 156 ohne Memory-Anhang**, und drei vorgeschlagene Abnahmesituationen. Der Autor zählte seinen Entwurf tatsächlich vor dem Senden. Beide Autoren lasen gezielte Jira-Felder, riefen die passenden Erstellungsfeld-Metadaten tatsächlich auf und nutzten verifizierte Zeilenanker der aktuellen lokalen Spec. Die begrenzte Feldabdeckung wurde nicht als Beweis für fehlende separate Abnahmekriterien ausgegeben.
+
+Die Quellenabdeckung unterscheidet sich: Nur der erste Autor betrachtete den Ticket-Screenshot und erkannte einen offenen Widerspruch zur Spec. Der zweite meldete den Screenshot als nicht ausgewertet. Daher belegen geringere Aufrufzahlen keine bessere Rechercheeffizienz. Die Wiederholung hatte keine fehlenden Suchpfade mehr, aber weiterhin eine zu breite Werkzeugkatalogsuche. Ein Rückgabeblock wurde gekürzt, gegenüber zwei im ersten Versuch; relevante Spec-Passagen waren vollständig lesbar. Keine wiederholte Jira-Beschreibung, kein `*all`, keine Produkt- oder Jira-Schreibaktion durch die Autoren.
+
+Beide nutzten `gpt-6-astra`, Einstellung `high`. Frische Kontexte hatten weiterhin Host-Regeln, Memory und bestehende Zugänge. Paketregeln und relevante Originalquellen sind mit Hashes gebunden; aktuelle Produktänderungen wurden nicht als geprüfte Umsetzung behandelt. Private Antworten, Bild, Quellen, alle sichtbaren Aufrufe und Rückgaben sowie unabhängige Einzelurteile bleiben lokal. Kein menschlicher PM-Test, kein unbekanntes Testset, keine Runtime-Abnahme und kein kausaler A/B-Vergleich. Frühere Zahlen und Fehlversuche bleiben unverändert.
+
 ## Was die automatische Prüfung nicht abdeckt
 
 - Befolgt ein frischer Assistent die Anweisungen tatsächlich?
@@ -146,7 +160,7 @@ Messdefinitionen und Freigabekriterien: [Eval-Plan](../evals/README.md). Neue Er
 | Baustein | Stand in fvk-powers |
 | --- | --- |
 | Geführter PM-Einstieg, Quellenbindung, lokale Fortsetzung | In frischem Agentkontext mit echten Quellen und lokaler Speicherung geprüft; menschlicher PM-Erststart offen |
-| Jira plus Original-Specs, Konflikte, Aktualität, Quellenbelege | Enthalten; acht begrenzte Live-Quellenchecks durchgeführt |
+| Jira plus Original-Specs, Konflikte, Aktualität, Quellenbelege | Enthalten; neun begrenzte Live-Quellenchecks durchgeführt |
 | Fachliche Kontextwahl, Entscheidungen, Code-Einstiege, Release-Grenzen | Portable Landkarte in `CONTEXT.md`; aktuelle lokale Pfade geprüft |
 | PM-Formatierung, Ideen, Abnahmeplanung | Profil, redaktionelle Beispiele und 20 separat modellbewertete Antworten enthalten; PM-Abnahme offen |
 | Paketprüfungen und wiederholbare Regressionen | Lokaler Checker und GitHub-Workflow für Pushes und Pull Requests enthalten |
