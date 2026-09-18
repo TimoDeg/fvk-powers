@@ -34,7 +34,7 @@ Stelle im Normalfall nur eine kurze, konkrete Frage auf einmal. Erkläre jeweils
 
 - Ein vorhandener bekannter Produktpfad wird direkt geprüft. Ist nur der Standardkandidat gefunden, kläre knapp, ob dies das gewünschte Rewrite-Repo ist, sofern der aktuelle Kontext es nicht bereits bestätigt.
 - Fehlt ein Pfad, frage: „Hast du das Rewrite-Repo bereits auf deinem Rechner? Wenn ja, nenne mir den Ordner; sonst hilft der interne Repo-Link.“ Erkläre bei Bedarf: „Dort liegen die fachlichen Beschreibungen, mit denen ich die Tickets abgleiche.“
-- Bei vorhandenem Ordner lies `docs/specs/features/README.md` und eine passende Original-Spec. Prüfe Repo-Identität und aktuellen lokalen Stand. Ein Verzeichnisname allein belegt nicht das richtige Produktrepo. Fehlt der Einstieg, suche begrenzt im bestätigten Dokumentationsordner nach den Specs und benenne die tatsächliche Fundstelle oder Lücke.
+- Bei vorhandenem Ordner lies `docs/specs/features/README.md` und eine passende Original-Spec. Prüfe Repo-Identität und aktuellen lokalen Stand mit Git im Produktordner selbst (`git -C <produktrepo> rev-parse --show-toplevel HEAD` und `git -C <produktrepo> status --short`). Ein im übergeordneten Arbeitsrepo ungetrackter Ordner kann ein eigenes Git-Repo mit gültigem Commit sein; leite daraus keinen fehlenden Produktstand ab. Ein Verzeichnisname allein belegt nicht das richtige Produktrepo. Fehlt der Einstieg, suche begrenzt im bestätigten Dokumentationsordner nach den Specs und benenne die tatsächliche Fundstelle oder Lücke.
 - Bei bloßem Repo-Link verwende verfügbaren freigegebenen Lesezugriff, wenn damit die Originaldateien erreichbar sind. Wenn ein lokaler Checkout erforderlich ist, erkläre den Zweck und kläre Zielordner und den Auftrag zum Herunterladen. Überschreibe keinen vorhandenen Ordner. Keine Produktinstallation, keine Container, keine Migrationen und keine Hintergrunddienste für das PM-Setup.
 - Ist keine Kopie und kein Remote-Lesezugriff vorhanden, erkläre, welcher Repo-Zugang fehlt. Berechtigungen erteilt der zuständige interne Ansprechpartner. Fahre mit nutzbarem Jira-Zugriff fort, ohne Spec-Abgleich zu behaupten.
 
@@ -49,6 +49,8 @@ Wenn Speichern nicht möglich ist, sage kurz, dass die Angaben nur im laufenden 
 ## 4. Verständlicher Abschluss und erste Nutzung
 
 Zeige für Jira, Specs und lokale Speicherung jeweils **geprüft**, **offen** oder **nicht verfügbar**, ergänzt um einen kurzen verständlichen Grund. „Geprüft“ beim Quellenzugriff verlangt eine erfolgreiche aktuelle Leseprüfung; das Vorhandensein einer Datei oder eines Tools reicht nicht. Ein erreichbarer Spec-Ordner allein belegt noch keinen erfolgreichen Ticket-Spec-Abgleich.
+
+Bei offenem Setup endet die Antwort mit genau einem direkt ausführbaren nächsten Schritt. Fehlt eine Angabe oder existiert der angegebene Produktordner nicht, frage konkret nach dem richtigen Ordner oder internen Repo-Link. Fehlt die Jira-Verbindung, nenne den nächsten zum Client passenden Bedien- oder Anmeldeschritt aus [Jira verbinden](docs/DEPENDENCIES.md#jira-verbinden). „Zugriff offen“ oder „Jira-Dienst verbinden“ allein führt den Nutzer nicht weiter. Bereits mögliche Quellenarbeit trotzdem ausführen.
 
 Bei beiden zugänglichen Quellen fahre mit dem bereits genannten Ticket fort: finde die passende Spec, fasse die fachliche Anforderung verständlich zusammen und benenne einen offenen Punkt oder sinnvollen Abnahmeschritt, sofern vorhanden. Wird keine passende Spec gefunden, melde diese Lücke. Erfinde keine Zuordnung, nur um den ersten Durchlauf abzuschließen.
 

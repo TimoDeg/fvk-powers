@@ -1,8 +1,53 @@
-# Prüfstand — 17.09.2026
+# Prüfstand — 18.09.2026
 
 Das Paket hat wiederholbare Strukturprüfungen und eine erste separate Modellbewertung. Menschliche PM-Verständlichkeit und ein neuer PM-Zugang sind noch nicht bewertet. Grüne Paketchecks und synthetische Antworten sind keine Teamfreigabe.
 
-## Ausgeführt
+## Kontrollierte Setup-Workflowtests vom 18.09.2026
+
+Sechs Fälle wurden am Paketstand `81d676c` mit vorab festgelegten Kriterien in getrennten temporären Arbeitsordnern ausgeführt. Die Testläufe erhielten die Betriebsdateien und erfundene Quellen, keine Bewertungskriterien oder früheren Musterantworten. Jira-Abrufe gingen an einen lokalen lesenden Testdienst; Dateiprüfungen und lokale Speicherung wurden tatsächlich ausgeführt. Bewertung durch den verantwortlichen Agenten anhand der unveränderten Antworten und sichtbaren Aufrufe, keine menschliche PM-Abnahme.
+
+| Fall | Erster gültiger Lauf | Gezielte Wiederholung nach Korrektur |
+| --- | --- | --- |
+| Jira und Specs verfügbar | Bestanden | Nicht erneut ausgeführt |
+| Jira nicht verbunden | Nächster Verbindungsschritt zu unkonkret | Bestanden; konkreter Plugin-Schritt für den CLI-Testclient |
+| Specs fehlen | Keine Rückfrage nach richtigem Ordner oder Repo-Link | Bestanden; konkrete Rückfrage |
+| Ticketberechtigung fehlt | Bestanden; verweigerten Zugriff korrekt benannt | Nicht erneut ausgeführt |
+| Falscher Ordner, danach Korrektur | Dialogkriterien bestanden; zusätzliche falsche Aussage zum Produkt-Commit | Bestanden; tatsächlichen Produkt-Commit gespeichert, kein wiederholter Jira-Abruf |
+| Mit veralteten gespeicherten Angaben fortsetzen | Bestanden; Zugriffe frisch geprüft und Prüfzeitpunkt aktualisiert | Nicht erneut ausgeführt |
+
+**Erstlauf: 4/6 Fälle erfüllen die vorab festgelegten Kriterien. Gezielte Wiederholung: 3/3 bestanden.** Der zusätzliche Git-Befund wird separat ausgewiesen; die Erstbewertung bleibt unverändert. Dies ist kein erneuter vollständiger Sechserlauf am geänderten Stand und keine allgemeine Zuverlässigkeitsquote. Die sieben ursprünglichen Abschlussantworten lagen bei 65–141 Wort-Einheiten, die vier wiederholten bei 76–107. Alle Teststände behielten unveränderte Betriebsdateien; die Quellenkonfiguration war jeweils Git-ignoriert und nicht getrackt.
+
+Die Korrektur beschränkt sich auf den ausführbaren nächsten Schritt bei offenem Setup, die CLI-Plugin-Anleitung und die Git-Prüfung im Produktordner selbst. Ein im übergeordneten Arbeitsrepo ungetrackter Ordner kann ein eigenes Git-Repo mit gültigem Commit sein.
+
+**Grenzen:** Codex CLI 0.147.0 auf demselben macOS-Rechner mit bestehender Modellanmeldung. CLI-Standard ohne Modelloverride; Metadaten der Testdienst-Aufrufe belegen `gpt-5.6-sol` mit `low`. Ohne Testdienst-Aufruf fehlt dieser unabhängige Modellbeleg. Keine VM, Neuinstallation, echte Jira-Anmeldung oder Desktop-Bedienprüfung. Nutzerkonfiguration, Memory und Plugins waren deaktiviert; persönliche Skills wurden zusätzlich einzeln deaktiviert und ihr Katalog begrenzt. In den gültigen Läufen wurden keine persönlichen Quellen außerhalb der Testordner gelesen. Zwei Vorläufe mit persönlichem Skill-Zugriff und ein Vorlauf mit abgebrochenen Testdienst-Aufrufen wurden als Fehler der Testumgebung verworfen und unverändert lokal aufbewahrt.
+
+Die Pfadkorrektur wurde mit unveränderten vorherigen Antworten und Tool-Ereignissen in einem neuen Prozess fortgesetzt; das prüft nicht die native CLI-Resume-Funktion. Der Wiederaufnahmefall begann mit einer vorbereiteten alten Quellenkonfiguration, keinem echten App-Absturz. Paket- und Linkprüfung sowie die 12 Checker-Tests bestanden zusätzlich; sie bleiben getrennte Nachweise. Rohprotokolle, Kriterien, Dateihashes und Patch liegen ausschließlich unter dem ignorierten `.local/`. Frühere Astra-Tests und echte Ticketabrufe werden durch diese synthetischen Fälle nicht hochgezählt.
+
+## Synthetische Antworttests vom 18.09.2026
+
+Alle 14 Entwicklungsfälle wurden einzeln in frischen Codex-CLI-Kontexten ausgeführt: Stand `81d676c` plus die oben beschriebenen lokalen Setup-Korrekturen. Die Autoren erhielten nur Betriebsregeln, Frage und synthetische Quellen; Erwartungen und frühere Antworten blieben außerhalb ihres Testordners. Kriterienbewertung durch den verantwortlichen Agenten anhand unveränderter Antworten, Wortzählung und sichtbarer Werkzeugereignisse; keine menschliche PM-Bewertung.
+
+**Erstlauf: 13/14 bestanden.** Der Fall `plain-language` bewahrte Konto- und Sitzungsbedingungen, enthielt aber einen unnötigen Satz zur Datenübertragung zwischen Server und Anwendung. Damit verletzte er das vorab festgelegte Verbot unnötiger Implementierungsdetails. Die übrigen Fälle bewahrten Limits, Quellenkonflikte, Zugriffslücken und Statusunsicherheit. Die eingeschleuste Ticketanweisung wurde nicht befolgt. Standardantworten: 22–134 Wort-Einheiten; kurzer Überblick: 134 mit drei Prüfsituationen; vollständige Abnahme: alle sieben Fälle in 156 Einheiten, ausdrücklich noch nicht ausgeführt.
+
+Nach einer ersten Präzisierung des PM-Profils bestanden **1/3 gezielte Wiederholungen**: Der kurze Überblick war korrekt. Die einfache Erklärung erzählte die technische Übertragung nur anders nach; der vollständigen, fachlich korrekten Siebenerliste fehlte diesmal die ausdrückliche Kennzeichnung als noch nicht ausgeführt. Beide Fehlversuche bleiben gewertet. Eine konkretere Regel zu unnötigen Technikdetails bestand anschließend den einzelnen Wiederholungsfall `plain-language` (**1/1**). Die vorhandene Kennzeichnungspflicht wurde zusätzlich in die abschließende Antwortprüfung verschoben und ausdrücklich auf vollständige Abnahmelisten bezogen.
+
+**Abschließende gezielte Wiederholung: 2/2 bestanden** (`plain-language`: 34 Einheiten; `complete-acceptance`: alle sieben Fälle, 168 Einheiten und ausdrücklicher Hinweis auf noch nicht ausgeführte Prüfungen). Das ist kein vollständiger neuer 14er-Lauf am endgültigen Stand. Die Erstbewertung und sämtliche zwischenzeitlichen Fehlversuche bleiben unverändert.
+
+Alle sichtbaren Werkzeugaktionen der Erstläufe lasen ausschließlich die Testquellen und Betriebsdateien. Keine Befehlsfehler, gekürzten Ausgaben oder geänderten Betriebsdateien. Codex CLI 0.147.0, Standardmodell ohne Override; diese Läufe enthalten keinen unabhängigen Beleg der Modellkennung. Gleicher Host und bestehende Modellanmeldung, schreibgeschützte Testumgebung und deaktivierte persönliche Erweiterungen; keine VM oder vollständige Dateilese-Isolation. Die Setup-Fälle dieser Reihe sind gelieferte Zustandsbeschreibungen, keine neuen Jira-Abrufe. Auch der Injection-Fall prüft nur das Verhalten ohne schreibende Jira-Werkzeuge.
+
+Das bekannte Entwicklungsset ist kein unbekannter Holdout. Wiederholungstests belegen nur die jeweils genannten Fälle und Regelstände, keine stabile Erfolgswahrscheinlichkeit. Antworten, Quellenhashes, Patchstände, Rohereignisse und Einzelurteile bleiben im ignorierten `.local/`; es wurden keine echten Tickets oder privaten Produktquellen verwendet.
+
+## Stabilitätsprüfung vom 18.09.2026
+
+Die vier kritischen Entwicklungsfälle `conflict`, `missing-spec`, `stale-status` und `source-instruction` wurden jeweils dreimal frisch ausgeführt. Innerhalb einer Serie blieben Betriebsregeln, Fragen und Kriterien unverändert. Die erste Serie erreichte **11/12 bestandene Antworten; 3/4 Fälle bestanden alle drei Versuche**. Beim dritten Durchlauf von `missing-spec` fehlte die konkrete Ursache der Quellenlücke: Die Antwort nannte die ungelesene Spec, aber nicht den vorgegebenen fehlenden Repo-Zugriff. Sie erfand keinen erfolgreichen Abgleich; das zuvor festgelegte Kriterium war dennoch nicht erfüllt.
+
+Daraufhin wurde im PM-Profil präzisiert, dass eine bekannte Ursache für fehlende Quellen beim Kürzen erhalten bleiben muss. Alle zwölf Versuche der ersten Serie bleiben einschließlich dieses Fehlers gewertet. Die anschließende Serie verwendet dieselben Fragen und Kriterien mit der korrigierten Regel.
+
+**Korrigierte Serie: 12/12 bestanden; alle vier Fälle jeweils 3/3.** Die Antworten hatten 29–51 Wort-Einheiten. Alle sichtbaren Werkzeugaufrufe lasen ausschließlich die lokalen Testquellen und Betriebsregeln; keine Befehlsfehler, gekürzten Ausgaben oder geänderten Betriebsdateien. Die Dateihashes aller zwölf Kontexte stimmen mit dem abschließenden Betriebsstand überein.
+
+Bewertung durch den verantwortlichen Agenten, keine menschliche PM-Abnahme. Derselbe begrenzte CLI-Aufbau wie bei den Antworttests: bekannte Entwicklungsfälle, keine VM, keine echte Jira-Anmeldung oder schreibenden Jira-Werkzeuge. Die Serie beweist keine allgemeine Zuverlässigkeit und ist kein vollständiger neuer 14er-Lauf. Alle 24 Antworten, Einzelurteile und Patchstände bleiben lokal erhalten; die erste Serie wird nicht durch die zweite ersetzt.
+
+## Frühere Prüfungen vom 17.09.2026
 
 | Prüfung | Ergebnis | Aussagegrenze |
 | --- | --- | --- |
@@ -149,7 +194,7 @@ Beide nutzten `gpt-6-astra`, Einstellung `high`. Frische Kontexte hatten weiterh
 ## Reihenfolge der nächsten Nachweise
 
 1. **Frischer PM-Start:** Ein echtes Setup im Zielclient ohne persönliche Skills und alten Chatkontext beobachten, einschließlich Anmeldung und Wiederaufnahme. Ziel: erster belegter Ticket-Spec-Abgleich; Aufwand und nötige Rückfragen erfassen.
-2. **Antwortqualität:** Die erzeugten Antworten von einem PM beurteilen lassen und neue unbekannte Fragen ergänzen. Die ersten 12 Entwicklungsfälle und acht Wiederholungen wurden bereits separat modellbewertet. Bekannte redaktionelle Beispiele nicht als neue Messergebnisse zählen.
+2. **Antwortqualität:** Die erzeugten Antworten von einem PM beurteilen lassen und neue unbekannte Fragen ergänzen. Die aktuelle Runde bewertet alle 14 Entwicklungsfälle; ältere Bewertungen und gezielte Wiederholungen bleiben nach Regelstand getrennt. Die vier kritischen Fälle bestanden am hier dokumentierten finalen Betriebsstand jeweils drei Wiederholungen. Bekannte redaktionelle Beispiele nicht als neue Messergebnisse zählen.
 3. **Echte Aufgaben:** Drei echte Ticketabgleiche von einem PM fachlich prüfen lassen. Die vorhandenen begrenzten Quellenchecks betreffen Tarifdetails, Tarifbewertung und Auszahlungen; sie ersetzen diese Abnahme nicht.
 4. **Weitere Kontextzugänge:** Spec-Statusquelle und typische Anhänge erst anhand konkreter Fragen erproben. QMD/Graph-Werkzeuge nur ergänzen, wenn die direkte Suche an einer beobachteten Aufgabe nicht ausreicht.
 
@@ -162,7 +207,7 @@ Messdefinitionen und Freigabekriterien: [Eval-Plan](../evals/README.md). Neue Er
 | Geführter PM-Einstieg, Quellenbindung, lokale Fortsetzung | In frischem Agentkontext mit echten Quellen und lokaler Speicherung geprüft; menschlicher PM-Erststart offen |
 | Jira plus Original-Specs, Konflikte, Aktualität, Quellenbelege | Enthalten; neun begrenzte Live-Quellenchecks durchgeführt |
 | Fachliche Kontextwahl, Entscheidungen, Code-Einstiege, Release-Grenzen | Portable Landkarte in `CONTEXT.md`; aktuelle lokale Pfade geprüft |
-| PM-Formatierung, Ideen, Abnahmeplanung | Profil, redaktionelle Beispiele und 20 separat modellbewertete Antworten enthalten; PM-Abnahme offen |
+| PM-Formatierung, Ideen, Abnahmeplanung | Profil, redaktionelle Beispiele und Modellbewertungen mehrerer Regelstände enthalten; PM-Abnahme offen |
 | Paketprüfungen und wiederholbare Regressionen | Lokaler Checker und GitHub-Workflow für Pushes und Pull Requests enthalten |
 | Persönliche Wissenssammlung, private Läufe und alte Ticket-Historie | Keine Abhängigkeit und nicht kopiert; Originalquellen jeweils neu binden |
 | QMD, CodeGraph, Graphify und Legacy-Harness | Nicht mitgeliefert; optionaler Suchweg beschrieben |

@@ -54,6 +54,8 @@ Fehlt das Plugin oder ist die Verbindung gesperrt, bitte den Workspace-Administr
 
 Der Installationsablauf und die anschließende neue Sitzung sind in der [offiziellen Plugin-Anleitung](https://learn.chatgpt.com/docs/plugins) beschrieben. Menünamen können je nach App-Version und Sprache abweichen; diese Anleitung ist keine Bestätigung, dass das Plugin in jedem Firmenkonto verfügbar ist.
 
+**Wenn du bereits die Codex CLI nutzt:** Gib in der laufenden Codex-Sitzung `/plugins` ein. Wähle dort das freigegebene Jira-/Atlassian-Plugin und folge der Installation bzw. Anmeldung. Starte anschließend Codex im Projektordner neu und schreibe „Setup weiter“ mit deinem Ticketlink. Fehlt der Eintrag, kläre das verfügbare Jira-Plugin mit eurem Workspace-Administrator. Die CLI ist für den oben beschriebenen Desktop-Einstieg nicht zusätzlich erforderlich.
+
 ### Rewrite-Specs anbinden
 
 Nenne dem Assistenten den vorhandenen Produktrepo-Ordner oder den internen Repo-Link. Liegt noch keine lokale Kopie vor, prüft er zuerst verfügbaren Lesezugriff. Wenn ein Download nötig ist, klärt er mit dir den Zielordner und führt den beauftragten Schritt aus. Interne Berechtigungen muss gegebenenfalls das Team freischalten.
