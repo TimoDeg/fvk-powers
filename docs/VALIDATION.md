@@ -2,6 +2,12 @@
 
 Das Paket hat wiederholbare Strukturprüfungen und eine erste separate Modellbewertung. Menschliche PM-Verständlichkeit und ein neuer PM-Zugang sind noch nicht bewertet. Grüne Paketchecks und synthetische Antworten sind keine Teamfreigabe.
 
+## Geführte PM-Abnahme — lokale Erweiterung vom 18.09.2026
+
+Das PM-Profil begleitet jetzt einzelne Prüffälle, hält Beobachtungen mit Herkunft fest und unterscheidet bestanden, abweichend und offen. Ein belegter Unterschied führt zu einem Bug-Entwurf im Chat; Quellenkonflikte bleiben Klärungspunkte. Pausen, unvollständige Rückmeldungen und Änderungen des Produktstands sind berücksichtigt. Das vorhandene Beispiel wurde um einen Dialog ergänzt, das Entwicklungsset von 14 auf 19 Fälle erweitert.
+
+Paketprüfung und die 12 Checker-Tests bestanden am lokalen Stand. Die fünf neuen Modellfälle und ein zusammenhängender Dialog wurden noch nicht ausgeführt; eine menschliche PM-Abnahme steht weiterhin aus. Die folgenden älteren Modellbewertungen belegen diese Erweiterung nicht. Der [Prüfplan](../evals/README.md#geführte-abnahme-prüfen) beschreibt die nötigen nächsten Nachweise.
+
 ## Kontrollierte Setup-Workflowtests vom 18.09.2026
 
 Sechs Fälle wurden am Paketstand `81d676c` mit vorab festgelegten Kriterien in getrennten temporären Arbeitsordnern ausgeführt. Die Testläufe erhielten die Betriebsdateien und erfundene Quellen, keine Bewertungskriterien oder früheren Musterantworten. Jira-Abrufe gingen an einen lokalen lesenden Testdienst; Dateiprüfungen und lokale Speicherung wurden tatsächlich ausgeführt. Bewertung durch den verantwortlichen Agenten anhand der unveränderten Antworten und sichtbaren Aufrufe, keine menschliche PM-Abnahme.

@@ -61,6 +61,35 @@ Ich kann die Anforderung aus dem Ticket erklären, aber den Abgleich mit der Spe
 
 **Prüfpunkt:** Die Antwort erfindet weder eine Spec noch das Ergebnis des Abgleichs. Umgekehrt gilt: Ohne Jira-Zugriff dürfen Specs erklärt, aber kein aktueller Ticketstatus behauptet werden.
 
+## 5. Geführte Abnahme mit Abweichung
+
+**Beispielquellen:** Ticket und Spec verlangen maximal drei Favoriten. Ein vierter Versuch muss einen Hinweis zeigen und die ursprünglichen drei erhalten. Der PM hat Testumgebung „Vorschau A“, Stand „Demo 1“ und drei ausgewählte Favoriten bestätigt. Alle Angaben sind erfunden.
+
+**PM:** „Führe mich durch die Abnahme.“
+
+**Assistent:** „Du hast in Vorschau A bereits drei Favoriten ausgewählt. Versuche jetzt, ein viertes Angebot zu markieren. Laut Beispiel-Spec sollte ein Hinweis erscheinen und die bisherigen drei sollten ausgewählt bleiben. Was siehst du danach?“
+
+**PM:** „Der Hinweis erscheint, aber alle Favoriten sind weg.“
+
+**Assistent:**
+
+Der Fall ist **abweichend laut deiner Rückmeldung**: Der Hinweis erscheint wie erwartet, die bisherige Auswahl bleibt aber nicht erhalten. Ich habe den Ablauf nicht selbst ausgeführt.
+
+**Bug-Entwurf, nicht erstellt**
+
+- **Titel:** Vierter Favoritenversuch entfernt bestehende Auswahl.
+- **Bezug / Umgebung:** Das besprochene Favoriten-Ticket; Vorschau A, Stand Demo 1.
+- **Voraussetzung und Schritte:** Drei Favoriten sind ausgewählt. Ein viertes Angebot markieren.
+- **Erwartung:** Hinweis anzeigen und ursprüngliche drei erhalten, laut Beispiel-Spec.
+- **Beobachtung:** Laut PM erscheint der Hinweis, danach ist kein Favorit mehr ausgewählt.
+- **Belege / offen:** PM-Rückmeldung vorhanden; Screenshot und Wiederholbarkeit noch offen. Ursache ungeprüft.
+
+**PM:** „Für heute stoppen.“
+
+**Assistent:** „Zwischenstand: Der vierte Auswahlversuch weicht laut deiner Rückmeldung ab; der Bug-Entwurf steht oben. Weitere Fälle wurden noch nicht geprüft. Damit ist die Ticketabnahme noch offen.“
+
+**Prüfpunkt:** Keine erfundene Browserausführung, keine automatische Veröffentlichung und keine vollständige Abnahme aus einem einzelnen Fall. „Weiter“ allein darf einen offenen Fall nicht bestehen lassen. Bei widersprüchlichen Limits wäre zuerst eine Klärung nötig, kein bestätigter Bug.
+
 ## Erprobung mit einem PM
 
 Für einen Vergleich dieselben Quellen und dieselbe Frage verwenden. Ein PM beurteilt: Ist die Antwort fachlich richtig, ohne Entwicklerwissen verständlich, mit Quellen nachvollziehbar und für den nächsten Schritt hilfreich? Ausgelassene Bedingungen und erfundene Fakten sind Fehler, auch bei angenehm lesbarer Sprache.

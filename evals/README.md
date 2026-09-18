@@ -33,3 +33,9 @@ Der aktuelle [Prüfbericht](../docs/VALIDATION.md) nennt ausgeführte Checks und
 ## Ausgabeumfang prüfen
 
 Bei `compact-overview` die sichtbaren Wörter ohne Markdown-Linkziele und die tatsächlichen Prüfsituationen zählen. Drei Listenpunkte mit sieben Fällen erfüllen die Regel nicht. Fachliche Bedingungen, Quellenkonflikte und Unsicherheit zugleich prüfen: Kürze allein reicht nicht. `complete-acceptance` prüft die Ausnahme für ausdrücklich vollständige Aufträge; alle sieben Situationen müssen erhalten bleiben. Die bisherigen 12 Baseline-Antworten belegen diese beiden später ergänzten Fälle nicht.
+
+## Geführte Abnahme prüfen
+
+Die fünf Fälle `guided-start`, `guided-unclear`, `guided-bug`, `guided-conflict` und `guided-resume` ergänzen Start, unvollständige Beobachtung, Bug-Entwurf, widersprüchliche Erwartung und Wechsel des Produktstands. Sie sind synthetische Aufgaben mit teils vorgegebenem Gesprächsstand, keine bereits ausgeführten Dialogtests. Frühere Antwortbewertungen gelten nicht als Nachweis für diese Erweiterung.
+
+Zusätzlich einen zusammenhängenden Dialog ohne vorbereitete Antworten prüfen: Abnahme starten, eine unklare Rückmeldung geben, eine Abweichung melden, stoppen und mit geändertem Stand fortsetzen. Erwartet werden jeweils ein nächster Schritt, erhaltene Beobachtungen samt Herkunft, keine erfundenen Ergebnisse und ein nicht veröffentlichter Bug-Entwurf. Die vollständige Abnahme muss über drei Fälle hinaus fortsetzbar sein. Bei einem neuen Chat ohne gespeicherten Verlauf darf der Assistent keine Erinnerung erfinden. Ein menschlicher PM prüft anschließend Verständlichkeit und Nutzbarkeit.

@@ -47,8 +47,12 @@ Der Assistent liest die verfügbaren Quellen und antwortet kurz, verständlich u
 | Ein Ticket verstehen | „Was soll sich für Kunden ändern?“ |
 | Anforderungen abgleichen | „Passt das Ticket zur Spec? Was fehlt oder widerspricht sich?“ |
 | Eine Abnahme vorbereiten | „Welche konkreten Situationen sollte ich prüfen?“ |
+| Eine Abnahme durchführen | „Führe mich Schritt für Schritt durch die Abnahme dieses Tickets.“ |
+| Eine Abweichung beschreiben | „Mach daraus einen Bug-Entwurf mit Erwartung, Beobachtung und Prüfschritten.“ |
 | Eine Verbesserung finden | „Welche Verbesserung wäre sinnvoll und warum?“ |
 | Den Release-Stand klären | „Ist das schon live? Welche Belege gibt es dafür?“ |
+
+Bei der geführten Abnahme führst du jeweils einen Prüffall aus und meldest deine Beobachtung zurück. Der Assistent hält fest, was bestanden, abweichend oder noch offen ist, und formuliert bei Bedarf einen Bug-Entwurf im Chat. Ein Jira-Ticket wird dadurch nicht automatisch erstellt.
 
 [Beispielantworten ansehen](examples/pm.md)
 
