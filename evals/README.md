@@ -1,6 +1,6 @@
 # Antwortqualität und Setup messen
 
-Paketprüfungen, Quellenzugriff und Produktnutzen sind getrennte Messungen. Die 22 [synthetischen Fälle](cases.json) definieren Aufgaben und Erwartungen; ihre Anzahl ist keine Erfolgsquote. Aktuelle Durchläufe, Fehlversuche und Grenzen stehen im [Prüfbericht](../docs/VALIDATION.md), die [Bewertung vom 17.09.2026](results/2026-09-17-v1.md) ist eine ältere Baseline. Die [Stilbeispiele](../examples/pm.md) sind redaktionell geschriebene Beispiele, keine Benchmark-Ausgaben.
+Paketprüfungen, Quellenzugriff und Produktnutzen sind getrennte Messungen. Die 28 [synthetischen Fälle](cases.json) definieren Aufgaben und Erwartungen; ihre Anzahl ist keine Erfolgsquote. Aktuelle Durchläufe, Fehlversuche und Grenzen stehen im [Prüfbericht](../docs/VALIDATION.md), die [Bewertung vom 17.09.2026](results/2026-09-17-v1.md) ist eine ältere Baseline. Die [Stilbeispiele](../examples/pm.md) sind redaktionell geschriebene Beispiele, keine Benchmark-Ausgaben.
 
 ## Vor dem Teamstart
 
@@ -47,6 +47,14 @@ Zusätzlich einen zusammenhängenden Dialog ohne vorbereitete Antworten prüfen:
 Bei Antworttests erhält jeder frische Kontext nur die Betriebsdateien, die natürliche Frage und den eingefrorenen Quellenstand. Bewertungsregeln, Musterantworten und frühere Ergebnisse bleiben außerhalb dieses Kontexts. Tatsächliche Quellenabrufe separat testen: gelieferte Tickettexte belegen weder Connector-Zugriff noch eigenständiges Auffinden der richtigen Spec. Echte Ticketproben und ihre Rohantworten bleiben lokal; öffentliche Berichte enthalten nur aggregierte Ergebnisse ohne private Ticketinhalte.
 
 Kriterien vor dem Lauf festlegen und anschließend jede einzelne Muss-Aussage und jedes Verbot anhand der unveränderten Antwort bewerten. Zusätzlich Werkzeugaktionen, Änderungen an Betriebsdateien, Abbrüche und gekürzte Rückgaben prüfen. Laufzeit und sichtbare Tokenwerte erfassen, soweit der Client sie liefert; daraus ohne vergleichbaren Ausgangslauf keine Einsparung ableiten. Fehlversuche erhalten; Wiederholungen getrennt ausweisen. Prüfer und Grenzen nennen: eine Bewertung durch den betreuenden Agenten ist keine unabhängige menschliche Abnahme.
+
+## Gespeicherten Kontext und Wissenszugriff prüfen
+
+Die sechs Fälle `context-save`, `context-resume`, `context-drift`, `context-missing`, `knowledge-conflict` und `context-storage-guard` brauchen für einen Funktionsnachweis tatsächliche temporäre Dateien. Eine Antwortsimulation kann sichere Speicherung oder korrektes Wiederlesen nicht belegen.
+
+Lege synthetische Quellen und einen Wissenseinstieg mit relativen Kapitelverweisen in einem temporären Git-Repo an. Lass „Stand speichern“ die Notiz erzeugen. Starte anschließend einen frischen Kontext mit „Weiter mit TEST-42“, ohne bisherigen Chat oder Musterantwort. Ändere danach die relevante Spec und den angegebenen Produktstand, behalte die ursprüngliche Notiz und prüfe eine weitere frische Fortsetzung. Herkunft und damalige Umgebung der Beobachtung, offene Fälle und neue Prüflücken müssen erhalten bleiben. Prüfe getrennt fehlende Notiz, Quellenkonflikt und ein bereits getracktes Speicherziel. Betriebsdateien bleiben unverändert; nur ausdrücklich beauftragte lokale Notizen dürfen entstehen.
+
+Kriterien vor der Regeländerung einfrieren. Alle Schreib- und Leseaktionen, ursprüngliche Notiz, Antworten, Datei-Hashes und Fehlversuche lokal behalten. Den Umgang mit synthetischen Dateien, tatsächlichem Jira-Zugriff und menschlicher Abnahme getrennt ausweisen. Pro Client muss insbesondere das Laden der Projektanweisungen separat geprüft werden.
 
 ## Bedarfsgerechtes Laden vergleichen
 

@@ -38,11 +38,17 @@ Stelle im Normalfall nur eine kurze, konkrete Frage auf einmal. Erkläre jeweils
 - Bei bloßem Repo-Link verwende verfügbaren freigegebenen Lesezugriff, wenn damit die Originaldateien erreichbar sind. Wenn ein lokaler Checkout erforderlich ist, erkläre den Zweck und kläre Zielordner und den Auftrag zum Herunterladen. Überschreibe keinen vorhandenen Ordner. Keine Produktinstallation, keine Container, keine Migrationen und keine Hintergrunddienste für das PM-Setup.
 - Ist keine Kopie und kein Remote-Lesezugriff vorhanden, erkläre, welcher Repo-Zugang fehlt. Berechtigungen erteilt der zuständige interne Ansprechpartner. Fahre mit nutzbarem Jira-Zugriff fort, ohne Spec-Abgleich zu behaupten.
 
+### Gemeinsames Wissen (optional)
+
+Wenn bereits ein Wissenseinstieg bestätigt ist oder der Nutzer eine Wissensbasis anbinden möchte, lies dessen lokale Einstiegsdatei oder interne URL. Fehlt die Adresse, frage nur danach; suche nicht auf dem ganzen Rechner. Prüfe den Einstieg und einen für die aktuelle Frage passenden Kapitelverweis. Halte getrennt fest, was lesbar ist und welche verlinkten Originale noch fehlen. Ohne Wissensbasis bleiben Jira und Specs nutzbar; dieser optionale Schritt blockiert das Setup nicht.
+
+Speichere den Einstieg als `Wissenseinstieg` in `.local/sources.md`, mit Themenbereich, tatsächlich gelesenem Kapitel und Prüfzeit. Relative Dateipfade beziehen sich auf das fvk-powers-Root; Links innerhalb der Wissensdokumente auf deren jeweilige Datei. Nutze vorhandene Kapitel und Suchhilfen nach [CONTEXT.md](CONTEXT.md#gemeinsames-wissen-nutzen). Kopiere die interne Sammlung nicht in dieses öffentliche Repo. Ein lokaler Pfad richtet keine Synchronisation für Kollegen ein.
+
 ## 3. Lokal merken und fortsetzen können
 
 Beim beauftragten Setup speichere die bestätigten Quellen unter `.local/sources.md`, sobald sie feststehen. Prüfe vorher, dass `.local/` von Git ignoriert wird und nicht bereits getrackt ist; wenn das nicht gilt, behalte die Angaben vorerst im Chat. Bestehende Angaben gezielt aktualisieren und andere Inhalte erhalten. Kein Commit und kein Upload dieser Datei.
 
-Speichere nur: gewähltes Profil, bestätigten Produktrepo-Pfad oder Repo-Link, Jira-Site ohne Zugangsdaten, Zeitpunkt und Umfang der tatsächlich durchgeführten Zugriffsprüfungen sowie noch offene Setup-Schritte. Keine Tickettexte, Namen anderer Personen, Zugangsdaten oder Anhänge. Markiere alte Prüfungen als datierte Beobachtungen, nicht als dauerhafte Zugriffsfreigabe.
+Speichere nur: gewähltes Profil, bestätigten Produktrepo-Pfad oder Repo-Link, Jira-Site ohne Zugangsdaten, optionalen Wissenseinstieg mit Themenbereich, Zeitpunkt und Umfang der tatsächlich durchgeführten Zugriffsprüfungen sowie noch offene Setup-Schritte. Keine Tickettexte, Namen anderer Personen, Zugangsdaten oder Anhänge. Markiere alte Prüfungen als datierte Beobachtungen, nicht als dauerhafte Zugriffsfreigabe.
 
 Wenn Speichern nicht möglich ist, sage kurz, dass die Angaben nur im laufenden Chat verfügbar bleiben. Bei „Setup weiter“ lies den gespeicherten Stand bzw. den aktuellen Kontext und setze bei der offenen Stelle fort. Nach Anmeldung oder korrigiertem Pfad wiederhole nur die betroffene Prüfung. Ein Abbruch ist kein Anlass, alles erneut abzufragen.
 

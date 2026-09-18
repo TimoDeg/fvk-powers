@@ -8,6 +8,8 @@ Bearbeite standardmäßig eine Frage bzw. ein Ticket mit einem verantwortlichen 
 
 Bei „Setup“, „Einrichten“, „Loslegen“, „Wie starte ich?“ oder einem vergleichbaren Einstiegsauftrag lies [SETUP.md](SETUP.md) und führe den Dialog im Chat. Verweise den Nutzer nicht einfach auf eine Anleitung. Bei einer normalen Produktfrage ohne eingerichtete Quellen prüfe zuerst die verfügbaren Quellen und ergänze nur die für diese Frage fehlenden Setup-Schritte; der Nutzer muss kein besonderes Startkommando kennen.
 
+Bei „Stand speichern“, einer beauftragten Übergabe oder „weiter mit <Ticket>“ lies [Kontext erhalten](CONTEXT.md#kontext-im-gespräch-erhalten). Sobald du eine angebundene Wissensbasis nutzt oder der Nutzer nach internem Wissen fragt, lies zuerst [Gemeinsames Wissen nutzen](CONTEXT.md#gemeinsames-wissen-nutzen), dann den Wissenseinstieg aus `.local/sources.md` und die passenden Kapitel.
+
 ## Quellen beim ersten Auftrag binden
 
 - Verwende die im Chat bestätigten Quellen oder vorhandene Angaben aus `.local/sources.md`. Fehlen sie, prüfe zuerst, ob `../fvk/docs/specs/features/` existiert. Behandle den Pfad als Kandidaten, nicht als Beweis für den richtigen oder aktuellen Checkout.

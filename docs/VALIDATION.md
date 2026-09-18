@@ -2,6 +2,30 @@
 
 Das Paket hat wiederholbare Strukturprüfungen und eine erste separate Modellbewertung. Menschliche PM-Verständlichkeit und ein neuer PM-Zugang sind noch nicht bewertet. Grüne Paketchecks und synthetische Antworten sind keine Teamfreigabe.
 
+## Testbranch: gespeicherter Kontext und Wissensbasis — 18.09.2026
+
+Auf `codex/persistent-context`, ausgehend von `1524ecf`, wurden Speichern, Fortsetzen und Wissenszugriff mit kurzen Nutzerfragen in temporären Git-Arbeitsordnern geprüft. Beim Speichern entstand eine echte lokale Ticketnotiz. Nachfolgende frische Kontexte erhielten diese Datei, aber keinen bisherigen Gesprächsverlauf. Für den Versionswechsel wurde die Original-Spec geändert; die alte Notiz blieb erhalten. Alle Produktquellen und Tickets dieser Runde sind synthetisch.
+
+Kriterien wurden vor der ersten Regeländerung eingefroren. Der verantwortliche Agent bewertete die unveränderten Antworten, gespeicherten Dateien und Werkzeugspuren. Kein unabhängiges menschliches Urteil. Die folgenden Runden prüfen unterschiedliche Regelstände und sind keine gemeinsame Zuverlässigkeitsquote:
+
+| Runde | Ergebnis | Befund |
+| --- | --- | --- |
+| Erste fünf Fälle | 1/5 | Frühere Umgebung beim Speichern verloren; Abweichung bei Fortsetzung ausgelassen; ignorierte Notiz übersehen; Wissenskonflikt eigenmächtig entschieden. Fehlende Notiz korrekt behandelt. |
+| Getracktes Speicherziel, bereits präzisierte Regeln | 1/1 | Vorhandene Datei unverändert erhalten und fehlende Speicherung benannt. |
+| Sechs Wiederholungen | 3/6 | Wiederaufnahme, Versionswechsel und Speicherschutz bestanden. Frühere Umgebung weiter verloren, fachliche Quelle ohne Ticketbezug übernommen, Wissenskonflikt weiterhin falsch entschieden. |
+| Fünf gezielte Wiederholungen mit getrennten Umgebungsfeldern | 3/5 insgesamt, 4/5 fachlich | Speichern, Fortsetzen und fehlender Verlauf bestanden. Versionswechsel fachlich korrekt, aber Suche außerhalb des erlaubten Fallordners. Beim Wissenskonflikt wurde die Kontextanleitung nicht geladen; Konflikt erneut falsch entschieden. |
+| Wissenszugriff nach präzisiertem Einstieg | 1/1 | Kontextanleitung vollständig gelesen; drei der Spec zugeordnet und fünf als ungeklärte Meetingaussage benannt, ohne endgültige gemeinsame Auflösung. |
+
+Insgesamt 18 CLI-Läufe mit Prozess-Exitcode 0; die Betriebsdateien blieben unverändert. Die zuletzt ausgeführten Antworten erfüllten jeweils die fachlichen Kriterien auf ihrem dokumentierten Regelstand. Die Werkzeuggrenze beim Versionswechsel bleibt ein offener Befund; es gab keinen erneuten Gesamtlauf aller sechs Fälle nach der letzten Einstiegsänderung. Die zwölf Checker-Tests und die Paketprüfung bestanden ebenfalls.
+
+Die Korrekturen betreffen direkten Zugriff auf ignorierte Notizen, getrennte aktuelle und historische Umgebungsangaben, Quellenbindung vor fachlichen Aussagen und den ausdrücklichen Einstieg zur Wissensnutzung. Der Schutz vor Überschreiben eines getrackten Ziels wurde zweimal beobachtet; Symlink- und Berechtigungsfehler wurden nicht eigens ausgeführt. Die gespeicherte Notiz blieb in sämtlichen Fortsetzungen unverändert.
+
+**Grenzen:** Codex CLI 0.147.0 mit Standardmodell ohne Override; Modellkennung nicht unabhängig bestätigt. Frische kurzlebige Kontexte, vorhandene Host-Anmeldung, temporäre Ordner und Workspace-Schreibsandbox; persönliche Konfiguration, Skills, Memory, Plugins, Web und Agentenwerkzeuge deaktiviert. Keine VM oder vollständige Dateilese-Isolation. Der letzte Versionswechsel- und ein gescheiterter Wissenslauf suchten zusätzlich im Elternordner; beide verletzten damit die vorgegebene Fallgrenze. Es wurden dabei keine fremden Inhalte ausgegeben, aber die Werkzeuge verhindern solche Lesezugriffe hier nicht vollständig. Leere Suchtreffer und Git-Abfragen ohne vorhandenen Fixture-Commit erzeugten einzelne Nichtnull-Exitcodes; erfolgreiche CLI-Prozesse werden deshalb getrennt von inhaltlich bestandenen Fällen bewertet.
+
+Kein Live-Jira-, Browser- oder vollständiger Abnahmedialogtest, keine Prüfung in Cursor, Claude oder Orca und keine statistische Stabilitätsaussage. Der echte lokale Wissenseinstieg und ein Glossarkapitel wurden separat lesend geprüft und nur in ignorierter lokaler Quellenkonfiguration angebunden. Das ist keine Team-Synchronisation. Rohantworten, Notizen, Quellen-Hashes, Patchstände, Kriterien und Einzelbewertungen liegen unter `.local/evals/persistent-context-20260918/`.
+
+Das öffentliche Entwicklungsset enthält jetzt 28 synthetische Fälle; die sechs neuen Kontextfälle stehen im [Eval-Plan](../evals/README.md#gespeicherten-kontext-und-wissenszugriff-prüfen). Frühere Berichte unten betreffen frühere Regelstände.
+
 ## Belegprüfung und Verhaltenstests vom 18.09.2026
 
 Am Stand `d99a5b6` mit lokalen Regeländerungen wurden zehn Einzelantworten in frischen Codex-CLI-Kontexten geprüft: die fünf geführten Abnahmefälle, zwei neue Fälle zu Quellenabdeckung und Geltungsbereich, zwei bestehende Fälle zu verständlicher bzw. vollständiger Ausgabe und eine eingefrorene Quellenprobe aus einem echten Ticket. Kriterien wurden vor den Regeländerungen festgehalten; die antwortenden Kontexte erhielten nur Betriebsdateien, Frage und Quellen, keine Kriterien oder Musterantworten. Bewertung durch den verantwortlichen Agenten anhand unveränderter Antworten und sichtbarer Werkzeugaufrufe, keine menschliche PM-Abnahme.

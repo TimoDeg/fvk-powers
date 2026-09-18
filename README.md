@@ -51,10 +51,20 @@ Der Assistent liest die verfügbaren Quellen und antwortet kurz, verständlich u
 | Eine Abweichung beschreiben | „Mach daraus einen Bug-Entwurf mit Erwartung, Beobachtung und Prüfschritten.“ |
 | Eine Verbesserung finden | „Welche Verbesserung wäre sinnvoll und warum?“ |
 | Den Release-Stand klären | „Ist das schon live? Welche Belege gibt es dafür?“ |
+| Später im neuen Chat weitermachen | „Speicher den Stand zu FVK-…“ und später „Weiter mit FVK-…“ |
+| Internes Wissen anbinden | „Nutze diesen internen Wissenseinstieg: …“ |
 
 Bei der geführten Abnahme führst du jeweils einen Prüffall aus und meldest deine Beobachtung zurück. Der Assistent hält fest, was bestanden, abweichend oder noch offen ist, und formuliert bei Bedarf einen Bug-Entwurf im Chat. Ist derselbe Fehler bereits im besprochenen Bug-Ticket erfasst, bereitet er eine Ergänzung dazu vor. Ein Jira-Ticket wird dadurch nicht automatisch erstellt.
 
 [Beispielantworten ansehen](examples/pm.md)
+
+## Wissen und Ticketstand behalten
+
+Eine interne Wissensbasis kannst du beim Setup als Datei oder internen Link anbinden. Der Assistent liest passende Kapitel und prüft entscheidende Aussagen an ihren Originalquellen. PM und IT können dieselbe Wissensbasis verwenden; zusätzliche Suchdienste sind dafür nicht nötig.
+
+Mit „Stand speichern“ hält der Assistent Umfang, Quellenstand, Entscheidungen, tatsächliche Beobachtungen und offene Schritte lokal fest. Ein neuer Chat im selben Checkout kann damit fortsetzen. Geänderte Anforderungen oder eine neue Testversion machen frühere Tests nicht automatisch wieder gültig. Ohne gespeicherte Notiz fehlt der bisherige Verlauf.
+
+**Lokal bedeutet nicht teamweit:** `.local/` wird nicht mit Git übertragen. Kollegen richten ihren eigenen Zugang zur internen Wissensbasis ein. Eine gemeinsame Übergabe braucht einen bestätigten internen Ablageort. [Speichern und Fortsetzen im Detail](CONTEXT.md#kontext-im-gespräch-erhalten).
 
 ## Wenn beim Setup etwas fehlt
 
@@ -64,7 +74,9 @@ Bei der geführten Abnahme führst du jeweils einen Prüffall aus und meldest de
 
 ## Was du erwarten kannst
 
-**Stand: Vorbereitung für den PM-Pilot.** Die jüngste Prüfrunde umfasst 23 KI-Antwortläufe einschließlich Wiederholungen und eines Vergleichs verschiedener Regelaufteilungen. Das sind keine 23 bestandenen Fälle. Die echte Ticketprobe war noch nicht stabil: Preisvergleiche oder die fehlende bestätigte Testumgebung wurden teilweise zu ungenau beschrieben. Menschliche PM-Abnahme und ein zusammenhängender Dialogtest stehen weiterhin aus. [Aktuelle Ergebnisse und Grenzen](docs/VALIDATION.md) · [Frühere Modellbewertung vom 17.09.2026](evals/results/2026-09-17-v1.md).
+**Stand: Testbranch `codex/persistent-context`.** Speichern und Fortsetzen werden hier mit echten lokalen Dateien und frischen Codex-Kontexten an synthetischen Fällen geprüft. Die Entwicklung hat mehrere Fehlversuche aufgedeckt; Ergebnisse und Grenzen stehen im [Prüfbericht](docs/VALIDATION.md#testbranch-gespeicherter-kontext-und-wissensbasis--18092026).
+
+Der PM-Grundablauf bleibt in Vorbereitung für den Pilot. Die frühere echte Ticketprobe war noch nicht stabil: Preisvergleiche oder die fehlende bestätigte Testumgebung wurden teilweise zu ungenau beschrieben. Menschliche PM-Abnahme, ein vollständiger Abnahmedialog und Prüfungen in weiteren Clients stehen weiterhin aus. [Frühere Modellbewertung vom 17.09.2026](evals/results/2026-09-17-v1.md).
 
 Vor einer Antwort soll der Assistent prüfen, ob die entscheidenden Quellen vollständig gelesen wurden, zum betroffenen Ablauf passen und den angefragten Stand belegen. Fehlende Inhalte bleiben als Lücke sichtbar; ein alter Ticketstatus bestätigt keinen aktuellen Rollout. Diese Regeln unterstützen die Arbeit, garantieren aber keine fehlerfreie Antwort.
 
