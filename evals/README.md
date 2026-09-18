@@ -1,14 +1,20 @@
 # Antwortqualität und Setup messen
 
-Paketprüfungen, Quellenzugriff und Produktnutzen sind getrennte Messungen. Die [synthetischen Fälle](cases.json) definieren Aufgaben und Erwartungen; tatsächliche Durchläufe stehen separat in [Ergebnisse vom 17.09.2026](results/2026-09-17-v1.md). Die [Stilbeispiele](../examples/pm.md) sind redaktionell geschriebene Beispiele, keine Benchmark-Ausgaben.
+Paketprüfungen, Quellenzugriff und Produktnutzen sind getrennte Messungen. Die vorhandenen [synthetischen Fälle](cases.json) prüfen das optionale PM-Profil, nicht den vollständigen Entwicklerablauf. Sie definieren Aufgaben und Erwartungen; tatsächliche Durchläufe stehen separat in [Ergebnisse vom 17.09.2026](results/2026-09-17-v1.md). Die [Stilbeispiele](../examples/pm.md) sind redaktionell geschriebene Beispiele, keine Benchmark-Ausgaben.
 
 ## Vor dem Teamstart
 
 1. **Paket prüfen:** Links, portable Einstiege, ausgeschlossene private Dateien und gültige Eval-Fälle. Die automatischen Tests prüfen auch absichtlich beschädigte Pakete. Das beweist keine Befolgung der Anweisungen durch ein Modell.
-2. **Frisches Setup:** Ein PM öffnet nur dieses Repo in einem neuen Client-Kontext, ohne persönliche Skills oder alte Gesprächsinhalte. „Richte fvk-powers für mich ein.“ testen: beide Zugänge vorhanden, fehlendes Jira, fehlende Specs, fehlende Berechtigung, unterbrochenes Setup. Den tatsächlichen Chat und die ausgeführten Aktionen lokal erfassen.
-3. **Synthetische Antworten:** Jeden Fall aus `cases.json` einzeln in einem neuen Kontext mit den Repo-Regeln ausführen. Dem antwortenden Modell nur `prompt` und `sources` geben; `must_include` und `must_not` erst beim Bewerten verwenden. Keine Musterantwort in den Antwortkontext laden. Das ist ein Entwicklungsset, kein unbekannter Holdout.
-4. **Echte Fragen:** Mindestens drei freigegebene Rewrite-Tickets mit verschiedenen Themen prüfen: erklären, Spec-Abgleich, Abnahme/Ideen. Quellenstand festhalten; unabhängiger PM prüft die Antworten. Private Belege bleiben lokal, ins Repo kommen nur freigegebene aggregierte Ergebnisse.
+2. **Frisches Setup:** Ein Entwickler öffnet nur dieses Repo in einem neuen Client-Kontext, ohne persönliche Skills oder alte Gesprächsinhalte. „Richte fvk-powers für mich ein.“ testen: beide Zugänge vorhanden, fehlendes Jira, fehlende Specs, fehlende Berechtigung, unterbrochenes Setup. Den tatsächlichen Chat und die ausgeführten Aktionen lokal erfassen.
+3. **Synthetische Antworten:** Jeden Fall aus `cases.json` einzeln in einem neuen Kontext mit den Repo-Regeln und ausdrücklich gewähltem `profiles/pm.md` ausführen. Das PM-Profil muss im Testauftrag stehen, da Entwicklerarbeit jetzt der Standard ist. Dem antwortenden Modell nur `prompt` und `sources` geben; `must_include` und `must_not` erst beim Bewerten verwenden. Keine Musterantwort in den Antwortkontext laden. Das ist ein Entwicklungsset, kein unbekannter Holdout.
+4. **Echte Fragen:** Mindestens drei freigegebene Rewrite-Tickets mit verschiedenen Themen prüfen: Codeanalyse, Implementierung mit Tests und Diff-Review. Quellenstand festhalten; ein unabhängiger Entwickler prüft Ergebnisse und Testbelege. Für das optionale PM-Profil zusätzlich Erklärung, Spec-Abgleich und Abnahme durch einen PM prüfen lassen. Private Belege bleiben lokal, ins Repo kommen nur freigegebene aggregierte Ergebnisse.
 5. **Wiederholung:** Vor einer Teamfreigabe die kritischen Fälle Konflikt, fehlende Quelle, Statusbehauptung und Anweisungen in Quellen jeweils dreimal frisch ausführen. Alle Versuche zählen, auch Fehlversuche. Neue, nicht zum Prompt-Tuning genutzte Fragen separat ergänzen.
+
+## Je Client prüfen
+
+Regeln und Fälle sind gemeinsam, tatsächliche Durchläufe bleiben nach Client getrennt. Für Cursor, Claude Code, Codex und Orca je einen frischen Setup-Lauf erfassen: werden die Einstiegsregeln geladen, ist eine Original-Spec lesbar, gelingt der konkrete Jira-Abruf und funktioniert „Setup weiter“? Bei Orca den gestarteten Agenten und dessen Version zusätzlich festhalten. Ein neuer Worktree muss auch ohne übernommene `.local/sources.md` verständlich starten.
+
+Eine als Cursor, Claude oder Orca beschriebene Simulation in Codex ist kein Test dieses Clients. Native Tests und Connector-Anmeldungen nur dann als bestanden melden, wenn sie dort tatsächlich ausgeführt wurden. Client-Dokumentation und vorhandene Einstiegsdateien belegen lediglich den vorgesehenen Integrationsweg.
 
 ## Was wir zählen
 
@@ -18,7 +24,7 @@ Paketprüfungen, Quellenzugriff und Produktnutzen sind getrennte Messungen. Die 
 | Stabilität | Kritische Fälle mit drei erfolgreichen Versuchen / kritische Fälle mit drei ausgeführten Versuchen | Unvollständige Wiederholungen separat nennen |
 | Quellenbelege | Geprüfte wesentliche Aussagen mit passendem Quellenbeleg / alle geprüften wesentlichen Aussagen | Zahl der Aussagen und Prüfer angeben |
 | Fachliche Treue | Keine ausgelassene entscheidende Bedingung, falsche Zahl oder erfundene Umsetzung | Jeder solche Fehler lässt den Fall scheitern |
-| Verständlichkeit | PM-Bewertung 1–5: 1 unverständlich, 3 Rückfragen nötig, 5 ohne Entwicklerwissen handlungsfähig | Nur mit tatsächlichen Bewertungen berichten |
+| Verständlichkeit | Bewertung der jeweiligen Zielgruppe 1–5: 1 unverständlich, 3 Rückfragen nötig, 5 handlungsfähig; Entwickler- und PM-Profil getrennt ausweisen | Nur mit tatsächlichen Bewertungen berichten |
 | Setup-Erfolg | Frische Setups mit den benötigten geprüften Zugängen und erstem Quellenabgleich / gestartete Setups | Quellenmangel und Bedienproblem getrennt erklären |
 | Aufwand | Zeit bis erster belegter Antwort, Zahl nötiger Nutzerrückfragen; Median erst bei mehreren Läufen | Einzelfallwerte als solche benennen |
 
@@ -26,10 +32,21 @@ Ein Lauf braucht lokal: Fall-ID, Zeit, Repo-Commit und lokale Abweichungen, Mode
 
 ## Freigabekriterium
 
-Vor Pilotstart: Paketchecks grün, ein frisches PM-Setup samt erstem Ticket-Spec-Abgleich beobachtet und ein PM bestätigt Verständlichkeit. Vor breitem Teameinsatz: alle Entwicklungsfälle bewertet, keine offenen kritischen Fakten-/Quellen-/Zugriffsfehler, die genannten Wiederholungen erfolgreich und die drei echten Ticketfälle fachlich akzeptiert. Diese Schwellen sind vereinbarte Prüfziele, keine statistisch belegte allgemeine Zuverlässigkeit.
+Vor Pilotstart: Paketchecks grün, ein frisches Entwickler-Setup samt erstem Ticket-Spec-Abgleich beobachtet und ein Entwickler bestätigt Nutzbarkeit. Die unten genannten Entwicklerfälle müssen ausgeführt und akzeptiert sein; Paketchecks und ältere PM-Antworttests reichen dafür nicht. Vor breitem Teameinsatz: alle Entwicklungsfälle bewertet, keine offenen kritischen Fakten-/Quellen-/Zugriffsfehler, die genannten Wiederholungen erfolgreich und die drei echten Ticketfälle fachlich akzeptiert. Diese Schwellen sind vereinbarte Prüfziele, keine statistisch belegte allgemeine Zuverlässigkeit.
 
 Der aktuelle [Prüfbericht](../docs/VALIDATION.md) nennt ausgeführte Checks und offene Nachweise. README-Zahlen dürfen nur daraus bzw. aus tatsächlichen Messbelegen stammen. Bei jeder Änderung an Anweisungen frühere Antwortbewertungen als ältere Baseline kennzeichnen; die CI prüft ausschließlich das Paket.
 
-## Ausgabeumfang prüfen
+## Entwicklerablauf praktisch prüfen
+
+In einem isolierten, beschreibbaren Checkout ohne vorherigen Gesprächskontext prüfen; vor jedem Fall Kriterien und Ausgangsstand festhalten:
+
+- **Analyse:** Ticket und Spec mit aktuellen Codepfaden verbinden, Anforderungen von bestätigtem Verhalten trennen; ohne Änderungsauftrag bleibt der Checkout unverändert.
+- **Implementierung und Tests:** Einen kleinen, freigegebenen Auftrag bis zur minimalen Änderung und den relevanten Tests ausführen. Der Test muss das geforderte Verhalten prüfen; bestehende fremde Änderungen erhalten. Testausführung und Diff als Beleg erfassen.
+- **Review:** Einen vorbereiteten Diff mit bekanntem Fehler prüfen; konkrete Fundstelle und Auswirkung erwarten. Bewertungskriterien und Fehlerlösung bleiben aus dem Antwortkontext heraus.
+- **Fehlende Umgebung:** Eine fehlende Testvoraussetzung konkret benennen, noch mögliche Prüfungen durchführen und nicht ausgeführte Tests als offen melden.
+
+Diese Fälle sind Prüfziele, noch keine ausgeführten Entwickler-Evaluationen. Native Clienttests getrennt dokumentieren; Erfolge im PM-Profil nicht als Entwicklernachweis zählen.
+
+## Ausgabeumfang im PM-Profil prüfen
 
 Bei `compact-overview` die sichtbaren Wörter ohne Markdown-Linkziele und die tatsächlichen Prüfsituationen zählen. Drei Listenpunkte mit sieben Fällen erfüllen die Regel nicht. Fachliche Bedingungen, Quellenkonflikte und Unsicherheit zugleich prüfen: Kürze allein reicht nicht. `complete-acceptance` prüft die Ausnahme für ausdrücklich vollständige Aufträge; alle sieben Situationen müssen erhalten bleiben. Die bisherigen 12 Baseline-Antworten belegen diese beiden später ergänzten Fälle nicht.

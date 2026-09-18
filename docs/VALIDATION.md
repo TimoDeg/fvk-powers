@@ -1,6 +1,12 @@
 # Prüfstand — 18.09.2026
 
-Das Paket hat wiederholbare Strukturprüfungen und eine erste separate Modellbewertung. Menschliche PM-Verständlichkeit und ein neuer PM-Zugang sind noch nicht bewertet. Grüne Paketchecks und synthetische Antworten sind keine Teamfreigabe.
+Das Paket hat wiederholbare Strukturprüfungen und separate Modellbewertungen des bisherigen PM-Ablaufs. Der neue Entwicklerstandard, native Erststarts je Client und menschliche Nutzbarkeit sind noch nicht praktisch bewertet. Grüne Paketchecks und synthetische Antworten sind keine Teamfreigabe.
+
+## Entwicklerstandard und clientneutraler Einstieg — lokale Erweiterung vom 18.09.2026
+
+Der Standard ist jetzt der [Entwicklerablauf](../profiles/developer.md): Analyse, Implementierung, Tests und Review nach Auftrag. Das PM-Profil bleibt optional; seine Wort- und Falllimits gelten nicht für Entwicklerarbeit. README und Setup unterscheiden Cursor, Claude Code, Codex, Orca (`stablyai/orca`) und weitere Clients nach ihren tatsächlichen Datei-/Connector-Fähigkeiten. `AGENTS.md` bleibt die gemeinsame Regelquelle; `CLAUDE.md` importiert sie für Claude Code. Bei Orca bestimmt der gestartete Agent die Regeln und den Jira-Zugang. Ein ChatGPT-Konto und Codex-Plugin-Menüs sind keine allgemeinen Voraussetzungen.
+
+Die offiziellen Client-Anleitungen sind in [Voraussetzungen](DEPENDENCIES.md) verlinkt. Paketprüfung und 12 Checker-Tests bestanden; Claude-Einstieg und Entwicklerprofil sind in der bestehenden Liste erforderlicher Dateien enthalten. Das belegt weder natives Laden noch einen erfolgreichen Jira-Abruf in Cursor, Claude oder Orca. Solche Erststarts sind weiterhin offen. Die folgenden Modellbewertungen gehören zum jeweiligen früheren Regelstand und belegen weder die neue Profilauswahl noch den vollständigen Entwicklerablauf. Die vorhandenen synthetischen Antwortfälle werden künftig explizit mit dem PM-Profil ausgeführt; separate Entwicklerfälle stehen im [Prüfplan](../evals/README.md#entwicklerablauf-praktisch-prüfen).
 
 ## Kontrollierte Setup-Workflowtests vom 18.09.2026
 

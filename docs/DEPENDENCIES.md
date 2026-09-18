@@ -1,19 +1,25 @@
 # Was benötigt wird
 
-Für den hier beschriebenen Einstieg installierst du **die Desktop-App mit Codex und Git**. Dazu kommen dein freigegebener ChatGPT-Zugang, die Jira-Verbindung und Lesezugriff auf das Rewrite-Produktrepo. Python brauchst du nur, wenn du als Maintainer die Paketchecks ausführen möchtest.
+Du brauchst **einen freigegebenen KI-Assistenten mit Datei- und Werkzeugzugriff**, Zugang zu Jira und den Rewrite-Specs sowie beim lokalen Klonen Git. Cursor, Claude Code, Codex und andere passende Clients verwenden dieselbe Pipeline. Ein ChatGPT-Konto ist nur für entsprechende OpenAI-Anmeldewege relevant, keine allgemeine Voraussetzung. Python brauchst du nur für die Paketchecks als Maintainer.
 
 ## Einrichtung von Anfang an
 
-Diese Anleitung führt durch macOS und Windows. Bereits erledigte Schritte kannst du überspringen. Auf einem verwalteten Firmenrechner nutze das Softwareportal bzw. die IT, falls eine Installation oder Verbindung gesperrt ist.
+Verwende deinen vorhandenen Assistenten. Falls er noch fehlt, installiere den von eurem Team freigegebenen Client nach dessen offizieller Anleitung. Konto und Lizenz richten sich nach diesem Client. Auf Firmenrechnern hilft das Softwareportal bzw. die IT, wenn Installation oder Verbindung gesperrt sind.
 
-### Codex einrichten
+### Assistent wählen und Regeln laden
 
-1. Öffne die [offizielle Desktop-Anleitung mit Download](https://learn.chatgpt.com/docs/app); für Windows gibt es eine [eigene Installationsseite](https://learn.chatgpt.com/docs/windows/windows-app). Wähle den Download für dein Betriebssystem und öffne die Installationsdatei bzw. den dort verlinkten Store.
-2. Folge der Installation und öffne die App. Die aktuelle OpenAI-Dokumentation nennt sie **ChatGPT-Desktop-App**; darin wählst du **Codex**. Bei einer bestehenden Codex-App kannst du diese verwenden.
-3. Melde dich mit dem für deine Arbeit freigegebenen ChatGPT-Konto an und wähle den vorgesehenen Workspace. Wenn Codex dort fehlt, kläre den Zugang mit dem Workspace-Administrator.
-4. Lass die App geöffnet. Den lokalen Projektordner fügst du nach dem Download des Repos hinzu.
+| Client | Einrichtung und Projektregeln |
+| --- | --- |
+| Cursor | [Offizielle Anleitung](https://cursor.com/docs). Öffne den Repo-Ordner im Agent-Modus. Cursor unterstützt `AGENTS.md` als Projektregel: [Regeldokumentation](https://cursor.com/docs/rules). |
+| Claude Code | [Offizieller Einstieg](https://code.claude.com/docs/en/quickstart). Starte Claude Code im Repo-Ordner. Die mitgelieferte `CLAUDE.md` importiert `AGENTS.md`: [Import-Dokumentation](https://code.claude.com/docs/en/memory). |
+| Codex | [Offizielle App-Anleitung](https://learn.chatgpt.com/docs/app). Füge den Repo-Ordner als lokales Projekt hinzu und starte darin Codex; siehe [Projektanleitung](https://learn.chatgpt.com/docs/projects). Ein bereits eingerichteter CLI-Client ist ebenfalls nutzbar. |
+| Claude-App | Nutze einen Modus mit Zugriff auf die benötigten Projektdateien und einen freigegebenen Jira-Connector. Automatisches Laden der Claude-Code-Regeln nicht voraussetzen; verwende den expliziten Starttext unten. |
+| Orca (`stablyai/orca`) | [Orca](https://github.com/stablyai/orca) startet andere CLI-Agenten in eigenen Arbeitsordnern. Öffne fvk-powers in Orca und starte den gewünschten Agenten darin. Für Claude Code gilt `CLAUDE.md`, für Codex bzw. Cursor deren `AGENTS.md`-Einstieg. [Unterstützte Agenten](https://www.onorca.dev/docs/agents/supported) |
+| Weitere Clients | Stelle Projekt-/Dateizugriff her und verwende den Starttext unten. Automatische Regelerkennung erst als vorhanden behandeln, wenn sie für genau diesen Client geprüft ist. |
 
-Für diesen Einstieg brauchst du keinen separat angelegten OpenAI-API-Schlüssel. Die Anleitung verwendet die Anmeldung mit deinem ChatGPT-Konto.
+Ein neuer Git-Worktree enthält die ignorierte `.local/sources.md` nicht automatisch; bestätigte Quellenpfade gegebenenfalls erneut angeben. Den Produktordner explizit binden, wenn er neben dem neuen Arbeitsordner nicht vorhanden ist.
+
+Ein Client muss die verlinkten Regeln und Originalquellen tatsächlich lesen können. Ein gewöhnlicher Textchat ohne diese Zugriffe ermöglicht keinen vollständigen Ablauf. Dass ein Client ein bestimmtes Modell anbietet, sagt noch nichts über seine Dateirechte oder Jira-Werkzeuge aus.
 
 ### Git installieren
 
@@ -30,31 +36,37 @@ Erscheint `git version …`, ist Git vorhanden. Andernfalls nutze den passenden 
 | macOS | Im Terminal `xcode-select --install` eingeben und den Installationsdialog abschließen. Die Apple Command Line Tools enthalten Git; die vollständige Xcode-App ist dafür nicht nötig. [Offizielle Git-Anleitung](https://git-scm.com/install/mac) |
 | Windows | In PowerShell `winget install --id Git.Git -e --source winget` ausführen. Ohne `winget` den passenden Installer über [Git für Windows](https://git-scm.com/install/windows) herunterladen und ausführen. |
 
-Öffne danach ein neues Terminal bzw. PowerShell-Fenster und prüfe erneut mit `git --version`. Falls die bereits geöffnete Codex-App Git nicht findet, starte sie neu.
+Öffne danach ein neues Terminal bzw. PowerShell-Fenster und prüfe erneut mit `git --version`. Falls dein bereits geöffneter Assistent Git nicht findet, starte ihn neu.
 
 ### Repo öffnen und Setup starten
 
-1. Wechsle im Terminal in einen Ordner, in dem du das Projekt speichern möchtest. Führe dort `git clone https://github.com/TimoDeg/fvk-powers.git` aus. Das legt den Unterordner `fvk-powers` an. Existiert er schon, verwende die vorhandene Kopie; überschreibe sie nicht.
-2. Öffne in der Desktop-App die Projektansicht und füge den heruntergeladenen Ordner als **lokales Projekt** hinzu. Bei einem vorhandenen Projekt: Projektmenü → **Edit project** → **Add folder**. Wähle `fvk-powers`; bei mehreren Ordnern setze ihn über **Make primary** als Hauptordner. So werden seine Projektanweisungen geladen. [Offizielle Projektanleitung](https://learn.chatgpt.com/docs/projects)
-3. Starte in diesem Projekt einen neuen Codex-Chat und schreibe: **„Richte fvk-powers für mich ein.“**
+1. Klone im gewünschten Ordner `git clone --branch codex/developer https://github.com/TimoDeg/fvk-powers.git`. Existiert die Kopie schon, verwende sie; überschreibe sie nicht. Prüfe mit `git branch --show-current`, welche Variante aktiv ist: `codex/developer` für Entwickler, `main` für die bisherige PM-Version. Vor einem Wechsel lokale Änderungen sichern.
+2. Öffne den Ordner `fvk-powers` im gewählten Client. Gib ihm Zugriff auf die Repo-Dateien. Die Ordnerfunktionen unterscheiden sich je Client; ein Projektname allein belegt keinen Dateizugriff.
+3. Starte einen neuen Chat bzw. eine neue Sitzung im Projekt und schreibe:
 
-Der Assistent prüft die Projektdateien und vorhandenen Quellen. Halte einen lesbaren Rewrite-Ticketlink und den Ordner oder internen Link zum Rewrite-Produktrepo bereit. Der öffentliche Download von fvk-powers benötigt keine Jira-Anmeldung und gewährt keine internen Zugriffsrechte.
+```text
+Lies AGENTS.md in diesem Projekt und führe das darin beschriebene Setup aus.
+Richte fvk-powers für mich ein.
+```
+
+Damit ist der Einstieg auch ohne automatische Erkennung des Dateinamens eindeutig. Kann der Assistent die Datei nicht öffnen, richte zuerst den Projekt-/Dateizugriff ein. Halte einen lesbaren Rewrite-Ticketlink und den Ordner oder internen Link zum Produktrepo bereit. Der öffentliche Download gewährt keine internen Zugriffsrechte.
 
 ### Jira verbinden
 
-Wenn der Assistent bereits ein Ticket lesen kann, ist keine neue Verbindung nötig. Andernfalls:
+Eine vorhandene funktionierende Verbindung weiterverwenden. Fehlt sie, nutze den zum Client passenden Weg. **MCP** ist ein Standard, über den ein Assistent externe Werkzeuge wie Jira aufrufen kann; manche Clients nennen solche Zugänge Plugins oder Connectoren.
 
-1. Öffne in der Desktop-App **Plugins** und suche nach **Atlassian Rovo** bzw. dem für eure Organisation freigegebenen Jira-Plugin. Der Name kann je nach Workspace abweichen.
-2. Öffne den Eintrag, prüfe den angebotenen Jira-Zugriff und installiere ihn über **+** bzw. die angezeigte Installationsschaltfläche. Ist er bereits installiert, fahre mit der Verbindung fort.
-3. Folge der Aufforderung zum Verbinden und melde dich im geöffneten Anmeldedialog mit deinem Arbeitskonto bei Atlassian an. Verwende die Jira-Site, zu der dein Ticket gehört. Die Anmeldung kann bei der Installation oder bei der ersten Nutzung erscheinen.
-4. Starte nach der Installation einen neuen Codex-Chat im Projekt `fvk-powers`. Schreibe **„Setup weiter. Prüfe den Jira-Zugriff auf dieses Ticket: …“** und füge den echten Ticketlink ein. Noch nicht gespeicherte Angaben aus dem alten Chat bei Bedarf erneut nennen.
-5. Erst wenn der Assistent das konkrete Ticket gelesen hat, ist der Zugriff geprüft. Ein installiertes Plugin allein reicht nicht.
+| Client | Nächster Schritt bei fehlendem Jira-Zugang |
+| --- | --- |
+| Cursor | Öffne die MCP-Verwaltung des Clients und füge den von eurem Team freigegebenen Jira-/Atlassian-Zugang nach [Cursor-MCP-Anleitung](https://cursor.com/docs/mcp) hinzu. Fehlt die Serveradresse oder Freigabe, frage den Workspace-Administrator. |
+| Claude Code | Öffne `/mcp`, um konfigurierte Verbindungen und deren Anmeldung zu prüfen. Fehlt der Jira-Server, binde den freigegebenen Zugang anhand der [MCP-Anleitung](https://code.claude.com/docs/en/mcp) ein; Serveradresse und Freigabe kommen vom Team. |
+| Codex in der Desktop-App | Öffne **Plugins**, suche das freigegebene Jira-/Atlassian-Plugin und folge Installation und Anmeldung nach der [Plugin-Anleitung](https://learn.chatgpt.com/docs/plugins). Falls die Installation eine neue Sitzung verlangt, starte einen neuen Projektchat. |
+| Codex CLI | Öffne `/plugins` und wähle das freigegebene Jira-/Atlassian-Plugin. Folge Installation und Anmeldung und starte die Sitzung bei Bedarf neu. |
+| Orca | Richte Jira im tatsächlich gestarteten Agenten ein, etwa über `/mcp` in Claude Code oder den passenden Codex-Zugang. Anschließend das Ticket in genau dieser Orca-Sitzung abrufen; ein funktionierender Zugang in einer anderen App beweist ihn nicht. |
+| Claude-App oder anderer Client | Prüfe die tatsächlich angebotenen Connector-/MCP-Einstellungen und die offizielle Anleitung genau dieses Produkts. Ohne passenden Zugang den Administrator nach dem freigegebenen Weg fragen; keine Menünamen eines anderen Clients übernehmen. |
 
-Fehlt das Plugin oder ist die Verbindung gesperrt, bitte den Workspace-Administrator um den freigegebenen Jira-Zugang. Ist nur das Ticket nicht lesbar, prüfe zunächst, ob du es mit demselben Konto im Browser öffnen kannst, und kläre die Ticketberechtigung intern. Passwörter und Tokens gehören nicht in den Chat.
+Melde dich ausschließlich im vorgesehenen Anmeldedialog an; Passwörter und Tokens gehören nicht in den Chat oder ins Repo. Wir liefern keine Zugangsdaten oder verbindliche firmenspezifische Serverkonfiguration mit. Nach der Einrichtung schreibe **„Setup weiter. Prüfe den Jira-Zugriff auf dieses Ticket: …“** mit dem echten Ticketlink. Lade die Werkzeuge so neu, wie der Client es verlangt; bestätigte lokale Quellenangaben werden weiterverwendet.
 
-Der Installationsablauf und die anschließende neue Sitzung sind in der [offiziellen Plugin-Anleitung](https://learn.chatgpt.com/docs/plugins) beschrieben. Menünamen können je nach App-Version und Sprache abweichen; diese Anleitung ist keine Bestätigung, dass das Plugin in jedem Firmenkonto verfügbar ist.
-
-**Wenn du bereits die Codex CLI nutzt:** Gib in der laufenden Codex-Sitzung `/plugins` ein. Wähle dort das freigegebene Jira-/Atlassian-Plugin und folge der Installation bzw. Anmeldung. Starte anschließend Codex im Projektordner neu und schreibe „Setup weiter“ mit deinem Ticketlink. Fehlt der Eintrag, kläre das verfügbare Jira-Plugin mit eurem Workspace-Administrator. Die CLI ist für den oben beschriebenen Desktop-Einstieg nicht zusätzlich erforderlich.
+Erst der erfolgreiche Abruf dieses Tickets bestätigt den Zugriff. Fehlt nur dessen Berechtigung, prüfe, ob du es mit demselben Konto im Browser öffnen kannst, und kläre die Leserechte intern. Ein installiertes Plugin oder erreichbarer MCP-Server allein ist kein erfolgreicher Ticketabruf. Bis dahin sind Fragen zu zugänglichen Specs bereits möglich.
 
 ### Rewrite-Specs anbinden
 
@@ -62,15 +74,15 @@ Nenne dem Assistenten den vorhandenen Produktrepo-Ordner oder den internen Repo-
 
 Der Assistent prüft eine Original-Spec und versucht den ersten Ticket-Spec-Abgleich. Er zeigt zum Abschluss getrennt, ob **Jira**, **Specs** und **lokale Speicherung** geprüft oder noch offen sind. Bei einer fehlenden Quelle bleibt die Arbeit mit der anderen möglich. Mit **„Setup weiter“** setzt du die Einrichtung fort.
 
-**Für die PM-Nutzung musst du kein Node, PHP, Docker, keine Datenbank und keine zusätzlichen npm-/Python-Pakete installieren.** Auch ein zusätzlicher Editor oder die Codex CLI sind für diesen Desktop-Weg nicht nötig.
+**Die Pipeline selbst benötigt kein Node, PHP, Docker, keine Datenbank und keine zusätzlichen npm-/Python-Pakete.** Der gewählte Client kann eigene Installationsvoraussetzungen haben. Eine zweite KI-App oder zusätzliche CLI ist für die Pipeline nicht erforderlich.
 
-Installationsquellen geprüft am **17.09.2026**. Ein vollständiger Erststart auf einem neuen PM-Rechner ist weiterhin offen; [Prüfstand](VALIDATION.md).
+Client-Dokumentation geprüft am **18.09.2026**. Ein vollständiger Erststart je Client ist damit noch nicht nachgewiesen; [Prüfstand](VALIDATION.md).
 
-## Für PMs
+## Grundsetup für Quellenarbeit
 
 | Voraussetzung | Wofür? | Prüfung im Chat |
 | --- | --- | --- |
-| Assistent mit Zugriff auf dieses Repo und dessen Anweisungen | Arbeitsablauf und PM-Profil lesen | `AGENTS.md` und die gerouteten Dateien sind lesbar |
+| Assistent mit Zugriff auf dieses Repo und dessen Anweisungen | Arbeitsablauf und gewähltes Profil lesen | `AGENTS.md` und die gerouteten Dateien sind lesbar |
 | Freigegebener Jira-Connector und persönliche Leseberechtigung | Tickets und relevante Ergänzungen lesen | Ein konkret genanntes Ticket tatsächlich abrufen |
 | Lesezugriff auf das Rewrite-Produktrepo | Original-Specs und bei Bedarf weitere Quellen lesen | Spec-Einstieg und passende Spec öffnen, Stand festhalten |
 | Lokaler beschreibbarer, von Git ausgeschlossener Ordner | Einrichtung über den Chat hinaus behalten | `.local/` prüfen; sonst nur im aktuellen Gespräch fortsetzen |
@@ -79,7 +91,7 @@ Jira und Specs können einzeln nutzbar sein; nur mit beiden ist ein vollständig
 
 ## Nur bei entsprechendem Bedarf
 
-| Werkzeug/Zugang | Wann benötigt? | Gehört zum PM-Grundsetup? |
+| Werkzeug/Zugang | Wann benötigt? | Gehört zum Grundsetup? |
 | --- | --- | --- |
 | Git | Lokal klonen, Versionen bestimmen, lokale Speicherung vor Veröffentlichung schützen | Beim lokalen Repo-Weg; kein Produkt-Build nötig |
 | Freigegebener Spec-Bot-/Slack-Lesezugriff | Aktueller Spec-Status und Zuständigkeit, wenn die Repo-Dokumentation dorthin verweist | Nein; ohne Zugriff diesen Status offenlassen |
@@ -88,7 +100,7 @@ Jira und Specs können einzeln nutzbar sein; nur mit beiden ist ein vollständig
 | Dateisuche, optional `rg` | Passende Originale auffinden | Der Client kann die Suche bereitstellen |
 | QMD, CodeGraph, Graphify | Vorhandene, aktuelle Suchindizes gezielt nutzen | Nein; nicht enthalten und nicht automatisch installiert |
 
-Für reine PM-Fragen keine Node-, PHP-, Composer-, Docker-, Datenbank- oder Produktinstallation verlangen. Die Abhängigkeiten des Produktrepos gelten erst bei entsprechender Entwickler-/Testarbeit.
+Für Quellenanalyse und Erklärungen keine Node-, PHP-, Composer-, Docker-, Datenbank- oder Produktinstallation verlangen. Für Implementierung und Tests prüft der Assistent die benötigten Versionen, Installationsschritte und Testbefehle in der aktuellen Anleitung des Produktrepos. Diese Abhängigkeiten werden nicht von fvk-powers mitgeliefert; das Grundsetup allein bestätigt keine lauffähige Produktumgebung.
 
 ## Dieses Repo prüfen und pflegen
 

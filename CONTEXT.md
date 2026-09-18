@@ -18,7 +18,7 @@ Diese Datei ist eine Landkarte zu Originalquellen, keine zweite Produktdokumenta
 | Wie nehme ich das ab? | Akzeptanzkriterien, fachliche Bedingungen und UI-Zustände | `docs/decisions/testing-layers-decision.md`, passende Testanleitungen; tatsächliche Umgebung und Testdaten separat prüfen |
 | Ist es live? | Aktueller Jira-Stand als Hinweis | Release-/Deploymentbeleg und Verhalten in der benannten Umgebung; bei Infrastrukturfragen `docs/jenkins/ci-cd-documentation.md` als Einstieg |
 
-`BackendForFrontend/` liegt unter `deployables/monolith/src/`. Eine Code-Lesespur beweist keine erfolgreiche Produktivsetzung. Technische Quellen werden in der Antwort in ihre fachliche Wirkung übersetzt.
+`BackendForFrontend/` liegt unter `deployables/monolith/src/`. Eine Code-Lesespur beweist keine erfolgreiche Produktivsetzung. Erkläre technische Abläufe mit ihrer fachlichen Wirkung und den für den Auftrag nötigen Codebelegen.
 
 ## Suchfolge
 
@@ -36,6 +36,6 @@ Führe Ticketidentität, konkrete Frage, gelesene Quellen mit Stand, bestätigte
 
 Wenn eine dauerhafte Übergabe beauftragt ist, fasse diese Punkte unter `.local/` zusammen und prüfe vorher den Git-Ausschluss wie beim Setup. Private Quelleninhalte bleiben lokal. Gespeicherte Zusammenfassungen ersetzen bei neuen fachlichen Entscheidungen nicht die Originale.
 
-## Übergang zur Entwicklerarbeit
+## Regeln für Produktarbeit
 
-Dieses Paket besitzt den PM-Ablauf. Es enthält keine portierte Implementierungs- und Deployment-Automation. Bei einem ausdrücklichen Codeauftrag zuerst Produktrepo-Regeln lesen: `AGENTS.md`, `.codex/AGENTS.md`, `docs/CONTRIBUTING.md`, `docs/coding-standards.md`, `.agent/rules.json` und die zur Änderung passenden Originalregeln und Testentscheidungen. Abweichende Hosts und Laufzeitvoraussetzungen vor Tests prüfen. Fehlende Regeln oder Quellen benennen; Änderungen nicht allein aus dem PM-Kurztext ableiten.
+Der [Entwicklerablauf](profiles/developer.md) verbindet Analyse, Implementierung, Tests und Review. Die geltenden Regeln und konkreten Build-/Testbefehle kommen aus dem Produktrepo. Vor Produktänderungen die vorhandenen Einstiege und jeweils anwendbaren Regeln lesen: `AGENTS.md`, `.codex/AGENTS.md`, `docs/CONTRIBUTING.md`, `docs/coding-standards.md`, `.agent/rules.json` und die zur Änderung passenden Originalregeln und Testentscheidungen. Abweichende Hosts und Laufzeitvoraussetzungen vor Tests prüfen. Fehlende Regeln oder Quellen benennen; Änderungen aus Originalanforderungen und geprüftem Code ableiten, nicht allein aus einer früheren Zusammenfassung.

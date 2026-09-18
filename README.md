@@ -1,30 +1,43 @@
-# fvk-powers
+# fvk-powers — Entwickler-Variante
 
-Jira-Tickets verstehen, mit den Rewrite-Specs abgleichen und Abnahmen vorbereiten — ein Arbeitsablauf für PMs im KI-Assistenten.
+Diese Variante wird auf `codex/developer` separat entwickelt und getestet. `main` bleibt vorerst die PM-Version; eine Zusammenführung erfolgt später. Beide Varianten gehören zum selben Repo.
+
+Tickets analysieren, Code umsetzen, Änderungen reviewen und gezielt testen: der gemeinsame Rewrite-Arbeitsablauf für Entwickler — unabhängig vom KI-Client.
 
 ## Starten in drei Schritten
 
-**Zum ersten Mal hier?** [Codex und Git installieren, Jira verbinden](docs/DEPENDENCIES.md#einrichtung-von-anfang-an). Wenn Codex und Git bereits eingerichtet sind, starte direkt mit Schritt 1.
+**Zum ersten Mal hier?** [Assistent und Git einrichten, Jira verbinden](docs/DEPENDENCIES.md#einrichtung-von-anfang-an). Wenn dein Assistent und Git bereits eingerichtet sind, starte direkt mit Schritt 1.
 
-Du brauchst **Codex oder einen vergleichbaren Assistenten mit Dateizugriff**, **Git** zum Klonen und für den vollständigen Abgleich Lesezugriff auf **Jira und das Rewrite-Produktrepo**. Die Specs sind die fachlichen Beschreibungen im Produktrepo. Eine laufende Produktanwendung brauchst du nicht.
+Du brauchst **einen Assistenten mit Datei- und Werkzeugzugriff**, **Git** zum Klonen und für den vollständigen Abgleich Lesezugriff auf **Jira und das Rewrite-Produktrepo**. Die Specs sind die fachlichen Beschreibungen im Produktrepo. Für die Quellenanalyse brauchst du keine laufende Produktanwendung. Für Implementierung und Tests gelten zusätzlich die Voraussetzungen des Produktrepos.
 
 ### 1. Repo herunterladen
 
 Im Terminal in dem Ordner ausführen, in dem du das Projekt ablegen möchtest:
 
 ```sh
-git clone https://github.com/TimoDeg/fvk-powers.git
+git clone --branch codex/developer https://github.com/TimoDeg/fvk-powers.git
 ```
 
 ### 2. Im Assistenten öffnen
 
-Öffne den heruntergeladenen Ordner **fvk-powers** als Projekt in Codex. Bei anderen Assistenten muss der Client die Projektanweisungen aus `AGENTS.md` lesen können.
+Öffne den heruntergeladenen Ordner **fvk-powers** im Assistenten deiner Wahl:
+
+| Client | Einstieg |
+| --- | --- |
+| Cursor | Ordner öffnen und Agent verwenden; die Regeln stehen in `AGENTS.md`. |
+| Claude Code | Im Projektordner starten; `CLAUDE.md` importiert die gemeinsamen Regeln. |
+| Codex | Ordner als Projekt öffnen und einen neuen Chat starten. |
+| Orca | Repo öffnen und darin den gewünschten Agenten starten. Es gelten die Einstiegsdateien und Jira-Zugänge dieses Agenten. |
+| Claude-App oder anderer Client | Repo-Dateien über den verfügbaren Projekt-/Dateizugriff bereitstellen und den Starttext unten verwenden. Datei- und Jira-Zugriff müssen tatsächlich angeboten werden. |
+
+[Einrichtung je Client und Jira-Zugang](docs/DEPENDENCIES.md). Die Aufnahme in diese Liste ist kein Nachweis eines erfolgreichen Tests in jedem Client.
 
 ### 3. Einrichtung starten
 
 Schreibe im Projektchat:
 
 ```text
+Lies AGENTS.md in diesem Projekt und führe das darin beschriebene Setup aus.
 Richte fvk-powers für mich ein.
 ```
 
@@ -34,23 +47,25 @@ Der Assistent prüft vorhandene Zugänge und führt dich durch fehlende Schritte
 
 [Voraussetzungen im Detail](docs/DEPENDENCIES.md) · [Ablauf der geführten Einrichtung](SETUP.md)
 
-## Deine erste Frage
+## Dein erster Auftrag
 
 Füge einen Ticketlink ein und schreibe zum Beispiel:
 
-> Erkläre mir dieses Ticket: Was soll sich für Kunden ändern und was muss ich abnehmen?
+> Analysiere dieses Ticket: Welche Akzeptanzkriterien gelten, welche Codepfade sind betroffen und wie lässt sich die Änderung testen?
 
-Der Assistent liest die verfügbaren Quellen und antwortet kurz, verständlich und mit Quellenlinks. Fehlende Informationen und Widersprüche werden benannt. Vorgeschlagene Abnahmeschritte sind noch keine ausgeführten Tests.
+Der Assistent liest die verfügbaren Quellen und antwortet verständlich, mit passenden technischen Details und Quellenlinks. Fehlende Informationen und Widersprüche werden benannt. Vorgeschlagene Abnahmeschritte sind noch keine ausgeführten Tests.
 
 | Du möchtest … | Frage im Chat |
 | --- | --- |
-| Ein Ticket verstehen | „Was soll sich für Kunden ändern?“ |
+| Ein Ticket verstehen | „Was verlangt das Ticket und wo ist der Ablauf implementiert?“ |
 | Anforderungen abgleichen | „Passt das Ticket zur Spec? Was fehlt oder widerspricht sich?“ |
-| Eine Abnahme vorbereiten | „Welche konkreten Situationen sollte ich prüfen?“ |
-| Eine Verbesserung finden | „Welche Verbesserung wäre sinnvoll und warum?“ |
+| Eine Änderung umsetzen | „Setze dieses Ticket um und prüfe die betroffenen Fälle.“ |
+| Änderungen reviewen | „Prüfe diesen Diff auf Fehler und Regressionen.“ |
+| Verhalten testen | „Teste diesen Ablauf anhand der Akzeptanzkriterien.“ |
+| Eine PM-Abnahme vorbereiten | „Erkläre es für einen PM und nenne konkrete Abnahmesituationen.“ |
 | Den Release-Stand klären | „Ist das schon live? Welche Belege gibt es dafür?“ |
 
-[Beispielantworten ansehen](examples/pm.md)
+Entwicklerarbeit ist der Standard. Für fachliche Übergaben gibt es zusätzlich ein [PM-Profil](profiles/pm.md) mit [Beispielantworten](examples/pm.md).
 
 ## Wenn beim Setup etwas fehlt
 
@@ -60,13 +75,13 @@ Der Assistent liest die verfügbaren Quellen und antwortet kurz, verständlich u
 
 ## Was du erwarten kannst
 
-**Stand: Vorbereitung für den PM-Pilot.** Paketprüfungen und begrenzte Modelltests wurden durchgeführt; die menschliche PM-Abnahme steht noch aus. Ergebnisse und Grenzen stehen im [Prüfbericht](docs/VALIDATION.md), die [Modelltest-Ergebnisse](evals/results/2026-09-17-v1.md) sind separat dokumentiert.
+**Stand: Vorbereitung für den Entwickler-Pilot.** Paketprüfungen und begrenzte Modelltests des bisherigen PM-Ablaufs wurden durchgeführt. Der vollständige Entwicklerablauf und native Erststarts je Client müssen noch praktisch geprüft werden. Ergebnisse und Grenzen stehen im [Prüfbericht](docs/VALIDATION.md), die [Modelltest-Ergebnisse](evals/results/2026-09-17-v1.md) sind separat dokumentiert.
 
-Standardmäßig liest und erklärt der Assistent. Änderungen, Nachrichten und Veröffentlichungen brauchen einen ausdrücklichen Auftrag. Persönliche Quellenangaben bleiben lokal im von Git ausgeschlossenen Ordner `.local/`. Dieses Repo enthält keine privaten Ticketkopien oder Zugangsdaten.
+Fragen beantwortet der Assistent lesend; Implementierung und Tests führt er auf Auftrag aus. Nachrichten und Veröffentlichungen brauchen einen ausdrücklichen Auftrag zur jeweiligen Aktion. Persönliche Quellenangaben bleiben lokal im von Git ausgeschlossenen Ordner `.local/`. Dieses Repo enthält keine privaten Ticketkopien oder Zugangsdaten.
 
 ## Für Maintainer
 
-[![Package checks](https://github.com/TimoDeg/fvk-powers/actions/workflows/check.yml/badge.svg)](https://github.com/TimoDeg/fvk-powers/actions/workflows/check.yml)
+[![Package checks](https://github.com/TimoDeg/fvk-powers/actions/workflows/check.yml/badge.svg?branch=codex%2Fdeveloper)](https://github.com/TimoDeg/fvk-powers/actions/workflows/check.yml)
 
 Paket und Dokumentationslinks prüfen, mit Git und Python 3.11 oder neuer; keine zusätzlichen Python-Pakete nötig. Im Repo-Ordner ausführen:
 
@@ -77,7 +92,7 @@ python3 tools/check.py
 
 Die Checks prüfen die Paketstruktur. Sie ersetzen keine Prüfung der Jira-Verbindung, der Antwortqualität oder der Produktumsetzung.
 
-[Arbeitsregeln](AGENTS.md) · [Kontext und Originalquellen](CONTEXT.md) · [PM-Ausgabeprofil](profiles/pm.md) · [Prüfplan](evals/README.md)
+[Arbeitsregeln](AGENTS.md) · [Kontext und Originalquellen](CONTEXT.md) · [Entwicklerablauf](profiles/developer.md) · [Optionales PM-Profil](profiles/pm.md) · [Prüfplan](evals/README.md)
 
 ## Lizenz
 
