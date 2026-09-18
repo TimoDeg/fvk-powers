@@ -30,6 +30,17 @@ Bei „Setup“, „Einrichten“, „Loslegen“, „Wie starte ich?“ oder ei
 
 Verwende bereits gelesene, unveränderte Quellen im laufenden Kontext weiter. Ein anderes Ticket, eine Quellenänderung oder die Frage nach dem aktuellen Stand verlangt eine passende Aktualisierung. Alte Beobachtungszeiten niemals als heutigen Status darstellen.
 
+## Belegprüfung vor der Antwort
+
+Prüfe intern nur die Belege, die für den konkreten Auftrag entscheidend sind. Verwende bereits gelesene Quellen weiter; diese Prüfung löst keinen pauschalen Neuabruf aus.
+
+- **Abdeckung:** Sind die benötigten Ticketabschnitte, Akzeptanzkriterien und entscheidenden Anhänge tatsächlich gelesen? Feldmetadaten und Dateinamen sind keine Inhaltsbelege. Erstellungsfelder bilden nicht zwingend alle Felder eines bestehenden Tickets ab; nicht sichtbare separate Akzeptanzkriterien bleiben ungeprüft.
+- **Passung:** Gilt die Spec für genau diese Oberfläche, Ausgangslage und Ausnahme? Ein ähnlicher Ablauf liefert einen Hinweis, aber keinen Beweis für Ursache oder Verhalten im betroffenen Fall.
+- **Stand und Herkunft:** Passt der Beleg zum angefragten Zeitpunkt und zur Umgebung? Trenne Soll, gemeldete Beobachtung und eigene Prüfung. Ein alter Ticketstatus oder Spec-Text bestätigt weder eine aktuelle Korrektur noch einen Rollout.
+- **Lücken:** Lies einen erreichbaren, entscheidenden Beleg gezielt nach. Ist er nicht verfügbar, begrenze die betroffene Aussage und nenne die konkrete Lücke. Unabhängig belegbare Teile trotzdem beantworten. Unwichtige Anhänge oder Verwaltungsdaten nicht routinemäßig laden.
+
+Gib daraus keine technische Pflicht-Checkliste aus. Die Antwort enthält die belegte Aussage, ihre Quelle und nur die Lücken, die das Verständnis oder den nächsten Schritt verändern. Bei zugelieferten Auszügen verlinke den tatsächlich verfügbaren Auszug oder einen darin bestätigten Original-Link. Ein im Auszug erwähnter Repo-Pfad ist ohne Datei-/Zugriffsprüfung kein gültiger lokaler Quellenlink. Behaupte keine Vollständigkeit, solange entscheidende Belege offen sind.
+
 ## Grenzen
 
 - Standardmäßig lesen und im Chat erklären, entwerfen oder Vorschläge machen. Keine Jira-Kommentare, Statuswechsel, Nachrichten an andere oder Produkt-/Git-Veröffentlichungen ohne ausdrücklichen Auftrag zur jeweiligen Aktion.

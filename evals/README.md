@@ -1,6 +1,6 @@
 # Antwortqualität und Setup messen
 
-Paketprüfungen, Quellenzugriff und Produktnutzen sind getrennte Messungen. Die [synthetischen Fälle](cases.json) definieren Aufgaben und Erwartungen; tatsächliche Durchläufe stehen separat in [Ergebnisse vom 17.09.2026](results/2026-09-17-v1.md). Die [Stilbeispiele](../examples/pm.md) sind redaktionell geschriebene Beispiele, keine Benchmark-Ausgaben.
+Paketprüfungen, Quellenzugriff und Produktnutzen sind getrennte Messungen. Die 22 [synthetischen Fälle](cases.json) definieren Aufgaben und Erwartungen; ihre Anzahl ist keine Erfolgsquote. Aktuelle Durchläufe, Fehlversuche und Grenzen stehen im [Prüfbericht](../docs/VALIDATION.md), die [Bewertung vom 17.09.2026](results/2026-09-17-v1.md) ist eine ältere Baseline. Die [Stilbeispiele](../examples/pm.md) sind redaktionell geschriebene Beispiele, keine Benchmark-Ausgaben.
 
 ## Vor dem Teamstart
 
@@ -36,6 +36,20 @@ Bei `compact-overview` die sichtbaren Wörter ohne Markdown-Linkziele und die ta
 
 ## Geführte Abnahme prüfen
 
-Die fünf Fälle `guided-start`, `guided-unclear`, `guided-bug`, `guided-conflict` und `guided-resume` ergänzen Start, unvollständige Beobachtung, Bug-Entwurf, widersprüchliche Erwartung und Wechsel des Produktstands. Sie sind synthetische Aufgaben mit teils vorgegebenem Gesprächsstand, keine bereits ausgeführten Dialogtests. Frühere Antwortbewertungen gelten nicht als Nachweis für diese Erweiterung.
+Die fünf Fälle `guided-start`, `guided-unclear`, `guided-bug`, `guided-conflict` und `guided-resume` ergänzen Start, unvollständige Beobachtung, Bug-Entwurf, widersprüchliche Erwartung und Wechsel des Produktstands. Sie sind synthetische Aufgaben mit teils vorgegebenem Gesprächsstand. Die ausgeführten Einzelantworttests und ihre Grenzen stehen im [Prüfbericht](../docs/VALIDATION.md); sie ersetzen keinen zusammenhängenden Dialogtest. Frühere Antwortbewertungen gelten nicht als Nachweis für diese Erweiterung.
 
 Zusätzlich einen zusammenhängenden Dialog ohne vorbereitete Antworten prüfen: Abnahme starten, eine unklare Rückmeldung geben, eine Abweichung melden, stoppen und mit geändertem Stand fortsetzen. Erwartet werden jeweils ein nächster Schritt, erhaltene Beobachtungen samt Herkunft, keine erfundenen Ergebnisse und ein nicht veröffentlichter Bug-Entwurf. Die vollständige Abnahme muss über drei Fälle hinaus fortsetzbar sein. Bei einem neuen Chat ohne gespeicherten Verlauf darf der Assistent keine Erinnerung erfinden. Ein menschlicher PM prüft anschließend Verständlichkeit und Nutzbarkeit.
+
+## Belegprüfung testen
+
+`evidence-field-coverage` prüft, ob eingeschränkte Jira-Feldmetadaten fälschlich als vollständige Abnahmegrundlage behandelt werden. `evidence-scope` prüft, ob eine Spec für einen anderen Ablauf und ein alter Ticketstatus zu einer unbelegten Ursachen- oder Behebungsbehauptung führen. Beide verwenden erfundene Quellen. `guided-existing-bug` prüft zusätzlich, dass derselbe Fehler eines bekannten Bug-Tickets als Ergänzung statt als neues Duplikat behandelt wird.
+
+Bei Antworttests erhält jeder frische Kontext nur die Betriebsdateien, die natürliche Frage und den eingefrorenen Quellenstand. Bewertungsregeln, Musterantworten und frühere Ergebnisse bleiben außerhalb dieses Kontexts. Tatsächliche Quellenabrufe separat testen: gelieferte Tickettexte belegen weder Connector-Zugriff noch eigenständiges Auffinden der richtigen Spec. Echte Ticketproben und ihre Rohantworten bleiben lokal; öffentliche Berichte enthalten nur aggregierte Ergebnisse ohne private Ticketinhalte.
+
+Kriterien vor dem Lauf festlegen und anschließend jede einzelne Muss-Aussage und jedes Verbot anhand der unveränderten Antwort bewerten. Zusätzlich Werkzeugaktionen, Änderungen an Betriebsdateien, Abbrüche und gekürzte Rückgaben prüfen. Laufzeit und sichtbare Tokenwerte erfassen, soweit der Client sie liefert; daraus ohne vergleichbaren Ausgangslauf keine Einsparung ableiten. Fehlversuche erhalten; Wiederholungen getrennt ausweisen. Prüfer und Grenzen nennen: eine Bewertung durch den betreuenden Agenten ist keine unabhängige menschliche Abnahme.
+
+## Bedarfsgerechtes Laden vergleichen
+
+Für einen Vergleich dieselben Fragen, Quellen und Bewertungskriterien vor und nach einer Änderung des Einstiegs verwenden. Mindestens eine einfache Erklärung, eine Testliste, einen Bug-Entwurf und eine kurze Fortsetzung einer geführten Abnahme aufnehmen. Prüfe in den Werkzeugbelegen, ob der testweise ausgelagerte Ablauf bei den letzten beiden Aufgaben gelesen wird und bei einfachen Fragen nicht routinemäßig. Ein erfolgreicher erster Fall belegt keine zuverlässige Zuordnung für andere Formulierungen.
+
+Input-Tokens, Cacheanteile, Output-Tokens und Laufzeit je Aufgabe getrennt vergleichen. Nachladen kann bei kurzen Fragen Kontext sparen und bei komplexen Abläufen einen zusätzlichen Werkzeugaufruf kosten. Keine allgemeine Kosten- oder Qualitätsverbesserung aus einem einzelnen Paar ableiten; fachliche Fehler unabhängig vom Tokenverbrauch bewerten.

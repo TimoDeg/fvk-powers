@@ -1,6 +1,6 @@
 # fvk-powers
 
-Jira-Tickets verstehen, mit den Rewrite-Specs abgleichen und Abnahmen vorbereiten — ein Arbeitsablauf für PMs im KI-Assistenten.
+Jira-Tickets verstehen, mit den Rewrite-Specs abgleichen, Abnahmen begleiten und Bug-Entwürfe vorbereiten — ein Arbeitsablauf für PMs im KI-Assistenten.
 
 ## Starten in drei Schritten
 
@@ -52,7 +52,7 @@ Der Assistent liest die verfügbaren Quellen und antwortet kurz, verständlich u
 | Eine Verbesserung finden | „Welche Verbesserung wäre sinnvoll und warum?“ |
 | Den Release-Stand klären | „Ist das schon live? Welche Belege gibt es dafür?“ |
 
-Bei der geführten Abnahme führst du jeweils einen Prüffall aus und meldest deine Beobachtung zurück. Der Assistent hält fest, was bestanden, abweichend oder noch offen ist, und formuliert bei Bedarf einen Bug-Entwurf im Chat. Ein Jira-Ticket wird dadurch nicht automatisch erstellt.
+Bei der geführten Abnahme führst du jeweils einen Prüffall aus und meldest deine Beobachtung zurück. Der Assistent hält fest, was bestanden, abweichend oder noch offen ist, und formuliert bei Bedarf einen Bug-Entwurf im Chat. Ist derselbe Fehler bereits im besprochenen Bug-Ticket erfasst, bereitet er eine Ergänzung dazu vor. Ein Jira-Ticket wird dadurch nicht automatisch erstellt.
 
 [Beispielantworten ansehen](examples/pm.md)
 
@@ -64,9 +64,17 @@ Bei der geführten Abnahme führst du jeweils einen Prüffall aus und meldest de
 
 ## Was du erwarten kannst
 
-**Stand: Vorbereitung für den PM-Pilot.** Paketprüfungen und begrenzte Modelltests wurden durchgeführt; die menschliche PM-Abnahme steht noch aus. Ergebnisse und Grenzen stehen im [Prüfbericht](docs/VALIDATION.md), die [Modelltest-Ergebnisse](evals/results/2026-09-17-v1.md) sind separat dokumentiert.
+**Stand: Vorbereitung für den PM-Pilot.** Die jüngste Prüfrunde umfasst 23 KI-Antwortläufe einschließlich Wiederholungen und eines Vergleichs verschiedener Regelaufteilungen. Das sind keine 23 bestandenen Fälle. Die echte Ticketprobe war noch nicht stabil: Preisvergleiche oder die fehlende bestätigte Testumgebung wurden teilweise zu ungenau beschrieben. Menschliche PM-Abnahme und ein zusammenhängender Dialogtest stehen weiterhin aus. [Aktuelle Ergebnisse und Grenzen](docs/VALIDATION.md) · [Frühere Modellbewertung vom 17.09.2026](evals/results/2026-09-17-v1.md).
+
+Vor einer Antwort soll der Assistent prüfen, ob die entscheidenden Quellen vollständig gelesen wurden, zum betroffenen Ablauf passen und den angefragten Stand belegen. Fehlende Inhalte bleiben als Lücke sichtbar; ein alter Ticketstatus bestätigt keinen aktuellen Rollout. Diese Regeln unterstützen die Arbeit, garantieren aber keine fehlerfreie Antwort.
 
 Standardmäßig liest und erklärt der Assistent. Änderungen, Nachrichten und Veröffentlichungen brauchen einen ausdrücklichen Auftrag. Persönliche Quellenangaben bleiben lokal im von Git ausgeschlossenen Ordner `.local/`. Dieses Repo enthält keine privaten Ticketkopien oder Zugangsdaten.
+
+## Wie das Paket arbeitet
+
+`fvk-powers` liefert Projektanweisungen für deinen Assistenten. [AGENTS.md](AGENTS.md) steuert die Quellenarbeit, [CONTEXT.md](CONTEXT.md) verweist auf passende Originalquellen, und das [PM-Profil](profiles/pm.md) beschreibt Antworten und Abnahmedialoge. Jira- und Dateizugriff stellt dein Client bereit. Das Paket enthält keinen eigenen KI-Dienst und trainiert kein Modell.
+
+`main` enthält die PM-Version. Die [Entwickler-Variante](https://github.com/TimoDeg/fvk-powers/tree/codex/developer) wird auf `codex/developer` separat weiterentwickelt.
 
 ## Für Maintainer
 

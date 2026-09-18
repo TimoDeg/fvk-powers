@@ -2,11 +2,44 @@
 
 Das Paket hat wiederholbare Strukturprüfungen und eine erste separate Modellbewertung. Menschliche PM-Verständlichkeit und ein neuer PM-Zugang sind noch nicht bewertet. Grüne Paketchecks und synthetische Antworten sind keine Teamfreigabe.
 
+## Belegprüfung und Verhaltenstests vom 18.09.2026
+
+Am Stand `d99a5b6` mit lokalen Regeländerungen wurden zehn Einzelantworten in frischen Codex-CLI-Kontexten geprüft: die fünf geführten Abnahmefälle, zwei neue Fälle zu Quellenabdeckung und Geltungsbereich, zwei bestehende Fälle zu verständlicher bzw. vollständiger Ausgabe und eine eingefrorene Quellenprobe aus einem echten Ticket. Kriterien wurden vor den Regeländerungen festgehalten; die antwortenden Kontexte erhielten nur Betriebsdateien, Frage und Quellen, keine Kriterien oder Musterantworten. Bewertung durch den verantwortlichen Agenten anhand unveränderter Antworten und sichtbarer Werkzeugaufrufe, keine menschliche PM-Abnahme.
+
+**Erstlauf: 8/10 bestanden.** Im Bug-Entwurf fehlte die Quelle der Erwartung. Die echte Ticketprobe erfand lokale Originalquellenlinks, obwohl nur Auszüge vorlagen, bündelte mehrere Prüfsituationen und band den Preisvergleich nicht ausreichend an denselben Tarif und Zahlungszeitraum. Eine zusätzliche Auffälligkeit im ansonsten akzeptierten Wiederaufnahmefall: Der alte Bug-Entwurf wurde als vorerst nicht nötig bezeichnet; historische Beobachtungen sollten beim Versionswechsel erhalten bleiben.
+
+Die gezielte Korrektur präzisiert belegbare Quellenlinks, die Herkunft der Erwartung im Bug-Entwurf, den Umfang eines einzelnen Vergleichstests und das Erhalten alter Beobachtungen. Ein weiterer Fall prüft die Ergänzung eines bereits bekannten Bug-Tickets statt eines Duplikats. Das öffentliche Entwicklungsset enthält damit **22 Fälle**; die echte Quellenprobe bleibt ausschließlich lokal.
+
+**Erste gezielte Wiederholung: 3/4 bestanden.** Bug-Entwurf, Wiederaufnahme und bestehendes Bug-Ticket erfüllten die Kriterien. Die echte Quellenprobe blieb zu ungenau beim Vergleich desselben Tarifs und setzte gültige Eingaben ohne passende Tarifvoraussetzungen mit vorhandenen Angeboten gleich. Nach einer weiteren Präzisierung bestand die einzelne erneute Quellenprobe **1/1**: zwei abgegrenzte, noch nicht ausgeführte Prüfsituationen, gleiche Tarifdaten und eine gewählte Zahlungsperiode gegen einen bekannten Referenzbetrag, ausdrücklich ungeklärte Testumgebung und separate Akzeptanzkriterien. Alle Fehlversuche bleiben erhalten; dies ist kein vollständiger neuer Lauf aller zehn bzw. 22 Fälle.
+
+Alle 15 Antwortläufe endeten erfolgreich als CLI-Prozess. Die sichtbaren Aktionen lasen nur die Betriebsdateien und gelieferten Quellen; keine externen Aktionen, Werkzeugfehler, gekürzten Rückgaben oder Änderungen an den Betriebsdateien. Im Erstlauf lagen neun Standardantworten bei 34–137 Wort-Einheiten; die vollständige Siebener-Abnahme hatte zulässige 206. Erstlauf-Zeit je Antwort: 10,9–22,5 Sekunden, Median 15,0. Der CLI meldete insgesamt 205.896 Input- und 4.947 Output-Tokens für die zehn Erstläufe; das sind Laufwerte inklusive Kontext/Werkzeugrückgaben, keine Preisangabe oder nachgewiesene Einsparung.
+
+**Grenzen:** Codex CLI 0.147.0, CLI-Standardmodell ohne Override; kein unabhängiger Beleg der Modellkennung. Bestehende Host-Anmeldung, temporäre Arbeitsordner, schreibgeschützte Ausführung, persönliche Konfiguration und Erweiterungen deaktiviert; keine VM oder vollständige Dateilese-Isolation. Ein interner Modellcache-Warnhinweis führte nicht zum Abbruch. Quellenproben prüfen den Umgang mit geliefertem Material, keinen neuen Jira-Zugriff, eigenständige Quellensuche oder Browser-Abnahme. Vorbereitete Gesprächsstände sind kein durchgehender Mehrturn-Dialog. Keine unabhängige menschliche Bewertung, kein unbekanntes Testset und kein kontrollierter Vorher-/Nachher-Vergleich. Kriterien, Patchstände, Hashes, unveränderte Antworten, Tokenwerte und Einzelbewertungen liegen im ignorierten `.local/`.
+
+Paketprüfung und die 12 Checker-Tests bestanden zusätzlich. Nächster Verhaltensnachweis ist ein zusammenhängender Dialog; dieser und native Erststarts in weiteren Clients bleiben offen. Das bedarfsgerechte Aufteilen der Anweisungen blieb in dieser ersten Runde unverändert; der anschließende Vergleich ist separat dokumentiert.
+
+## Vergleich des bedarfsgerechten Ladens — verworfene Aufteilung
+
+Vier identische Fragen und Quellen wurden mit den korrigierten Regeln vor und nach einer probeweisen Auslagerung des geführten Abnahmeablaufs geprüft. Je ein frischer CLI-Lauf pro Fall und Variante, unveränderte Kriterien. Die Zuordnung funktionierte in allen vier Fällen: Erklärung und Testliste lasen nur das PM-Profil; kurze Abnahmefortsetzung und Bug-Entwurf lasen zusätzlich den ausgelagerten Ablauf.
+
+| Fall | Input-Tokens vorher → nachher | Laufzeit vorher → nachher | Kriterien vorher / nachher |
+| --- | ---: | ---: | --- |
+| Einfache Erklärung | 20.692 → 19.905 | 11,0 → 12,8 s | Bestanden / bestanden |
+| Unklare Abnahmerückmeldung | 20.777 → 33.037 | 9,8 → 16,3 s | Bestanden / bestanden |
+| Bug-Entwurf | 20.759 → 33.144 | 13,9 → 18,6 s | Bestanden / bestanden |
+| Echte Quellenprobe | 21.110 → 20.285 | 20,4 → 19,3 s | Nicht bestanden / nicht bestanden |
+
+Die zusätzliche Leserunde erhöhte bei geführten Aufgaben den gemeldeten Gesamtkontext; die Cacheanteile änderten sich ebenfalls. Die Zahlen sind keine Rechnung über Modellkosten und keine stabile Laufzeitaussage. Bei einfachen Aufgaben wurden in diesen Paaren etwa 800 Input-Tokens weniger verarbeitet. Für das kleine Paket rechtfertigt das die zusätzliche Datei und Leserunde derzeit nicht: **Die Aufteilung wurde zurückgenommen; das PM-Profil bleibt zusammen.** Die getesteten Korrekturen zur Belegprüfung bleiben erhalten.
+
+Jeweils **3/4** Antworten erfüllten alle vorab festgelegten Kriterien. Vor der Aufteilung blieb die echte Quellenprobe beim Preisvergleich zu ungenau; danach waren Vergleich und Fallumfang korrekt, aber die fehlende bestätigte Testumgebung wurde nicht genannt. Ein nicht ausgeführter Laufzeittest ist keine gleichwertige Erklärung dieses fehlenden Ausgangspunkts. Die Quellenprobe ist damit weiterhin nicht stabil, auch nach ihrem zuvor erfolgreichen Einzelversuch. Diese Fehler werden weder aus der Wertung entfernt noch durch geänderte Kriterien übergangen. Alle acht Prozessläufe endeten ohne externe Aktionen, Werkzeugfehler, gekürzte Rückgaben oder geänderte Betriebsdateien.
+
+Der endgültige Betriebsstand entspricht wieder dem geprüften Stand vor der Aufteilung. Der Vergleich dient der Entscheidung über die Dateiaufteilung, nicht als Beleg einer allgemeinen Qualitätssteigerung. Die Grenzen der vorherigen CLI-Proben gelten unverändert; Antworten, Kriterien, Werkzeugbelege und Cache-/Tokenwerte bleiben lokal erhalten. Vor einer Teamfreigabe bleibt insbesondere die vollständige Benennung abnahmerelevanter Lücken erneut zu prüfen.
+
 ## Geführte PM-Abnahme — lokale Erweiterung vom 18.09.2026
 
 Das PM-Profil begleitet jetzt einzelne Prüffälle, hält Beobachtungen mit Herkunft fest und unterscheidet bestanden, abweichend und offen. Ein belegter Unterschied führt zu einem Bug-Entwurf im Chat; Quellenkonflikte bleiben Klärungspunkte. Pausen, unvollständige Rückmeldungen und Änderungen des Produktstands sind berücksichtigt. Das vorhandene Beispiel wurde um einen Dialog ergänzt, das Entwicklungsset von 14 auf 19 Fälle erweitert.
 
-Paketprüfung und die 12 Checker-Tests bestanden am lokalen Stand. Die fünf neuen Modellfälle und ein zusammenhängender Dialog wurden noch nicht ausgeführt; eine menschliche PM-Abnahme steht weiterhin aus. Die folgenden älteren Modellbewertungen belegen diese Erweiterung nicht. Der [Prüfplan](../evals/README.md#geführte-abnahme-prüfen) beschreibt die nötigen nächsten Nachweise.
+Paketprüfung und die 12 Checker-Tests bestanden am lokalen Stand. Zum Zeitpunkt dieser Erweiterung waren die fünf neuen Modellfälle und ein zusammenhängender Dialog noch nicht ausgeführt; eine menschliche PM-Abnahme steht weiterhin aus. Die folgenden älteren Modellbewertungen belegen diese Erweiterung nicht. Der [Prüfplan](../evals/README.md#geführte-abnahme-prüfen) beschreibt die nötigen nächsten Nachweise.
 
 ## Kontrollierte Setup-Workflowtests vom 18.09.2026
 
