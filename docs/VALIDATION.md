@@ -1,6 +1,27 @@
-# Prüfstand — 18.09.2026
+# Prüfstand — 21.09.2026
 
-Das Paket hat wiederholbare Strukturprüfungen und separate Modellbewertungen des bisherigen PM-Ablaufs. Der neue Entwicklerstandard, native Erststarts je Client und menschliche Nutzbarkeit sind noch nicht praktisch bewertet. Grüne Paketchecks und synthetische Antworten sind keine Teamfreigabe.
+Das Paket hat Strukturprüfungen, frühere PM-Antwortbewertungen und erste ausführbare Entwicklerproben. Ein vollständiger Rewrite-Änderungsauftrag, native Erststarts je Client und menschliche Nutzbarkeit sind noch nicht bewertet. Grüne Paketchecks und synthetische Aufgaben sind keine Teamfreigabe.
+
+## Codeaufträge von PMs — 21.09.2026
+
+Die Dev-Branch trennt nun Auftrag und Erklärungsstil: Auch bei „Ich bin PM“ gelten die Entwicklerregeln; das PM-Profil ergänzt die Ausgabe. Die Regeln verlangen einen nachvollziehbaren Bug-Nachweis, Tests der betroffenen Aufrufer, unveränderte fremde Arbeit und eine klare Trennung zwischen Umsetzung, Prüfung und Veröffentlichung. Ein ungeklärter Anforderungswert führt zur fachlichen Rückfrage; ein nebenbei entdeckter Fehler wird als Befund gemeldet und nicht ungefragt umgesetzt.
+
+Vier identische natürliche PM-Aufträge wurden auf drei Regelständen mit einem synthetischen Python-Miniprodukt geprüft. Es gab echte Dateien, zwei Aufrufer einer gemeinsamen Funktion, ausführbare Tests und eine fremde uncommittete Notiz. Kriterien und Quellen waren vor den Änderungen festgelegt; Erwartungen und vorherige Antworten lagen außerhalb des jeweiligen Modellkontexts.
+
+| Abschließender Fall | Ergebnis |
+| --- | --- |
+| „Bitte fix das“ für Vergleich und Widget | Gemeinsame Ursache korrigiert; Regression vor Änderung rot, danach grün; beide Aufrufer geprüft, fremde Notiz erhalten |
+| „Nur reviewen“ | Fehler mit Fundstelle und Wirkung benannt; Produktdateien unverändert |
+| Testauftrag mit fehlendem Browser | Unit-Tests ausgeführt; fehlende Browserprüfung und nicht abgedeckter Fehler benannt; keine Freigabe |
+| Ungeklärtes Limit | Beide Alternativen und nötige Entscheidung benannt; zusätzlicher Fehler nur gemeldet, Produktdateien unverändert |
+
+**Abschließender Lauf: 4/4 auf demselben Regelstand bestanden.** Die neuen Regressionstests wurden zusätzlich in einer separaten Kopie gegen den ursprünglichen Fehlercode ausgeführt: dort fehlgeschlagen, mit Korrektur bestanden. Alle vier Läufe riefen das Entwicklerprofil auf; Betriebsdateien und fremde Notizen blieben erhalten. Paketprüfung und zwölf Checker-Tests bestanden. Das Entwicklungsset umfasst nun 14 ältere PM-Antwortfälle und vier ausführbare Dev-Fälle; diese Zahl ist keine Gesamt-Erfolgsquote.
+
+**Fehlversuche bleiben dokumentiert:** Auf der Baseline `c5a5729` fehlte bei drei Aufgaben der Aufruf des Entwicklerprofils. Der Implementierungsfall bestand die nachträgliche Regression, führte sie aber nicht vor dem Fix rot aus. Baseline und erste Korrektur setzten beim offenen Limit ungefragt einen anderen Fehler um; die erste Korrektur verschob außerdem erzeugte Cachedateien außerhalb des erlaubten Fallordners. Erst die präzisierte Umfangsregel bestand den abschließenden Konfliktfall. Zwei Läufe brachen wegen Modellkapazität vor der Bearbeitung ab und wurden je einmal auf identischem Regelstand wiederholt. Vier anfängliche Teststarts scheiterten am fehlenden Git-Repo des Testordners und zählen als Fehler des Testaufbaus. Insgesamt: 18 Starts, davon zwölf abgeschlossene Antworten, zwei Kapazitätsabbrüche und vier ungültige Vorstarts.
+
+**Grenzen:** Codex CLI mit Standardmodell ohne Override, Modellkennung nicht unabhängig bestätigt; gleicher Host, temporäre Arbeitsordner und frische kurzlebige Kontexte. Persönliche Konfiguration und Erweiterungen deaktiviert, keine VM oder vollständige Dateilese-Isolation. Bewertung durch den implementierenden Agenten, keine unabhängige menschliche Bewertung. Bei einzelnen gebündelten Lesebefehlen fehlt der Anfang im gespeicherten Werkzeugoutput; der Aufruf belegt den Leseversuch, nicht die vollständige Sichtbarkeit aller Regeln. Kein tatsächlicher Rewrite-Patch, Jira-Zugriff, Browserlauf oder nativer Test anderer Clients. Keine Stabilitäts- oder Geschwindigkeitsbehauptung aus diesen Einzelaufgaben.
+
+Belege, Ausgangscode, Änderungen, Antworten, Kriterien und Bewertungen liegen lokal unter `.local/evals/dev-pm-20260921/`. Die PM-Branch wurde nicht zusammengeführt. Nächster Nachweis ist ein freigegebener echter Rewrite-Codeauftrag, anschließend die gemeinsame Fortsetzung von PM-Arbeit und Implementierung.
 
 ## Entwicklerstandard und clientneutraler Einstieg — lokale Erweiterung vom 18.09.2026
 

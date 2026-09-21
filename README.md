@@ -1,8 +1,8 @@
 # fvk-powers — Entwickler-Variante
 
-Diese Variante wird auf `codex/developer` separat entwickelt und getestet. `main` bleibt vorerst die PM-Version; eine Zusammenführung erfolgt später. Beide Varianten gehören zum selben Repo.
+Diese Variante wird auf `codex/developer` separat entwickelt und getestet. `main` bleibt vorerst die PM-Version; eine Zusammenführung erfolgt später. Beide Varianten gehören zum selben Repo. Weitere experimentelle Regeln und die inzwischen durchgeführten historischen Echtproben stehen auf [codex/dev-evidence-checks](https://github.com/TimoDeg/fvk-powers/tree/codex/dev-evidence-checks); deren vollständige fachliche Abnahme ist noch offen.
 
-Tickets analysieren, Code umsetzen, Änderungen reviewen und gezielt testen: der gemeinsame Rewrite-Arbeitsablauf für Entwickler — unabhängig vom KI-Client.
+Tickets analysieren, Code umsetzen, Änderungen reviewen und gezielt testen: der Rewrite-Arbeitsablauf für Entwickler und PMs, die Änderungen mit einem Assistenten umsetzen — unabhängig vom KI-Client.
 
 ## Starten in drei Schritten
 
@@ -65,7 +65,9 @@ Der Assistent liest die verfügbaren Quellen und antwortet verständlich, mit pa
 | Eine PM-Abnahme vorbereiten | „Erkläre es für einen PM und nenne konkrete Abnahmesituationen.“ |
 | Den Release-Stand klären | „Ist das schon live? Welche Belege gibt es dafür?“ |
 
-Entwicklerarbeit ist der Standard. Für fachliche Übergaben gibt es zusätzlich ein [PM-Profil](profiles/pm.md) mit [Beispielantworten](examples/pm.md).
+Codearbeit ist der Standard. Du musst dafür keine technischen Lösungsanweisungen formulieren: „Ich bin PM. Beim vierten Favoriten verschwindet die Auswahl. Bitte fix das und erklär mir, was ich testen kann.“ reicht als Auftrag, sobald Produktzugriff und Anforderungen geklärt sind. Der Assistent untersucht den Code, setzt die Änderung um, führt die passenden Tests aus und prüft den Diff. Offene Produktentscheidungen fragt er verständlich nach.
+
+Die Qualitätsanforderungen gelten unabhängig von deiner Rolle. Das zusätzliche [PM-Profil](profiles/pm.md) vereinfacht die Erklärung; es ersetzt weder Entwicklerablauf noch Tests. Commit, Push und Deployment sind eigene Aufträge. Die PM-Version auf `main` bleibt vorerst separat; diese Verbesserung führt die Branches noch nicht zusammen.
 
 ## Wenn beim Setup etwas fehlt
 
@@ -75,7 +77,7 @@ Entwicklerarbeit ist der Standard. Für fachliche Übergaben gibt es zusätzlich
 
 ## Was du erwarten kannst
 
-**Stand: Vorbereitung für den Entwickler-Pilot.** Paketprüfungen und begrenzte Modelltests des bisherigen PM-Ablaufs wurden durchgeführt. Der vollständige Entwicklerablauf und native Erststarts je Client müssen noch praktisch geprüft werden. Ergebnisse und Grenzen stehen im [Prüfbericht](docs/VALIDATION.md), die [Modelltest-Ergebnisse](evals/results/2026-09-17-v1.md) sind separat dokumentiert.
+**Stand: Erste ausführbare Dev-Proben bestanden.** Vier isolierte Codeaufträge in PM-Sprache prüfen Umsetzung mit Regressionstest, lesendes Review, fehlende Browserprüfung und ungeklärte Anforderungen. Sie liefen auf einem kleinen synthetischen Produkt; der vollständige Rewrite-Ablauf und native Erststarts je Client stehen noch aus. Ergebnisse einschließlich Fehlversuchen und Grenzen stehen im [Prüfbericht](docs/VALIDATION.md#codeaufträge-von-pms--21092026). Die PM-Pipeline wird erst nach weiterer Dev-Prüfung verbunden.
 
 Fragen beantwortet der Assistent lesend; Implementierung und Tests führt er auf Auftrag aus. Nachrichten und Veröffentlichungen brauchen einen ausdrücklichen Auftrag zur jeweiligen Aktion. Persönliche Quellenangaben bleiben lokal im von Git ausgeschlossenen Ordner `.local/`. Dieses Repo enthält keine privaten Ticketkopien oder Zugangsdaten.
 

@@ -2,7 +2,7 @@
 
 ## Auftrag und Einstieg
 
-Dieses Repo enthält den gemeinsamen Arbeitsablauf für Rewrite-Entwickler: Ticketanalyse, Implementierung, Review und Tests. Lies einmal pro Aufgabenkontext [profiles/developer.md](profiles/developer.md). Für ausdrücklich an PMs gerichtete Antworten verwende stattdessen das Ausgabeprofil [profiles/pm.md](profiles/pm.md); der gründliche Quellenabgleich bleibt gleich. Eine Bitte um eine einfachere Erklärung ändert nicht automatisch den Arbeitsauftrag. Wünsche zu Zielgruppe und Tiefe gehen vor; frage nicht routinemäßig nach einer Rolle.
+Dieses Repo enthält den Arbeitsablauf für Codearbeit: Ticketanalyse, Implementierung, Review und Tests. Entwickler und PMs können Änderungen beauftragen. Lies einmal pro Aufgabenkontext [profiles/developer.md](profiles/developer.md); es bestimmt die Ausführung unabhängig von der Rolle des Nutzers. Für an PMs gerichtete Antworten nutze zusätzlich den Erklärungsstil aus [profiles/pm.md](profiles/pm.md). Dessen Kurzformat begrenzt weder Umsetzung noch Tests oder Review. Der konkrete Auftrag bestimmt, ob du erklärst, änderst oder prüfst; eine einfachere Erklärung ändert diesen Auftrag nicht. Frage nicht routinemäßig nach einer Rolle.
 
 Bearbeite standardmäßig eine Frage bzw. ein Ticket mit einem verantwortlichen Agenten. Nutze vorhandene Datei- und Jira-Werkzeuge des Clients. Der Ablauf ist clientneutral: Setze kein bestimmtes Produkt, Modell, Konto oder Plugin voraus; wähle Setup-Schritte nach den tatsächlich verfügbaren Fähigkeiten. Kein zusätzlicher Harness, kein globaler Skill und kein Indexaufbau ist Voraussetzung.
 
