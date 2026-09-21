@@ -56,6 +56,8 @@ Lege synthetische Quellen und einen Wissenseinstieg mit relativen Kapitelverweis
 
 Kriterien vor der Regeländerung einfrieren. Alle Schreib- und Leseaktionen, ursprüngliche Notiz, Antworten, Datei-Hashes und Fehlversuche lokal behalten. Den Umgang mit synthetischen Dateien, tatsächlichem Jira-Zugriff und menschlicher Abnahme getrennt ausweisen. Pro Client muss insbesondere das Laden der Projektanweisungen separat geprüft werden.
 
+Nach einem Speicher- oder Konfliktfehler den betroffenen Originalfall dreimal auf demselben Regelstand prüfen; alle Versuche zählen. Beim Speichern müssen bekannte frühere Umgebungsnamen und Versionen trotz unbekanntem heutigen Stand erhalten bleiben. Zusätzlich andere Umgebungsnamen und Konfliktwerte verwenden. Als Gegenprobe eine ausdrücklich bestätigte Ablösung liefern: Hier soll die neue Entscheidung gelten. Eine ungeklärte Abweichung allein erlaubt weiterhin keinen Gewinner. Beim Fortsetzen auch die sichtbare Antwort auf Herkunft und noch ungeprüfte Fälle prüfen; eine vollständige Notiz gleicht Auslassungen in der Antwort nicht aus.
+
 ## Bedarfsgerechtes Laden vergleichen
 
 Für einen Vergleich dieselben Fragen, Quellen und Bewertungskriterien vor und nach einer Änderung des Einstiegs verwenden. Mindestens eine einfache Erklärung, eine Testliste, einen Bug-Entwurf und eine kurze Fortsetzung einer geführten Abnahme aufnehmen. Prüfe in den Werkzeugbelegen, ob der testweise ausgelagerte Ablauf bei den letzten beiden Aufgaben gelesen wird und bei einfachen Fragen nicht routinemäßig. Ein erfolgreicher erster Fall belegt keine zuverlässige Zuordnung für andere Formulierungen.

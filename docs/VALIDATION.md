@@ -2,9 +2,28 @@
 
 Das Paket hat wiederholbare Strukturprüfungen und eine erste separate Modellbewertung. Menschliche PM-Verständlichkeit und ein neuer PM-Zugang sind noch nicht bewertet. Grüne Paketchecks und synthetische Antworten sind keine Teamfreigabe.
 
-## Merge-Prüfung — 21.09.2026: noch nicht bestanden
+## Kontextkorrektur — 21.09.2026: Merge-Bedingung erfüllt
 
-Der vollständige Lauf aller sechs Kontextfälle wurde auf `30fba84` wiederholt. Zusätzlich wurde ein echtes Ticket frisch über den internen Jira-Connector gelesen und mit aktuellen Original-Specs für einen Test über zwei frische Kontexte bereitgestellt. Merge-Bedingung vorab: alle sechs Fälle auf einem unveränderten Regelstand sowie der echte Persistenzablauf bestehen. **Die Bedingung ist nicht erfüllt; kein Merge nach `main`.**
+Die beiden wiederkehrenden Fehler wurden an ihrer gemeinsamen Ursache korrigiert: Frühere Beobachtungen werden als kurzer wörtlicher Beleg statt als neu formulierte Zusammenfassung gespeichert. Der heutige unbekannte Stand bleibt davon getrennt. Die zentrale Konfliktregel verlangt einen tatsächlichen Klärungsbeleg; Dokumenttyp oder Datum wählen keinen Gewinner. Fortsetzungsantworten nennen die Herkunft der Beobachtung und noch ungeprüfte Fälle ausdrücklich.
+
+| Prüfung am abschließenden Regelstand | Ergebnis |
+| --- | --- |
+| Sechs Kontextfälle: speichern, fortsetzen, Versionswechsel, fehlende Notiz, Wissenskonflikt, getracktes Ziel | 6/6 bestanden |
+| Zwei zusätzliche Wiederholungen je ursprünglichem Speicher- und Konfliktfall | 4/4; einschließlich Gesamtlauf jeweils 3/3 |
+| Varianten: andere Umgebung/Version, andere Konfliktwerte, bestätigte Ablösung als Gegenprobe | 3/3 bestanden |
+| Echtes Ticket: erklären/speichern → neuer Kontext/fortsetzen | Beide Persistenzschritte bestanden |
+
+Die abschließenden **15 CLI-Läufe** verwendeten dieselben Betriebsdateien, durch Hashes geprüft. Alle vier synthetischen Speicherbelege wurden zusätzlich wörtlich mit der Eingabe verglichen: Umgebung, Version, PM-Herkunft und Ergebnis blieben erhalten. Lesende Fortsetzungen und das getrackte Speicherziel blieben unverändert. Keine beobachteten Zugriffe außerhalb der Fallordner, externen Aktionen oder gekürzten Werkzeugausgaben. Ein nicht unterstützter `realpath`-Schalter wurde vor dem Schreiben korrigiert. Alle Prozesse endeten mit Exitcode 0. Paketprüfung, zwölf Checker-Tests und Whitespace-Prüfung bestanden.
+
+**Der erste Korrekturversuch bleibt als Fehlschlag erhalten:** 5/6 Kontextfälle, 6/7 ergänzende Prüfungen und zwei bestandene reale Persistenzschritte. Beim Versionswechsel fehlten in der sichtbaren Antwort PM-Herkunft und ungeprüftes Neuladen; die Notiz selbst behielt beides. Beim einfachen Fortsetzen blieb die PM-Herkunft ebenfalls nur in der Notiz. Eine der drei Speicherwiederholungen verlor erneut die frühere Umgebung. Erst danach wurden der wörtliche Beleg und die Fortsetzungsform präzisiert. Insgesamt entstanden in dieser Korrekturrunde **30 Läufe**; Fehlversuche wurden weder entfernt noch durch erfolgreiche Wiederholungen umgewertet.
+
+**Grenzen:** Codex CLI 0.147.0, Standardmodell ohne Override und ohne unabhängig bestätigte Modellkennung. Bewertung durch den verantwortlichen Agenten, kein menschliches Urteil und kein unbekanntes Testset. Temporäre Git-Arbeitsordner mit deaktivierter persönlicher Konfiguration und Erweiterungen, keine VM oder vollständige Dateilese-Isolation. Die echten Quellen sind datierte Kopien des zuvor am selben Tag gelesenen Tickets und der Specs; kein erneuter Live-Connector- oder Anwendungstest. Die Persistenzprüfung ist keine vollständige fachliche Freigabe: Der echte Kurzüberblick trennt benachbarte Journey-Vorgaben weiterhin nicht ausdrücklich vom Bot-Geltungsbereich. Native Prüfungen in Cursor, Claude und Orca sowie menschliche PM-Abnahme bleiben offen. Drei Wiederholungen belegen keine allgemeine Zuverlässigkeitsquote.
+
+Rohantworten, gespeicherte Notizen, Kriterien, Hashes und Einzelbewertungen liegen unter `.local/evals/context-fix-20260921/`; der abschließende Lauf unter `verbatim/`. Private Quellen bleiben dort. README-Status und Prüfbericht wurden anschließend aktualisiert; die getesteten Arbeitsregeln blieben unverändert. Die nachfolgenden Berichte dokumentieren frühere Regelstände.
+
+## Frühere Merge-Prüfung — 21.09.2026: noch nicht bestanden
+
+Der vollständige Lauf aller sechs Kontextfälle wurde auf `30fba84` wiederholt. Zusätzlich wurde ein echtes Ticket frisch über den internen Jira-Connector gelesen und mit aktuellen Original-Specs für einen Test über zwei frische Kontexte bereitgestellt. Merge-Bedingung vorab: alle sechs Fälle auf einem unveränderten Regelstand sowie der echte Persistenzablauf bestehen. **In diesen früheren Läufen war die Bedingung nicht erfüllt; es erfolgte kein Merge nach `main`.**
 
 | Prüfung | Erster Lauf | Nach gezielter Regelkorrektur |
 | --- | --- | --- |
