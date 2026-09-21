@@ -1,6 +1,32 @@
-# Prüfstand — 18.09.2026
+# Prüfstand — 21.09.2026
 
 Das Paket hat wiederholbare Strukturprüfungen und eine erste separate Modellbewertung. Menschliche PM-Verständlichkeit und ein neuer PM-Zugang sind noch nicht bewertet. Grüne Paketchecks und synthetische Antworten sind keine Teamfreigabe.
+
+## Merge-Prüfung — 21.09.2026: noch nicht bestanden
+
+Der vollständige Lauf aller sechs Kontextfälle wurde auf `30fba84` wiederholt. Zusätzlich wurde ein echtes Ticket frisch über den internen Jira-Connector gelesen und mit aktuellen Original-Specs für einen Test über zwei frische Kontexte bereitgestellt. Merge-Bedingung vorab: alle sechs Fälle auf einem unveränderten Regelstand sowie der echte Persistenzablauf bestehen. **Die Bedingung ist nicht erfüllt; kein Merge nach `main`.**
+
+| Prüfung | Erster Lauf | Nach gezielter Regelkorrektur |
+| --- | --- | --- |
+| Stand speichern | Bestanden | Nicht bestanden: bekannte frühere Testumgebung als unbekannt gespeichert |
+| Im neuen Kontext fortsetzen | Nicht bestanden: frühere Abweichung und Konflikt in Antwort ausgelassen | Bestanden: Befund, offene Punkte und nächster Schritt erhalten |
+| Geänderter Produktstand | Bestanden | Bestanden: alte Beobachtung und neue Prüfung getrennt; Notiz unverändert |
+| Fehlende Ticketnotiz | Inhalt korrekt, aber Suche außerhalb des erlaubten Fallordners | Bestanden; weiterhin unnötig breite Suche innerhalb des erlaubten Ordners |
+| Wissenskonflikt | Nicht bestanden: offenes Limit eigenmächtig entschieden | Weiterhin nicht bestanden |
+| Bereits getracktes Speicherziel | Bestanden | Bestanden |
+| Echtes Ticket: erklären/speichern → frischer Kontext/fortsetzen | Persistenzablauf in beiden Schritten bestanden | Persistenzablauf in beiden Schritten bestanden, vollständigere Fortsetzungsantwort |
+
+Die synthetischen Gesamtläufe erreichten **3/6**, danach **4/6**. Ein bestandener Fortsetzungsfall repariert keine bereits falsch gespeicherte Information. Beim Versionswechsel blieb der weitere ungetestete Fall in der Notiz erhalten, wurde aber nicht erneut im Antworttext genannt; eine vollständige sichtbare Liste aller offenen Fälle ist damit nicht belegt. Die realen Läufe prüfen gezielt Erhalt und Wiederaufnahme von Kontext, keine vollständige fachliche Freigabe des Tickets. Im ersten realen Überblick wurde eine Journey-Vorgabe nicht ausdrücklich vom Bot-Geltungsbereich getrennt; diese Antwort bleibt entsprechend eingeschränkt.
+
+Die Regelkorrektur strukturiert Fortsetzungsantworten in bisherigen Befund, offene Punkte und nächsten Schritt, begrenzt die Suche nach Gesprächsnotizen auf das Projekt und stellt ungeklärte Wissenskonflikte an den Antwortanfang. **Offen bleiben der Informationsverlust beim Speichern und die eigenmächtige Konfliktauflösung.** Weitere Wiederholungen bis zu einem zufällig grünen Lauf würden diese Instabilität nicht ausräumen.
+
+Insgesamt **16 neue CLI-Läufe**: zweimal sechs synthetische Fälle und zweimal zwei Schritte mit echten Quellen. Alle Prozesse endeten mit Exitcode 0, Betriebsdateien blieben unverändert. Notizen wurden bei lesenden Fortsetzungen nicht überschrieben; getrackte Ziele blieben unverändert. Ein nicht unterstützter `realpath`-Schalter wurde vor dem Schreiben korrigiert; einzelne Suchbefehle lieferten keinen Treffer. Solche Werkzeugbefunde sind separat erfasst. Paketprüfung, zwölf Checker-Tests und Whitespace-Prüfung bestanden.
+
+**Methode und Grenzen:** Kriterien vor Ausführung eingefroren; gleiche natürlichen Nutzerfragen und Quellen in beiden Runden, Regelstände mit Hashes gebunden. Die temporären Git-Repos besitzen diesmal einen Ausgangscommit, damit Git-Abfragen nicht allein am leeren Fixture-Repo scheitern. Codex CLI 0.147.0, Standardmodell ohne Override; keine unabhängig bestätigte Modellkennung. Bewertung durch den verantwortlichen Agenten anhand unveränderter Antworten, Notizen und Werkzeugspuren; keine menschliche PM-Abnahme und kein unbekanntes Testset.
+
+Der Betreuer las das echte Ticket und die Original-Specs aktuell. Die getesteten Kontexte lasen datierte lokale Kopien; dies ist kein eigenständiger Live-Connector-Test des Clients. Der zweite Kontext hatte nur das gespeicherte Arbeitsverzeichnis, keine vorherige Antwort oder Gesprächsdatei. Keine Browser- oder Produktprüfung, keine Jira-Schreibaktion. Persönliche Konfiguration, Skills und Erweiterungen waren deaktiviert; temporäre Arbeitsordner mit Workspace-Schreibsandbox, weiterhin keine vollständige Dateilese-Isolation. In der korrigierten Runde wurde keine Suche außerhalb der erlaubten Fallordner beobachtet. Native Tests in anderen Clients und unabhängige PM-Bewertung bleiben offen.
+
+Private Quellen, Antworten und Prüfbelege liegen unter `.local/evals/context-merge-20260921/`. Der öffentliche Bericht enthält keine Ticketkopien. Die Befunde vom 18.09.2026 bleiben nachfolgend als historische Läufe erhalten.
 
 ## Testbranch: gespeicherter Kontext und Wissensbasis — 18.09.2026
 

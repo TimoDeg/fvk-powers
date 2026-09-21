@@ -74,7 +74,7 @@ Mit „Stand speichern“ hält der Assistent Umfang, Quellenstand, Entscheidung
 
 ## Was du erwarten kannst
 
-**Stand: Testbranch `codex/persistent-context`.** Speichern und Fortsetzen werden hier mit echten lokalen Dateien und frischen Codex-Kontexten an synthetischen Fällen geprüft. Die Entwicklung hat mehrere Fehlversuche aufgedeckt; Ergebnisse und Grenzen stehen im [Prüfbericht](docs/VALIDATION.md#testbranch-gespeicherter-kontext-und-wissensbasis--18092026).
+**Stand: Testbranch `codex/persistent-context`, noch nicht bereit für den Merge.** Im vollständigen Kontextlauf bestanden zuletzt 4 von 6 Fällen. Eine bekannte frühere Testumgebung ging beim Speichern verloren; ein ungeklärter Wissenskonflikt wurde eigenmächtig entschieden. Ein echtes Ticket ließ sich über zwei frische Kontexte speichern und fortsetzen. [Ergebnisse und Grenzen](docs/VALIDATION.md#merge-prüfung--21092026-noch-nicht-bestanden).
 
 Der PM-Grundablauf bleibt in Vorbereitung für den Pilot. Die frühere echte Ticketprobe war noch nicht stabil: Preisvergleiche oder die fehlende bestätigte Testumgebung wurden teilweise zu ungenau beschrieben. Menschliche PM-Abnahme, ein vollständiger Abnahmedialog und Prüfungen in weiteren Clients stehen weiterhin aus. [Frühere Modellbewertung vom 17.09.2026](evals/results/2026-09-17-v1.md).
 
