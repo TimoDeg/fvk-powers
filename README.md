@@ -2,6 +2,8 @@
 
 Jira-Tickets verstehen, mit den Rewrite-Specs abgleichen, Abnahmen begleiten und Bug-Entwürfe vorbereiten — ein Arbeitsablauf für PMs im KI-Assistenten.
 
+**Varianten:** `main` enthält den PM-Ablauf inklusive gespeichertem Ticketkontext und Anbindung interner Wissensquellen. Codearbeit wird separat auf [codex/developer](https://github.com/TimoDeg/fvk-powers/tree/codex/developer) entwickelt. Die neuesten experimentellen Nachweisregeln und Ergebnisse der Echtproben stehen auf [codex/dev-evidence-checks](https://github.com/TimoDeg/fvk-powers/tree/codex/dev-evidence-checks); dieser Stand ist noch nicht für den vollständigen Dev-Ablauf freigegeben.
+
 ## Starten in drei Schritten
 
 **Zum ersten Mal hier?** [Codex und Git installieren, Jira verbinden](docs/DEPENDENCIES.md#einrichtung-von-anfang-an). Wenn Codex und Git bereits eingerichtet sind, starte direkt mit Schritt 1.
