@@ -1,6 +1,47 @@
-# Prüfstand — 18.09.2026
+# Prüfstand — 21.09.2026
 
-Das Paket hat wiederholbare Strukturprüfungen und separate Modellbewertungen des bisherigen PM-Ablaufs. Der neue Entwicklerstandard, native Erststarts je Client und menschliche Nutzbarkeit sind noch nicht praktisch bewertet. Grüne Paketchecks und synthetische Antworten sind keine Teamfreigabe.
+Das Paket hat Strukturprüfungen, frühere PM-Antwortbewertungen, synthetische Entwicklerproben und zwei lokal geprüfte historische Produktaufträge. Eine vollständige fachliche Abnahme der Echtproben fehlt weiterhin. Native Erststarts je Client und menschliche Nutzbarkeit sind offen. Grüne Paketchecks und große Testsuites sind keine Teamfreigabe.
+
+
+## Historische Implementierungsproben — 21.09.2026
+
+Der Kandidat auf `codex/dev-evidence-checks` präzisiert Nachweise je Symptom, Gegenproben für vermutete gemeinsame Ursachen, verpflichtende Prüfungen, echte rote Regressionen, abschließenden Anforderungsabgleich und begrenzte Werkzeugausgaben. Grundlage ist der zuvor lokal geprüfte Dev-Stand auf `c5a5729`; Produktarbeit erfolgt in getrennten Worktrees mit frischem Kontext und natürlichem PM-Auftrag. Fertige Lösungen und Bewertungskriterien bleiben außerhalb des Autorenkontexts. Produktpatches bleiben lokal; die Workflow-Regeln werden separat veröffentlicht und noch nicht mit der PM-Branch zusammengeführt.
+
+| Abschließender Fall | Ergebnis |
+| --- | --- |
+| Historischer Backendfall, bekannte Wiederholung | Nicht akzeptiert: Eingabeprüfung und Fehlerpfade verbessert, aber eine kundensichtbare Ausgabe weiter falsch; Abschluss meldet den Auftrag trotzdem als umgesetzt |
+| Anderer historischer UI-Fall | Teilweise belegt: eine Layoutkorrektur durch echte Komponenten und Browser-Gegenprobe bestätigt; beim zweiten Symptom besteht auch der alte Code die isolierte Probe, daher kein belastbarer Fehlernachweis |
+
+Im Backendfall bestehen 9.848 Unit-Tests bei vier übersprungenen Tests, dennoch scheitert die unabhängige Ausgabeprobe. Drei gezielte Regressionen reagieren auf Entfernen der neuen Prüfung. Im UI-Fall bestehen 1.352 Tests; die Autoren-Browserprobe verwendet jedoch nachgebautes HTML. Die spätere Evaluatorprüfung rendert echte Komponenten mit gebautem CSS und vergleicht Original, Patch und damaligen Merge. Sie ersetzt keinen vollständigen Anwendungsdurchlauf. Tests von CSS-Klassen allein belegen keine Darstellung.
+
+**Fehlversuche:** Ein erster Backendversuch wurde wegen einer erneut unbelegten gemeinsamen Ursache vor Abschluss gestoppt. Danach wurde die Gegenprobe präzisiert; die beiden abschließenden Fälle nutzten denselben eingefrorenen Regelstand. Drei Starts in dieser Runde, davon zwei abgeschlossene Antworten; kein Erfolgsprozentsatz aus der gezielten Wiederholung. Aufbaufehler und bereits im Ausgangsstand scheiternde Checks bleiben dokumentiert.
+
+**Aufwand der abgeschlossenen Autorenläufe:** Backend 24:33 Minuten, 226.939 ungecachte Input- und 29.244 Outputtokens; UI rund 8:42 Minuten, 137.771 ungecachte Input- und 15.396 Outputtokens. Native Cache-Zähler und sämtliche sichtbaren Kommandos sind lokal erfasst. Vorbereitung, Evaluator und abgebrochener Lauf sind darin nicht vollständig enthalten. Einzelversuche mit unterschiedlichem Prüfumfang erlauben keine kausale Effizienzbehauptung. Große gebündelte Ausgaben bleiben eine beobachtete Schwäche.
+
+**Grenzen und Entscheidung:** Codex CLI 0.147.0, Standardmodell ohne Override; Modellkennung nicht unabhängig bestätigt. Gemeinsamer Host, getrennte Worktrees und frische Kontexte; keine VM oder technisch vollständige Dateilese-Isolation. Produktchecks in neuen Containern ohne Netzwerk, UI-Prüfung zusätzlich in frischem Chrome. Bewertung durch den implementierenden Agenten; keine menschliche Abnahme oder nativen Tests anderer Clients. Die Regeländerung ist umgesetzt, ein verlässlicher Gesamtgewinn jedoch nicht nachgewiesen. Deshalb noch keine Verbindung mit der PM-Branch.
+
+Private Quellen, Patches, Antworten, Messwerte und Gegenproben bleiben unter `.local/evals/dev-evidence-20260921/`. Der [Eval-Plan](../evals/README.md#historische-implementierungsproben) verlangt für kommende Browsernachweise ausdrücklich die tatsächliche Produktimplementierung und eine empfindliche Gegenprobe.
+
+## Codeaufträge von PMs — 21.09.2026
+
+Die Dev-Branch trennt nun Auftrag und Erklärungsstil: Auch bei „Ich bin PM“ gelten die Entwicklerregeln; das PM-Profil ergänzt die Ausgabe. Die Regeln verlangen einen nachvollziehbaren Bug-Nachweis, Tests der betroffenen Aufrufer, unveränderte fremde Arbeit und eine klare Trennung zwischen Umsetzung, Prüfung und Veröffentlichung. Ein ungeklärter Anforderungswert führt zur fachlichen Rückfrage; ein nebenbei entdeckter Fehler wird als Befund gemeldet und nicht ungefragt umgesetzt.
+
+Vier identische natürliche PM-Aufträge wurden auf drei Regelständen mit einem synthetischen Python-Miniprodukt geprüft. Es gab echte Dateien, zwei Aufrufer einer gemeinsamen Funktion, ausführbare Tests und eine fremde uncommittete Notiz. Kriterien und Quellen waren vor den Änderungen festgelegt; Erwartungen und vorherige Antworten lagen außerhalb des jeweiligen Modellkontexts.
+
+| Abschließender Fall | Ergebnis |
+| --- | --- |
+| „Bitte fix das“ für Vergleich und Widget | Gemeinsame Ursache korrigiert; Regression vor Änderung rot, danach grün; beide Aufrufer geprüft, fremde Notiz erhalten |
+| „Nur reviewen“ | Fehler mit Fundstelle und Wirkung benannt; Produktdateien unverändert |
+| Testauftrag mit fehlendem Browser | Unit-Tests ausgeführt; fehlende Browserprüfung und nicht abgedeckter Fehler benannt; keine Freigabe |
+| Ungeklärtes Limit | Beide Alternativen und nötige Entscheidung benannt; zusätzlicher Fehler nur gemeldet, Produktdateien unverändert |
+
+**Abschließender Lauf: 4/4 auf demselben Regelstand bestanden.** Die neuen Regressionstests wurden zusätzlich in einer separaten Kopie gegen den ursprünglichen Fehlercode ausgeführt: dort fehlgeschlagen, mit Korrektur bestanden. Alle vier Läufe riefen das Entwicklerprofil auf; Betriebsdateien und fremde Notizen blieben erhalten. Paketprüfung und zwölf Checker-Tests bestanden. Das Entwicklungsset umfasst nun 14 ältere PM-Antwortfälle und vier ausführbare Dev-Fälle; diese Zahl ist keine Gesamt-Erfolgsquote.
+
+**Fehlversuche bleiben dokumentiert:** Auf der Baseline `c5a5729` fehlte bei drei Aufgaben der Aufruf des Entwicklerprofils. Der Implementierungsfall bestand die nachträgliche Regression, führte sie aber nicht vor dem Fix rot aus. Baseline und erste Korrektur setzten beim offenen Limit ungefragt einen anderen Fehler um; die erste Korrektur verschob außerdem erzeugte Cachedateien außerhalb des erlaubten Fallordners. Erst die präzisierte Umfangsregel bestand den abschließenden Konfliktfall. Zwei Läufe brachen wegen Modellkapazität vor der Bearbeitung ab und wurden je einmal auf identischem Regelstand wiederholt. Vier anfängliche Teststarts scheiterten am fehlenden Git-Repo des Testordners und zählen als Fehler des Testaufbaus. Insgesamt: 18 Starts, davon zwölf abgeschlossene Antworten, zwei Kapazitätsabbrüche und vier ungültige Vorstarts.
+
+**Grenzen:** Codex CLI mit Standardmodell ohne Override, Modellkennung nicht unabhängig bestätigt; gleicher Host, temporäre Arbeitsordner und frische kurzlebige Kontexte. Persönliche Konfiguration und Erweiterungen deaktiviert, keine VM oder vollständige Dateilese-Isolation. Bewertung durch den implementierenden Agenten, keine unabhängige menschliche Bewertung. Bei einzelnen gebündelten Lesebefehlen fehlt der Anfang im gespeicherten Werkzeugoutput; der Aufruf belegt den Leseversuch, nicht die vollständige Sichtbarkeit aller Regeln. Kein tatsächlicher Rewrite-Patch, Jira-Zugriff, Browserlauf oder nativer Test anderer Clients. Keine Stabilitäts- oder Geschwindigkeitsbehauptung aus diesen Einzelaufgaben.
+
+Belege, Ausgangscode, Änderungen, Antworten, Kriterien und Bewertungen liegen lokal unter `.local/evals/dev-pm-20260921/`. Die PM-Branch wurde nicht zusammengeführt. Nächster Nachweis ist ein freigegebener echter Rewrite-Codeauftrag, anschließend die gemeinsame Fortsetzung von PM-Arbeit und Implementierung.
 
 ## Entwicklerstandard und clientneutraler Einstieg — lokale Erweiterung vom 18.09.2026
 
