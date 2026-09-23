@@ -1,6 +1,6 @@
 # Was benötigt wird
 
-Für den hier beschriebenen Einstieg installierst du **die Desktop-App mit Codex und Git**. Dazu kommen dein freigegebener ChatGPT-Zugang, die Jira-Verbindung und Lesezugriff auf das Rewrite-Produktrepo. Python brauchst du nur, wenn du als Maintainer die Paketchecks ausführen möchtest.
+Für den hier ausführlich beschriebenen Einstieg installierst du **die Desktop-App mit Codex und Git**; Claude Code, Claude Desktop und Cursor funktionieren mit denselben Projektanweisungen ([andere Clients](#andere-clients)). Dazu kommen dein freigegebener ChatGPT-Zugang, die Jira-Verbindung und Lesezugriff auf das Rewrite-Produktrepo. Python brauchst du nur, wenn du als Maintainer die Paketchecks ausführen möchtest.
 
 ## Einrichtung von Anfang an
 
@@ -55,6 +55,18 @@ Fehlt das Plugin oder ist die Verbindung gesperrt, bitte den Workspace-Administr
 Der Installationsablauf und die anschließende neue Sitzung sind in der [offiziellen Plugin-Anleitung](https://learn.chatgpt.com/docs/plugins) beschrieben. Menünamen können je nach App-Version und Sprache abweichen; diese Anleitung ist keine Bestätigung, dass das Plugin in jedem Firmenkonto verfügbar ist.
 
 **Wenn du bereits die Codex CLI nutzt:** Gib in der laufenden Codex-Sitzung `/plugins` ein. Wähle dort das freigegebene Jira-/Atlassian-Plugin und folge der Installation bzw. Anmeldung. Starte anschließend Codex im Projektordner neu und schreibe „Setup weiter“ mit deinem Ticketlink. Fehlt der Eintrag, kläre das verfügbare Jira-Plugin mit eurem Workspace-Administrator. Die CLI ist für den oben beschriebenen Desktop-Einstieg nicht zusätzlich erforderlich.
+
+### Andere Clients
+
+Die Projektanweisungen stehen in `AGENTS.md`; Claude Code lädt sie über `CLAUDE.md`. Jira verbindest du über den offiziellen [Atlassian-MCP-Server](https://support.atlassian.com/atlassian-rovo-mcp-server/docs/getting-started-with-the-atlassian-remote-mcp-server/) mit deinem Arbeitskonto (Stand 23.09.2026):
+
+| Client | Projekt öffnen | Jira verbinden |
+| --- | --- | --- |
+| Claude Code | Im Ordner `fvk-powers` `claude` starten | `claude mcp add --transport http atlassian https://mcp.atlassian.com/v2/mcp`, dann in der Sitzung `/mcp` und anmelden |
+| Claude Desktop | Ordner als Projekt bzw. Arbeitsordner wählen | Atlassian-Connector hinzufügen, falls euer Workspace ihn freigibt; sonst Server-URL wie oben laut Atlassian-Anleitung |
+| Cursor | Ordner öffnen, Agent verwenden | Im Cursor-Marketplace „Atlassian“ suchen, **Add to Cursor**, anmelden |
+
+Danach wie oben einen neuen Chat starten und „Setup weiter“ mit dem Ticketlink schreiben. In diesen Clients ist der vollständige Ablauf noch nicht nativ geprüft; [Prüfstand](VALIDATION.md).
 
 ### Rewrite-Specs anbinden
 

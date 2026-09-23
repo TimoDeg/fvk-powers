@@ -1,71 +1,65 @@
 # Geführtes Setup im Chat
 
-Diese Anleitung richtet sich an den Assistenten. Führe die Schritte selbst aus, soweit Werkzeuge und Auftrag das erlauben. Lass den Nutzer nur Angaben, Anmeldung oder Zugriffsentscheidungen übernehmen, die du nicht selbst erledigen kannst. Ein Link auf diese Datei allein erfüllt keinen Setup-Auftrag.
+Diese Anleitung richtet sich an den Assistenten. Ziel: Nach dem Setup kann der PM ein echtes Ticket mit der passenden Spec abgleichen. Führe die Schritte selbst aus, soweit Werkzeuge und Auftrag es erlauben. Der Nutzer übernimmt nur Angaben, Anmeldungen und Zugriffsentscheidungen, die du nicht selbst erledigen kannst. Ein Link auf diese Datei erfüllt keinen Setup-Auftrag.
 
-## 1. Begrüßen und vorhandene Quellen prüfen
+## 1. Vorhandenes prüfen
 
 Beginne etwa so:
 
-> Ich richte fvk-powers für dich ein. Dafür prüfe ich den Zugriff auf Jira und auf die Rewrite-Specs. Ich schaue zuerst, was schon vorhanden ist, und führe dich dann durch die fehlenden Schritte. Du brauchst keine Entwicklerumgebung.
+> Ich richte fvk-powers für dich ein. Dafür prüfe ich den Zugriff auf Jira und auf die Rewrite-Specs. Ich schaue zuerst, was schon da ist, und führe dich dann durch die fehlenden Schritte. Eine Entwicklerumgebung brauchst du nicht.
 
-Verwende Deutsch und das PM-Profil als Standard. Frage nicht zuerst nach Rolle, Modell, technischen Einstellungen oder Antwortlänge. Explizite Wünsche des Nutzers übernehmen.
+Frage nicht nach Rolle, Modell oder Antwortlänge; Deutsch und das PM-Profil sind Standard. Prüfe dann ohne Rückfrage:
 
-Lies vorhandene Angaben aus `.local/sources.md`, falls vorhanden, und berücksichtige den laufenden Chat. Prüfe die tatsächlich verfügbaren Datei- und Jira-Werkzeuge; suche gegebenenfalls in den angebotenen Connector-Werkzeugen. Erfinde keine Toolnamen. Prüfe den bekannten Produktpfad oder den Kandidaten `../fvk` auf lesbare Specs. Suche nicht pauschal auf dem gesamten Rechner.
+- `.local/sources.md` und den laufenden Chat auf bereits bekannte Angaben. Ein gespeicherter Erfolg ist eine alte Beobachtung und wird frisch geprüft.
+- Welche Datei- und Jira-Werkzeuge der Client tatsächlich anbietet. Erfinde keine Toolnamen.
+- Den bekannten Produktpfad oder den Kandidaten `../fvk` auf lesbare Specs. Suche nicht auf dem ganzen Rechner.
+- Beim lokalen Git-Weg `git --version`. Fehlt eine Grundvoraussetzung, führe mit dem passenden Abschnitt aus [Einrichtung von Anfang an](docs/DEPENDENCIES.md#einrichtung-von-anfang-an) durch genau den nächsten Schritt; Betriebssystem und Client ermittelst du aus verfügbaren Angaben und fragst nur, wenn die Anleitung davon abhängt.
 
-Die [Voraussetzungen](docs/DEPENDENCIES.md) unterscheiden nötige Zugänge von optionalen Werkzeugen. Der [Kontexteinstieg](CONTEXT.md) beschreibt weitere Originalquellen. Lade daraus nur das gerade Benötigte. Die optionale Python-Paketprüfung ist keine Voraussetzung für den PM-Chat und ersetzt keinen Jira-Test.
-
-Fehlt eine Grundvoraussetzung, verwende die [Installationsschritte](docs/DEPENDENCIES.md#einrichtung-von-anfang-an) und erkläre genau den nächsten passenden Schritt im Chat. Ermittle Betriebssystem und Client aus verfügbaren Angaben; frage nur, wenn die nächste Anleitung davon abhängt. Prüfe, ob `AGENTS.md` und `profiles/pm.md` im aktuellen Projekt lesbar sind, und beim lokalen Git-Weg mit `git --version`, ob Git verfügbar ist. Vorhandene Installationen wiederverwenden; bei fehlendem Git nur den zum Betriebssystem passenden Installationsweg anbieten. Keine zusätzlichen Entwicklerpakete für die PM-Nutzung verlangen. Die Installation von Codex selbst liegt vor diesem Projektchat; Nutzer, die dabei noch festhängen, anhand der Anleitung weiterführen.
-
-Kündige bevorstehende Schritte kurz mit ihrem Zweck an. Zeige relevante Ergebnisse, keine Befehlsausgaben und internen Diagnosepakete. Ein gespeicherter Erfolgsstatus ist eine alte Beobachtung und muss für einen erneuten Setup-Check frisch geprüft werden.
+Kündige Schritte kurz mit ihrem Zweck an und zeige Ergebnisse, keine Befehlsausgaben. Verlange für die PM-Nutzung keine Entwicklerpakete, Produktinstallation, Container oder Datenbank.
 
 ## 2. Fehlendes nacheinander klären
 
-Stelle im Normalfall nur eine kurze, konkrete Frage auf einmal. Erkläre jeweils, wofür die Angabe benötigt wird. Nutze Antworten sofort und wiederhole bereits beantwortete Fragen nicht. Arbeite an unabhängigen Prüfungen weiter, während eine Antwort aussteht.
+Stelle eine kurze Frage auf einmal, sag, wofür du die Angabe brauchst, und arbeite an unabhängigen Prüfungen weiter, während die Antwort aussteht. Bereits beantwortete Fragen stellst du nicht erneut.
 
 ### Jira
 
-- Ist ein Ticketlink bereits bekannt, übernimm Site und exakten Schlüssel daraus. Sonst frage: „Schick mir einen Link zu einem Rewrite-Ticket, das du lesen kannst. Daran prüfe ich den Jira-Zugriff.“ Keine zusätzliche Frage nach der Site, wenn der Link sie schon eindeutig enthält.
-- Lies das genannte Ticket über den vorhandenen internen Connector. Prüfe, dass das zurückgegebene Ticket übereinstimmt und Beschreibung und Status zugänglich sind. Halte die Abrufzeit fest. Ein vorhandenes Werkzeug allein beweist keinen Zugriff.
-- Fehlt der Connector, führe bei der Desktop-App anhand von [Jira verbinden](docs/DEPENDENCIES.md#jira-verbinden) durch Plugin-Suche, Installation und Anmeldung; erkläre den nächsten nötigen Schritt direkt im Chat. Bei abweichendem Client oder anderen Menüs die aktuelle offizielle Anleitung bzw. tatsächlich sichtbare Optionen prüfen, statt Schaltflächen zu raten. Nach einer Plugin-Installation auf den neuen Projektchat mit „Setup weiter“ hinweisen; bereits gespeicherte Angaben wiederverwenden. Anschließend das konkrete Ticket tatsächlich lesen. Installiere nichts ungefragt und bitte nie um Tokens, Passwörter oder Sitzungscookies im Chat. Fehlende Plugin-Verfügbarkeit oder Workspace-Freigabe an den Administrator verweisen, fehlende Ticketrechte davon getrennt benennen.
-- Unterscheide fehlende Anmeldung, fehlende Berechtigung, nicht gefundenes Ticket und einen vorübergehenden Abruffehler, soweit der Fehler das belegt. Bei uneindeutigem Fehler keine Ursache erfinden. Nenne genau den nächsten sinnvollen Schritt, statt den gleichen Abruf wiederholt zu starten.
-- Möchte der Nutzer Jira später verbinden, setze den Spec-Teil fort und markiere Jira als offen.
+- Ist ein Ticketlink bekannt, übernimm Site und Schlüssel daraus. Sonst: „Schick mir einen Link zu einem Rewrite-Ticket, das du lesen kannst. Daran prüfe ich den Jira-Zugriff.“
+- Lies das Ticket über den vorhandenen Connector. Geprüft ist Jira erst, wenn das zurückgegebene Ticket übereinstimmt und Beschreibung und Status lesbar sind; notiere die Abrufzeit. Ein installiertes Werkzeug allein ist kein Zugriff.
+- Fehlt der Connector, nenne sofort den konkreten nächsten Schritt aus [Jira verbinden](docs/DEPENDENCIES.md#jira-verbinden) für den erkennbaren Client. Ist der Client nicht erkennbar, frag nicht erst danach: Nenne den Schritt für die Desktop-App (**Plugins** öffnen, **Atlassian** suchen, installieren und anmelden) und einen Satz, wo die Anleitung für andere Clients steht. Weichen Menüs ab, orientiere dich an den tatsächlich sichtbaren Optionen oder der offiziellen Anleitung, statt Schaltflächen zu raten. Installiere nichts ungefragt und bitte nie um Passwörter, Tokens oder Sitzungscookies. Nach einer Plugin-Installation ist oft ein neuer Chat nötig: Weise auf „Setup weiter“ hin.
+- Unterscheide, soweit der Fehler es belegt: fehlende Anmeldung, fehlende Berechtigung, Ticket nicht gefunden, vorübergehender Fehler. Ist er uneindeutig, erfinde keine Ursache. Nenne den nächsten sinnvollen Schritt, statt denselben Abruf zu wiederholen. Fehlende Plugin-Freigabe klärt der Workspace-Administrator, fehlende Ticketrechte das Team.
+- Möchte der Nutzer Jira später verbinden, mach mit den Specs weiter und markiere Jira als offen.
 
 ### Rewrite-Specs
 
-- Ein vorhandener bekannter Produktpfad wird direkt geprüft. Ist nur der Standardkandidat gefunden, kläre knapp, ob dies das gewünschte Rewrite-Repo ist, sofern der aktuelle Kontext es nicht bereits bestätigt.
-- Fehlt ein Pfad, frage: „Hast du das Rewrite-Repo bereits auf deinem Rechner? Wenn ja, nenne mir den Ordner; sonst hilft der interne Repo-Link.“ Erkläre bei Bedarf: „Dort liegen die fachlichen Beschreibungen, mit denen ich die Tickets abgleiche.“
-- Bei vorhandenem Ordner lies `docs/specs/features/README.md` und eine passende Original-Spec. Prüfe Repo-Identität und aktuellen lokalen Stand mit Git im Produktordner selbst (`git -C <produktrepo> rev-parse --show-toplevel HEAD` und `git -C <produktrepo> status --short`). Ein im übergeordneten Arbeitsrepo ungetrackter Ordner kann ein eigenes Git-Repo mit gültigem Commit sein; leite daraus keinen fehlenden Produktstand ab. Ein Verzeichnisname allein belegt nicht das richtige Produktrepo. Fehlt der Einstieg, suche begrenzt im bestätigten Dokumentationsordner nach den Specs und benenne die tatsächliche Fundstelle oder Lücke.
-- Bei bloßem Repo-Link verwende verfügbaren freigegebenen Lesezugriff, wenn damit die Originaldateien erreichbar sind. Wenn ein lokaler Checkout erforderlich ist, erkläre den Zweck und kläre Zielordner und den Auftrag zum Herunterladen. Überschreibe keinen vorhandenen Ordner. Keine Produktinstallation, keine Container, keine Migrationen und keine Hintergrunddienste für das PM-Setup.
-- Ist keine Kopie und kein Remote-Lesezugriff vorhanden, erkläre, welcher Repo-Zugang fehlt. Berechtigungen erteilt der zuständige interne Ansprechpartner. Fahre mit nutzbarem Jira-Zugriff fort, ohne Spec-Abgleich zu behaupten.
+- Einen bekannten Pfad prüfst du direkt. Ist nur der Kandidat `../fvk` gefunden, frag knapp, ob das das gewünschte Rewrite-Repo ist, sofern der Kontext es nicht bestätigt.
+- Fehlt ein Pfad: „Hast du das Rewrite-Repo schon auf deinem Rechner? Dann nenne mir den Ordner, sonst hilft der interne Repo-Link. Dort liegen die fachlichen Beschreibungen, mit denen ich Tickets abgleiche.“
+- Bei einem Ordner lies `docs/specs/features/README.md` und eine passende Spec. Prüfe Identität und Stand im Produktordner selbst: `git -C <produktrepo> rev-parse --show-toplevel HEAD` und `git -C <produktrepo> status --short`. Ein im übergeordneten Arbeitsrepo ungetrackter Ordner kann ein eigenes Repo mit gültigem Commit sein; ein Ordnername allein belegt nicht das richtige Repo.
+- Bei einem Repo-Link nutzt du freigegebenen Lesezugriff, wenn er die Originaldateien erreicht. Ist ein Download nötig, klärst du Zielordner und Auftrag; einen vorhandenen Ordner überschreibst du nie.
+- Ohne Kopie und Remote-Zugriff erklärst du, welcher Repo-Zugang fehlt und wer ihn intern freischaltet. Mit Jira geht es weiter, ohne einen Spec-Abgleich zu behaupten.
 
 ### Gemeinsames Wissen (optional)
 
-Wenn bereits ein Wissenseinstieg bestätigt ist oder der Nutzer eine Wissensbasis anbinden möchte, lies dessen lokale Einstiegsdatei oder interne URL. Fehlt die Adresse, frage nur danach; suche nicht auf dem ganzen Rechner. Prüfe den Einstieg und einen für die aktuelle Frage passenden Kapitelverweis. Halte getrennt fest, was lesbar ist und welche verlinkten Originale noch fehlen. Ohne Wissensbasis bleiben Jira und Specs nutzbar; dieser optionale Schritt blockiert das Setup nicht.
+Möchte der Nutzer eine Wissensbasis anbinden, frag nach ihrem Einstieg (Datei oder interne URL), lies ihn und einen zur aktuellen Frage passenden Kapitelverweis. Halte fest, was lesbar ist und welche verlinkten Originale fehlen. Speichere ihn als `Wissenseinstieg` mit Themenbereich, gelesenem Kapitel und Prüfzeit; relative Pfade beziehen sich auf das fvk-powers-Root. Ohne Wissensbasis bleibt alles andere nutzbar. Details: [Gemeinsames Wissen](CONTEXT.md#gemeinsames-wissen).
 
-Speichere den Einstieg als `Wissenseinstieg` in `.local/sources.md`, mit Themenbereich, tatsächlich gelesenem Kapitel und Prüfzeit. Relative Dateipfade beziehen sich auf das fvk-powers-Root; Links innerhalb der Wissensdokumente auf deren jeweilige Datei. Nutze vorhandene Kapitel und Suchhilfen nach [CONTEXT.md](CONTEXT.md#gemeinsames-wissen-nutzen). Kopiere die interne Sammlung nicht in dieses öffentliche Repo. Ein lokaler Pfad richtet keine Synchronisation für Kollegen ein.
+## 3. Lokal merken
 
-## 3. Lokal merken und fortsetzen können
+Sobald Quellen feststehen, speicherst du sie in `.local/sources.md`, nachdem du geprüft hast, dass `.local/` von Git ignoriert und nicht getrackt ist; sonst bleiben die Angaben im Chat. Aktualisiere gezielt und erhalte andere Inhalte. Kein Commit, kein Upload.
 
-Beim beauftragten Setup speichere die bestätigten Quellen unter `.local/sources.md`, sobald sie feststehen. Prüfe vorher, dass `.local/` von Git ignoriert wird und nicht bereits getrackt ist; wenn das nicht gilt, behalte die Angaben vorerst im Chat. Bestehende Angaben gezielt aktualisieren und andere Inhalte erhalten. Kein Commit und kein Upload dieser Datei.
+Gespeichert werden nur: Profil, Produktrepo-Pfad oder -Link, Jira-Site ohne Zugangsdaten, optionaler Wissenseinstieg, Zeitpunkt und Umfang der tatsächlich durchgeführten Zugriffsprüfungen und offene Setup-Schritte. Keine Tickettexte, Namen anderer Personen, Zugangsdaten oder Anhänge.
 
-Speichere nur: gewähltes Profil, bestätigten Produktrepo-Pfad oder Repo-Link, Jira-Site ohne Zugangsdaten, optionalen Wissenseinstieg mit Themenbereich, Zeitpunkt und Umfang der tatsächlich durchgeführten Zugriffsprüfungen sowie noch offene Setup-Schritte. Keine Tickettexte, Namen anderer Personen, Zugangsdaten oder Anhänge. Markiere alte Prüfungen als datierte Beobachtungen, nicht als dauerhafte Zugriffsfreigabe.
+Bei „Setup weiter“ liest du den gespeicherten Stand und den Chat und setzt an der offenen Stelle fort. Links, Pfade und Tickets, die im Chat oder in `.local/sources.md` schon stehen, verwendest du weiter, statt erneut danach zu fragen. Meldet der Nutzer eine Anmeldung, ist der nächste Schritt der Abruf des bereits genannten Tickets; nach einem korrigierten Pfad die Leseprüfung dieses Pfads. Wiederhole nur die betroffene Prüfung.
 
-Wenn Speichern nicht möglich ist, sage kurz, dass die Angaben nur im laufenden Chat verfügbar bleiben. Bei „Setup weiter“ lies den gespeicherten Stand bzw. den aktuellen Kontext und setze bei der offenen Stelle fort. Nach Anmeldung oder korrigiertem Pfad wiederhole nur die betroffene Prüfung. Ein Abbruch ist kein Anlass, alles erneut abzufragen.
+## 4. Abschluss und erste Nutzung
 
-## 4. Verständlicher Abschluss und erste Nutzung
+Zeige für **Jira**, **Specs** und **lokale Speicherung** jeweils **geprüft**, **offen** oder **nicht verfügbar** mit kurzem Grund. „Geprüft“ heißt: aktuell erfolgreich gelesen bzw. geschrieben und zurückgelesen.
 
-Zeige für Jira, Specs und lokale Speicherung jeweils **geprüft**, **offen** oder **nicht verfügbar**, ergänzt um einen kurzen verständlichen Grund. „Geprüft“ beim Quellenzugriff verlangt eine erfolgreiche aktuelle Leseprüfung; das Vorhandensein einer Datei oder eines Tools reicht nicht. Ein erreichbarer Spec-Ordner allein belegt noch keinen erfolgreichen Ticket-Spec-Abgleich.
+- **Setup offen:** Die Antwort endet mit genau einem direkt ausführbaren nächsten Schritt: dem konkreten Bedien- oder Anmeldeschritt aus [Jira verbinden](docs/DEPENDENCIES.md#jira-verbinden) oder der Frage nach dem richtigen Ordner bzw. Repo-Link. „Zugriff offen“ allein hilft nicht weiter. Was schon geht, sagst du ausdrücklich, etwa „Du kannst bereits Fragen zu den Specs stellen.“
+- **Beide Quellen erreichbar:** Mach mit dem genannten Ticket weiter: passende Spec finden, Anforderung verständlich zusammenfassen, einen offenen Punkt oder Abnahmeschritt nennen. Findest du keine passende Spec, sag das; erfinde keine Zuordnung.
 
-Bei offenem Setup endet die Antwort mit genau einem direkt ausführbaren nächsten Schritt. Fehlt eine Angabe oder existiert der angegebene Produktordner nicht, frage konkret nach dem richtigen Ordner oder internen Repo-Link. Fehlt die Jira-Verbindung, nenne den nächsten zum Client passenden Bedien- oder Anmeldeschritt aus [Jira verbinden](docs/DEPENDENCIES.md#jira-verbinden). „Zugriff offen“ oder „Jira-Dienst verbinden“ allein führt den Nutzer nicht weiter. Bereits mögliche Quellenarbeit trotzdem ausführen.
+Beispiele, nur bei tatsächlich erfolgten Prüfungen:
 
-Bei beiden zugänglichen Quellen fahre mit dem bereits genannten Ticket fort: finde die passende Spec, fasse die fachliche Anforderung verständlich zusammen und benenne einen offenen Punkt oder sinnvollen Abnahmeschritt, sofern vorhanden. Wird keine passende Spec gefunden, melde diese Lücke. Erfinde keine Zuordnung, nur um den ersten Durchlauf abzuschließen.
+> Die Rewrite-Specs kann ich lesen, deinen Repo-Pfad habe ich lokal gespeichert. Für Jira fehlt noch die Anmeldung: Öffne in der App **Plugins**, suche nach **Atlassian** und installiere es. Fragen zu den Specs kannst du schon jetzt stellen.
 
-Beispiel für einen teilweisen Abschluss:
+> Jira und Rewrite-Specs sind erreichbar. Dein Ticket habe ich mit der passenden Spec abgeglichen. Frag zum Beispiel: „Was fehlt für die Abnahme?“
 
-> Die Rewrite-Specs kann ich lesen. Für Jira fehlt noch die Anmeldung. Deinen Repo-Pfad habe ich lokal gespeichert. Du kannst bereits Produktfragen stellen; den Abgleich mit einem Ticket prüfen wir nach der Anmeldung.
-
-Beispiel nach erfolgreichem ersten Durchlauf:
-
-> Jira und Rewrite-Specs sind erreichbar. Das genannte Ticket habe ich mit der passenden Spec abgeglichen und die Quellen lokal eingerichtet. Du kannst jetzt zum Beispiel fragen: „Was fehlt für die Abnahme?“
-
-Verwende solche Erfolgsaussagen nur bei tatsächlich erfolgten Prüfungen. Behaupte weder allgemeine Teamfreigabe noch korrekte Produktumsetzung. Ein Setup-Abschluss beschreibt den aktuellen Zugriff und die erprobte Nutzung.
+Ein Setup-Abschluss beschreibt den aktuellen Zugriff, keine Teamfreigabe und keine korrekte Produktumsetzung.

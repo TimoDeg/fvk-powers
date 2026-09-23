@@ -2,6 +2,14 @@
 
 Paketprüfungen, Quellenzugriff und Produktnutzen sind getrennte Messungen. Die 28 [synthetischen Fälle](cases.json) definieren Aufgaben und Erwartungen; ihre Anzahl ist keine Erfolgsquote. Aktuelle Durchläufe, Fehlversuche und Grenzen stehen im [Prüfbericht](../docs/VALIDATION.md), die [Bewertung vom 17.09.2026](results/2026-09-17-v1.md) ist eine ältere Baseline. Die [Stilbeispiele](../examples/pm.md) sind redaktionell geschriebene Beispiele, keine Benchmark-Ausgaben.
 
+## Automatischer Lauf
+
+`python3 evals/run.py --rules <paketordner> --label <name> --reps 2` führt alle Fälle gegen einen Regelstand aus. Jede Antwort entsteht in einem frischen Codex-CLI-Kontext in einem temporären Git-Ordner mit den Betriebsdateien; `evals/`, `tests/`, `tools/` und der Prüfstand bleiben unsichtbar. Der Client lädt `AGENTS.md` wie im Alltag selbst. Antwortfälle erhalten ihre Quellen als `case-input.json` und laufen schreibgeschützt; die sechs Kontextfälle laufen als echte Folge (speichern, fortsetzen, Versionswechsel, fehlende Notiz, Wissenskonflikt, getracktes Ziel) mit tatsächlichen Dateien.
+
+Ein separater Codex-Kontext bewertet jede Antwort anhand von `must_include`, `must_not` und dem gemeinsamen Kriterium „nichts erfunden“; er sieht nicht, welcher Regelstand die Antwort erzeugt hat. Zusätzlich deterministisch: Exitcode, unveränderte Betriebsdateien, Befehle außerhalb des Fallordners und Kurzform (über 180 Wörter nur bei ausdrücklich langen Aufgaben). Ein Lauf besteht nur, wenn alles erfüllt ist. `--report <ordner>` fasst einen Lauf neu zusammen.
+
+Grenzen: Antwort- und Bewertungsmodell stammen aus demselben Client; das ersetzt keine menschliche PM-Bewertung und prüft kein Laden der Anweisungen in anderen Clients. Für einen Vergleich zweier Regelstände beide Läufe mit denselben Fällen, Wiederholungen und derselben Clientversion ausführen.
+
 ## Vor dem Teamstart
 
 1. **Paket prüfen:** Links, portable Einstiege, ausgeschlossene private Dateien und gültige Eval-Fälle. Die automatischen Tests prüfen auch absichtlich beschädigte Pakete. Das beweist keine Befolgung der Anweisungen durch ein Modell.

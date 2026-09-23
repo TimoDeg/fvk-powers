@@ -1,112 +1,103 @@
 # fvk-powers
 
-Jira-Tickets verstehen, mit den Rewrite-Specs abgleichen, Abnahmen begleiten und Bug-Entwürfe vorbereiten — ein Arbeitsablauf für PMs im KI-Assistenten.
+Ein Arbeitsablauf für PMs im KI-Assistenten: Rewrite-Tickets verstehen, mit den Specs abgleichen, Abnahmen Schritt für Schritt begleiten und Bug-Entwürfe vorbereiten.
 
-**Varianten:** `main` enthält den PM-Ablauf inklusive gespeichertem Ticketkontext und Anbindung interner Wissensquellen. Codearbeit wird separat auf [codex/developer](https://github.com/TimoDeg/fvk-powers/tree/codex/developer) entwickelt. Die neuesten experimentellen Nachweisregeln und Ergebnisse der Echtproben stehen auf [codex/dev-evidence-checks](https://github.com/TimoDeg/fvk-powers/tree/codex/dev-evidence-checks); dieser Stand ist noch nicht für den vollständigen Dev-Ablauf freigegeben.
+## Warum
+
+Ein KI-Assistent antwortet immer flüssig, auch wenn er die entscheidende Stelle nie gelesen hat. Für PMs ist das gefährlich: Ein falsch übernommenes Limit, ein alter „Done“-Status oder eine erfundene Ursache landen direkt in Abnahme und Planung.
+
+fvk-powers gibt dem Assistenten klare Arbeitsregeln:
+
+- **Nur Gelesenes zählt.** Aussagen stützen sich auf Ticket und Spec, mit Link. Ungelesene Anhänge oder fehlender Zugriff bleiben als Lücke sichtbar.
+- **Widersprüche bleiben offen.** Sagt das Ticket drei und die Spec fünf, entscheidet nicht die KI, sondern du erfährst, welche Entscheidung fehlt.
+- **Alt ist nicht aktuell.** „Done“ heißt nicht live, ein Test von letzter Woche gilt nicht für die neue Version.
+- **Nichts passiert ungefragt.** Der Assistent liest und entwirft; Jira-Tickets, Kommentare oder Nachrichten entstehen nur auf ausdrücklichen Auftrag.
+
+## So sieht das aus
+
+Ein erfundenes Beispiel einer geführten Abnahme:
+
+> **PM:** Führe mich durch die Abnahme.
+>
+> **Assistent:** Du hast in Vorschau A drei Favoriten markiert. Markiere jetzt ein viertes Angebot. Laut Spec erscheint ein Hinweis und die drei bleiben ausgewählt. Was siehst du?
+>
+> **PM:** Der Hinweis kommt, aber alle Favoriten sind weg.
+>
+> **Assistent:** Der Fall ist **abweichend laut deiner Rückmeldung**. Hier ist der **Bug-Entwurf, nicht erstellt**: Titel, Umgebung, Schritte, Erwartung mit Spec-Link, Beobachtung. Offen sind noch Screenshot und Wiederholbarkeit.
+
+Weitere Beispiele: [examples/pm.md](examples/pm.md).
 
 ## Starten in drei Schritten
 
-**Zum ersten Mal hier?** [Codex und Git installieren, Jira verbinden](docs/DEPENDENCIES.md#einrichtung-von-anfang-an). Wenn Codex und Git bereits eingerichtet sind, starte direkt mit Schritt 1.
+Du brauchst einen **KI-Assistenten mit Datei- und Werkzeugzugriff** (Codex, Claude Code, Claude Desktop oder Cursor), **Git** und Lesezugriff auf **Jira** und das **Rewrite-Produktrepo**, in dem die Specs liegen. Eine laufende Produktanwendung brauchst du nicht. Zum ersten Mal hier? [Assistent und Git einrichten, Jira verbinden](docs/DEPENDENCIES.md#einrichtung-von-anfang-an).
 
-Du brauchst **Codex oder einen vergleichbaren Assistenten mit Dateizugriff**, **Git** zum Klonen und für den vollständigen Abgleich Lesezugriff auf **Jira und das Rewrite-Produktrepo**. Die Specs sind die fachlichen Beschreibungen im Produktrepo. Eine laufende Produktanwendung brauchst du nicht.
+1. **Herunterladen:** Im Terminal in deinem Projektordner ausführen:
 
-### 1. Repo herunterladen
+   ```sh
+   git clone https://github.com/TimoDeg/fvk-powers.git
+   ```
 
-Im Terminal in dem Ordner ausführen, in dem du das Projekt ablegen möchtest:
+2. **Öffnen:** Den Ordner `fvk-powers` im Assistenten als Projekt öffnen. Codex und Cursor lesen `AGENTS.md`, Claude Code liest `CLAUDE.md`.
+3. **Einrichten:** Im Chat schreiben: „Richte fvk-powers für mich ein.“ Halte einen **Rewrite-Ticketlink** und den **Ordner oder Link des Rewrite-Repos** bereit. Der Assistent prüft, was schon geht, und führt dich durch den Rest. Unterbrochen? „Setup weiter“.
 
-```sh
-git clone https://github.com/TimoDeg/fvk-powers.git
-```
+Passwörter und Tokens gehören nie in den Chat; die Anmeldung läuft im jeweiligen Dienst.
 
-### 2. Im Assistenten öffnen
-
-Öffne den heruntergeladenen Ordner **fvk-powers** als Projekt in Codex. Bei anderen Assistenten muss der Client die Projektanweisungen aus `AGENTS.md` lesen können.
-
-### 3. Einrichtung starten
-
-Schreibe im Projektchat:
-
-```text
-Richte fvk-powers für mich ein.
-```
-
-Der Assistent prüft vorhandene Zugänge und führt dich durch fehlende Schritte. Halte einen **Link zu einem Rewrite-Ticket** und den **Ordner oder internen Link zum Rewrite-Produktrepo** bereit. Er fragt danach, wenn die Angaben fehlen. Falls die Jira-Verbindung noch fehlt, hilft er dir beim nächsten Verbindungsschritt. Melde dich im jeweiligen Dienst an; Passwörter gehören nicht in den Chat.
-
-**Unterbrochen?** Schreibe „Setup weiter“. Bereits lokal gespeicherte Angaben werden wiederverwendet.
-
-[Voraussetzungen im Detail](docs/DEPENDENCIES.md) · [Ablauf der geführten Einrichtung](SETUP.md)
-
-## Deine erste Frage
-
-Füge einen Ticketlink ein und schreibe zum Beispiel:
-
-> Erkläre mir dieses Ticket: Was soll sich für Kunden ändern und was muss ich abnehmen?
-
-Der Assistent liest die verfügbaren Quellen und antwortet kurz, verständlich und mit Quellenlinks. Fehlende Informationen und Widersprüche werden benannt. Vorgeschlagene Abnahmeschritte sind noch keine ausgeführten Tests.
+## Was du fragen kannst
 
 | Du möchtest … | Frage im Chat |
 | --- | --- |
-| Ein Ticket verstehen | „Was soll sich für Kunden ändern?“ |
+| Ein Ticket verstehen | „Erkläre mir dieses Ticket: Was ändert sich für Kunden?“ |
 | Anforderungen abgleichen | „Passt das Ticket zur Spec? Was fehlt oder widerspricht sich?“ |
 | Eine Abnahme vorbereiten | „Welche konkreten Situationen sollte ich prüfen?“ |
-| Eine Abnahme durchführen | „Führe mich Schritt für Schritt durch die Abnahme dieses Tickets.“ |
-| Eine Abweichung beschreiben | „Mach daraus einen Bug-Entwurf mit Erwartung, Beobachtung und Prüfschritten.“ |
-| Eine Verbesserung finden | „Welche Verbesserung wäre sinnvoll und warum?“ |
-| Den Release-Stand klären | „Ist das schon live? Welche Belege gibt es dafür?“ |
-| Später im neuen Chat weitermachen | „Speicher den Stand zu FVK-…“ und später „Weiter mit FVK-…“ |
+| Eine Abnahme durchführen | „Führe mich Schritt für Schritt durch die Abnahme.“ |
+| Eine Abweichung festhalten | „Mach daraus einen Bug-Entwurf.“ |
+| Den Release-Stand klären | „Ist das schon live? Welche Belege gibt es?“ |
+| Später weitermachen | „Speicher den Stand zu FVK-…“, im neuen Chat „Weiter mit FVK-…“ |
 | Internes Wissen anbinden | „Nutze diesen internen Wissenseinstieg: …“ |
 
-Bei der geführten Abnahme führst du jeweils einen Prüffall aus und meldest deine Beobachtung zurück. Der Assistent hält fest, was bestanden, abweichend oder noch offen ist, und formuliert bei Bedarf einen Bug-Entwurf im Chat. Ist derselbe Fehler bereits im besprochenen Bug-Ticket erfasst, bereitet er eine Ergänzung dazu vor. Ein Jira-Ticket wird dadurch nicht automatisch erstellt.
+Vorgeschlagene Prüfschritte sind noch keine ausgeführten Tests, und einzelne bestandene Fälle sind keine Freigabe: Die entscheidest weiterhin du.
 
-[Beispielantworten ansehen](examples/pm.md)
+## Stand speichern und Wissen anbinden
 
-## Wissen und Ticketstand behalten
+„Stand speichern“ legt Umfang, Quellenstand, Entscheidungen, deine Beobachtungen (wörtlich, mit Umgebung und Version) und offene Schritte in `.local/tickets/` ab. Ein neuer Chat setzt damit fort; geänderte Anforderungen oder eine neue Version machen alte Tests nicht wieder gültig. Eine interne Wissensbasis bindest du beim Setup als Datei oder Link an; entscheidende Aussagen prüft der Assistent an den Originalen.
 
-Eine interne Wissensbasis kannst du beim Setup als Datei oder internen Link anbinden. Der Assistent liest passende Kapitel und prüft entscheidende Aussagen an ihren Originalquellen. PM und IT können dieselbe Wissensbasis verwenden; zusätzliche Suchdienste sind dafür nicht nötig.
-
-Mit „Stand speichern“ hält der Assistent Umfang, Quellenstand, Entscheidungen, tatsächliche Beobachtungen und offene Schritte lokal fest. Ein neuer Chat im selben Checkout kann damit fortsetzen. Geänderte Anforderungen oder eine neue Testversion machen frühere Tests nicht automatisch wieder gültig. Ohne gespeicherte Notiz fehlt der bisherige Verlauf.
-
-**Lokal bedeutet nicht teamweit:** `.local/` wird nicht mit Git übertragen. Kollegen richten ihren eigenen Zugang zur internen Wissensbasis ein. Eine gemeinsame Übergabe braucht einen bestätigten internen Ablageort. [Speichern und Fortsetzen im Detail](CONTEXT.md#kontext-im-gespräch-erhalten).
+`.local/` wird nicht mit Git geteilt: Notizen und Quellenangaben bleiben auf deinem Rechner, Kollegen richten ihren eigenen Zugang ein. [Details](CONTEXT.md#kontext-erhalten).
 
 ## Wenn beim Setup etwas fehlt
 
-- **Jira noch nicht verbunden:** Folge der [Anleitung zur Jira-Verbindung](docs/DEPENDENCIES.md#jira-verbinden). Mit erreichbaren Specs kannst du bereits Produktfragen stellen.
-- **Rewrite-Repo fehlt:** Nenne den internen Repo-Link oder den lokalen Ordner. Ohne Zugriff auf die Specs kann der Assistent lesbare Tickets erklären, aber keinen Spec-Abgleich bestätigen.
-- **Zugriff verweigert:** Lass die benötigte Leseberechtigung intern freischalten. Das öffentliche fvk-powers-Repo gewährt keinen Zugang zu Jira oder zum Produktrepo.
+- **Jira nicht verbunden:** [Jira verbinden](docs/DEPENDENCIES.md#jira-verbinden). Fragen zu den Specs gehen schon vorher.
+- **Rewrite-Repo fehlt:** Nenne den Ordner oder den internen Repo-Link. Ohne Specs kann der Assistent Tickets erklären, aber keinen Spec-Abgleich bestätigen.
+- **Zugriff verweigert:** Leserechte intern freischalten lassen. Dieses Repo gewährt keinen Zugang zu Jira oder zum Produktrepo.
 
-## Was du erwarten kannst
+## Stand und Grenzen
 
-**Stand: Kontextablauf lokal geprüft.** Alle sechs Kontextfälle bestanden auf demselben Regelstand; die zuvor fehlerhaften Speicher- und Konfliktfälle einschließlich zusätzlicher Wiederholungen jeweils dreimal. Frühere Beobachtungen bleiben als wörtlicher Beleg erhalten, ungeklärte Quellenkonflikte brauchen eine bestätigte Entscheidung. Ein echtes Ticket ließ sich über zwei frische Kontexte speichern und fortsetzen. Native Prüfungen in weiteren Clients und menschliche PM-Abnahme stehen noch aus. [Ergebnisse und Grenzen](docs/VALIDATION.md#kontextkorrektur--21092026-merge-bedingung-erfüllt).
-
-Der PM-Grundablauf bleibt in Vorbereitung für den Pilot. Die frühere echte Ticketprobe war noch nicht stabil: Preisvergleiche oder die fehlende bestätigte Testumgebung wurden teilweise zu ungenau beschrieben. Menschliche PM-Abnahme, ein vollständiger Abnahmedialog und Prüfungen in weiteren Clients stehen weiterhin aus. [Frühere Modellbewertung vom 17.09.2026](evals/results/2026-09-17-v1.md).
-
-Vor einer Antwort soll der Assistent prüfen, ob die entscheidenden Quellen vollständig gelesen wurden, zum betroffenen Ablauf passen und den angefragten Stand belegen. Fehlende Inhalte bleiben als Lücke sichtbar; ein alter Ticketstatus bestätigt keinen aktuellen Rollout. Diese Regeln unterstützen die Arbeit, garantieren aber keine fehlerfreie Antwort.
-
-Standardmäßig liest und erklärt der Assistent. Änderungen, Nachrichten und Veröffentlichungen brauchen einen ausdrücklichen Auftrag. Persönliche Quellenangaben bleiben lokal im von Git ausgeschlossenen Ordner `.local/`. Dieses Repo enthält keine privaten Ticketkopien oder Zugangsdaten.
+Pilotphase. Die Regeln werden mit 28 synthetischen Fällen automatisch und blind bewertet; Ergebnisse und offene Nachweise stehen im [Prüfstand](docs/VALIDATION.md). Ein echter PM hat den Ablauf noch nicht von Anfang bis Ende genutzt, und native Tests in Claude und Cursor stehen aus. Die Regeln helfen, garantieren aber keine fehlerfreie Antwort.
 
 ## Wie das Paket arbeitet
 
-`fvk-powers` liefert Projektanweisungen für deinen Assistenten. [AGENTS.md](AGENTS.md) steuert die Quellenarbeit, [CONTEXT.md](CONTEXT.md) verweist auf passende Originalquellen, und das [PM-Profil](profiles/pm.md) beschreibt Antworten und Abnahmedialoge. Jira- und Dateizugriff stellt dein Client bereit. Das Paket enthält keinen eigenen KI-Dienst und trainiert kein Modell.
+fvk-powers besteht nur aus Projektanweisungen, ohne eigenen KI-Dienst, Index oder Installation:
 
-`main` enthält die PM-Version. Die [Entwickler-Variante](https://github.com/TimoDeg/fvk-powers/tree/codex/developer) wird auf `codex/developer` separat weiterentwickelt.
+- [AGENTS.md](AGENTS.md): Belegmodell, Recherche und Grenzen
+- [profiles/pm.md](profiles/pm.md): Antwortform, Prüfsituationen, geführte Abnahme
+- [CONTEXT.md](CONTEXT.md): welche Originalquelle zu welcher Frage passt, Speichern und Fortsetzen
+- [SETUP.md](SETUP.md): der geführte Einrichtungsdialog
+
+Jira- und Dateizugriff stellt dein Client bereit. Persönliche Angaben bleiben im von Git ausgeschlossenen `.local/`; dieses Repo enthält keine Ticketkopien oder Zugangsdaten.
 
 ## Für Maintainer
 
 [![Package checks](https://github.com/TimoDeg/fvk-powers/actions/workflows/check.yml/badge.svg)](https://github.com/TimoDeg/fvk-powers/actions/workflows/check.yml)
 
-Paket und Dokumentationslinks prüfen, mit Git und Python 3.11 oder neuer; keine zusätzlichen Python-Pakete nötig. Im Repo-Ordner ausführen:
+Paketprüfung (Python 3.11+, nur Standardbibliothek) und Antwortqualität (Codex CLI mit Anmeldung, Ergebnisse unter `.local/evals/`):
 
 ```sh
 python3 -m unittest discover -s tests -v
 python3 tools/check.py
+python3 evals/run.py --rules . --label mein-lauf --reps 2
 ```
 
-Die Checks prüfen die Paketstruktur. Sie ersetzen keine Prüfung der Jira-Verbindung, der Antwortqualität oder der Produktumsetzung.
-
-[Arbeitsregeln](AGENTS.md) · [Kontext und Originalquellen](CONTEXT.md) · [PM-Ausgabeprofil](profiles/pm.md) · [Prüfplan](evals/README.md)
+[Prüfplan](evals/README.md) · [Prüfstand](docs/VALIDATION.md). `main` ist die PM-Version; die Entwickler-Variante entsteht separat auf [codex/developer](https://github.com/TimoDeg/fvk-powers/tree/codex/developer).
 
 ## Lizenz
 
-Dieses Paket steht unter der [MIT-Lizenz](LICENSE). Kopieren, Ändern, Weitergeben und kommerzielle Nutzung sind erlaubt; der Urheber- und Lizenzhinweis müssen in allen Kopien oder wesentlichen Teilen erhalten bleiben. Copyright (c) 2026 Timofey Degtyarev.
-
-Die Lizenz gilt für die Inhalte dieses Repos, nicht für externe Rewrite-Produktquellen, Jira-Inhalte oder andere verlinkte Materialien.
+[MIT](LICENSE), Copyright (c) 2026 Timofey Degtyarev. Die Lizenz gilt für dieses Repo, nicht für Rewrite-Produktquellen, Jira-Inhalte oder verlinkte Materialien.
