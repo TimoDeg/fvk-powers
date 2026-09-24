@@ -10,7 +10,7 @@ from urllib.parse import unquote, urlsplit
 
 
 ENTRYPOINTS = (
-    "AGENTS.md", "CLAUDE.md", "README.md", "SETUP.md", "CONTEXT.md", "profiles/pm.md",
+    "AGENTS.md", "CLAUDE.md", "README.md", "SETUP.md", "CONTEXT.md", "SCENARIOS.md", "profiles/pm.md",
     "docs/DEPENDENCIES.md", "evals/README.md", "examples/pm.md",
 )
 PRODUCT_PATHS = (

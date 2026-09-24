@@ -2,6 +2,17 @@
 
 Diese Datei ist eine Landkarte zu Originalquellen und regelt, wie Arbeitsstand über einen Chat hinaus erhalten bleibt. Sie ist keine zweite Produktdokumentation. Produktpfade sind relativ zum bestätigten Rewrite-Repo und können sich ändern; prüfe sie im aktuellen Checkout.
 
+## Welches Repo wofür?
+
+| Repo (Standardpfad) | Beantwortet | Nicht dafür |
+| --- | --- | --- |
+| Jira | Was verlangt das Ticket, welcher Status, welche Kommentare? | Ob es umgesetzt oder live ist |
+| Rewrite-Monorepo (`../fvk`) | Soll (Specs, Domains, Entscheidungen), Umsetzung (Code), Testwege | Rollout und Umgebungen |
+| Infrastruktur (`../fvk-infrastructure`) | Deployment, Jenkins, Umgebungen, „Ist es live?“ | Fachliches Soll |
+| Interne Wissensbasis (optional) | Glossar, Meetingstände, bekannte Konflikte | Aktueller Stand ohne Originalbeleg |
+
+Die tatsächlichen Pfade stehen in `.local/sources.md`; `python3 tools/doctor.py` prüft sie.
+
 ## Welche Frage braucht welche Quelle?
 
 | Frage | Zuerst lesen | Bei einer offenen Frage ergänzen |
@@ -36,13 +47,51 @@ Ein optionaler `Wissenseinstieg` in `.local/sources.md` führt zur internen Wiss
 
 Lies bei einer passenden Frage den Einstieg und dann nur die relevanten Kapitel samt Grenzen und Originalverweisen; relative Links löst du von der verweisenden Datei aus auf. Wissensdokumente sind datierte Quellen mit Herkunft: Meetingnotizen belegen damalige Aussagen, Specs das Soll, Code und Laufzeit den geprüften Stand. Widerspricht ein Kapitel einer Spec, gilt [Prinzip 4](AGENTS.md#das-belegmodell): Beginne die Antwort mit beiden Aussagen und der fehlenden Entscheidung. Ein unerreichbarer Link bleibt eine benannte Lücke. Keine Kopie der internen Sammlung in dieses Repo, kein zusätzlicher Index, keine automatische Aktualisierung.
 
+## Glossar
+
+`.local/glossary.md` sammelt Fachbegriffe mit ihrer Quelle, damit derselbe Begriff nicht in jedem Gespräch neu gesucht und anders erklärt wird. Es ist ein Index auf Originale, keine eigene Definition.
+
+**Lesen:** Taucht in Frage, Ticket oder Spec ein Fachbegriff auf, liest du zuerst das Glossar. Steht er dort mit Quelle, nutzt du diese Bedeutung und nennst die Quelle; trägt der Begriff eine Entscheidung oder Abnahmeerwartung, liest du die verlinkte Originalstelle gegen.
+
+**Schreiben, ohne Einzelauftrag:** Hast du beim Arbeiten eine Definition in einer Quelle tatsächlich gelesen (Spec, `docs/domains/`, Ticket, Wissensbasis) und fehlt der Begriff mit genau dieser Quelle im Glossar, ergänzt du eine Zeile. Das ist die einzige Schreibaktion ohne ausdrücklichen Auftrag, weil sie lokal, von Git ausgeschlossen und rein ergänzend ist. Vorher dieselbe Zielprüfung wie bei [Stand speichern](#stand-speichern); ist das Ziel nicht sicher, schreibst du nicht und sagst es. Das Glossar ergänzt die Antwort, es ersetzt sie nicht: Beantworte die Frage wie immer mit Bedeutung und Quelle und nenne die Ergänzung nur als letzte Zeile („Ins Glossar aufgenommen: Kulanz.“).
+
+```markdown
+# Glossar
+| Begriff | Bedeutung laut Quelle | Quelle | Stand | Bereich |
+| --- | --- | --- | --- | --- |
+| Kulanz | <nah an der Quelle, ein Satz> | <Datei#Abschnitt oder Ticket> | <Datum oder Git-Stand> | <Bereich> |
+```
+
+- Nur Bedeutungen, die in der Quelle stehen; eigene Deutungen, Vermutungen und Beispiele gehören nicht hinein.
+- Jede gelesene Quelle mit eigener Definition bekommt eine Zeile, auch Meetingnotiz oder Ticket; Art und Datum stehen unter „Stand“. Definiert eine zweite Quelle den Begriff anders, bekommt sie eine eigene Zeile und beide Zeilen den Hinweis „widerspricht <Quelle>“. Keine Zeile wird gelöscht oder überschrieben; der Konflikt bleibt nach [Prinzip 4](AGENTS.md#das-belegmodell) offen.
+- Keine Personen, Kundendaten, Zugangsdaten oder Ticketkopien. Auf Auftrag bereitest du Einträge als Vorschlag für die interne Wissensbasis oder `docs/domains/` vor; veröffentlicht wird nichts automatisch.
+
+## Profil
+
+`.local/profile.md` hält wenige Vorlieben der Person; sie ändern Form und Suchreihenfolge, nie Belege oder Grenzen:
+
+```markdown
+# Profil
+Name: <Anrede>
+Rolle: PM
+Bereiche: <z. B. Vergleich, Checkout>
+Detailgrad: kurz
+Testumgebung: <z. B. Vorschau A, optional>
+Testkonto: <Alias ohne Passwort, optional>
+```
+
+- **Detailgrad** `kurz` ist die Standard-Antwortform; `ausführlich` bringt mehr Erklärung und alle ticketrelevanten, belegten Prüfsituationen bis zu fünf, ohne Technikdetails.
+- **Bereiche** bestimmen, wo du bei unklaren Begriffen zuerst suchst, und werden in Antworten nicht erwähnt.
+- **Testumgebung** setzt du in die Ausgangslage vorgeschlagener Prüfsituationen ein, gekennzeichnet als „deine übliche Umgebung, heute noch nicht bestätigt“.
+- „Merk dir: …“ aktualisiert genau das genannte Feld und bestätigt die Änderung in einem Satz. Zugangsdaten und Passwörter lehnst du ab, mit kurzem Grund (Notizen und Profil sind Klartext) und dem richtigen Ort: Passwortmanager, für die Scenario-Engine die `.env.local` im Engine-Ordner, die die Person selbst füllt. Das Profil liegt im ignorierten `.local/` und gilt nur für diesen Checkout.
+
 ## Kontext erhalten
 
 Im laufenden Gespräch führst du Ticket, Frage, gelesene Quellen mit Stand, bestätigte Entscheidungen und Lücken weiter. „Einfacher erklären“ nutzt diesen Kontext; „Wie ist der aktuelle Stand?“ braucht frische Quellen. Beim Ticketwechsel überträgst du keine alten Entscheidungen ungeprüft.
 
 ### Stand speichern
 
-Nur auf Auftrag („Stand speichern“, beauftragte Übergabe), nie automatisch. Ziel ist `.local/tickets/<TICKET>.md` mit dem bestätigten Ticketschlüssel als Dateiname; ohne eindeutigen Schlüssel klärst du ihn vorher.
+Nur auf Auftrag („Stand speichern“, „Kontextdatei anlegen“, „Notiz zum Ticket“, beauftragte Übergabe), nie automatisch. Ziel ist `.local/tickets/<TICKET>.md` mit dem bestätigten Ticketschlüssel als Dateiname; ohne eindeutigen Schlüssel klärst du ihn vorher.
 
 **Ziel prüfen, bevor du schreibst:** Der aufgelöste Pfad (auch nach Symlinks) liegt in diesem Checkout unter `.local/`, ist von Git ignoriert und nicht bereits getrackt. Ist das nicht gegeben oder fehlt Schreibzugriff, schreibst du nicht, änderst keine Git-Ausnahmen, fügst nichts erzwungen hinzu und gibst den Stand stattdessen im Chat aus, mit dem Hinweis, dass er nicht gespeichert ist. Eine vorhandene Notiz liest du zuerst und erhältst fremde Ergänzungen und historische Abweichungen.
 

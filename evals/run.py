@@ -10,6 +10,7 @@ sources are used. Results stay below the git-ignored .local/ folder.
 import argparse
 import hashlib
 import json
+import os
 import re
 import shutil
 import subprocess
@@ -22,10 +23,12 @@ HERE = Path(__file__).resolve().parents[1]
 CLIENT = ["codex"]  # set from --client
 CASES = {c["id"]: c for c in json.loads((HERE / "evals/cases.json").read_text(encoding="utf-8"))}
 # Rubrics, results and maintainer tooling never reach the answering context.
-HIDDEN = ("evals/", "tests/", "tools/", ".github/", "docs/VALIDATION")
+HIDDEN = ("evals/", "tests/", "tools/check.py", "tools/jira_stub.py", "tools/fresh_env.py", ".github/",
+          "docs/VALIDATION")
 # Cases whose task legitimately needs more than the short default answer.
 LONG_OK = {"complete-acceptance", "guided-bug", "guided-existing-bug", "context-save",
-           "context-storage-guard"}  # unsafe target: the note content goes into the chat instead
+           "context-storage-guard", "profile-detail", "setup-no-code", "glossary-save", "scenario-draft", "dev-question"}  # unsafe target: the note content goes into the chat instead
+FILE_CASES = {"glossary-save", "glossary-reuse", "scenario-draft"}
 CONTEXT = {"save": "context-save", "resume": "context-resume", "drift": "context-drift",
            "missing": "context-missing", "knowledge": "knowledge-conflict",
            "guard": "context-storage-guard"}
@@ -69,17 +72,24 @@ def workspace(base, name, rules, files):
     return w
 
 
-def skill_switches():
-    # Personal skills would leak host knowledge into the test; disable every installed one.
-    paths = [p.parent for root in (Path.home() / ".agents/skills", Path.home() / ".codex/skills")
-             if root.is_dir() for p in root.glob("*/SKILL.md")]
-    items = ",".join(f'{{path="{p}",enabled=false}}' for p in paths)
-    return ["-c", f"skills.config=[{items}]", "-c", "skills.max_context_tokens=1"]
+def isolated_env():
+    """Empty HOME with only the Codex login linked in.
+
+    Personal skills (~/.codex/skills, ~/.agents/skills, also symlinked ones) are listed to the model
+    even when disabled via skills.config, so they must not be reachable at all.
+    """
+    home = Path(tempfile.mkdtemp(prefix="fvk-eval-home-"))
+    (home / ".codex").mkdir()
+    (home / ".codex/auth.json").symlink_to(Path.home() / ".codex/auth.json")
+    return {**os.environ, "HOME": str(home), "CODEX_HOME": str(home / ".codex")}
+
+
+ENV = {}  # set in main()
 
 
 def codex(cwd, prompt, dest, sandbox, schema=None, dev=DEV):
     cmd = ["codex", "exec", "--ignore-user-config", "--ephemeral", "--json", "--color", "never",
-           "--skip-git-repo-check", "-C", str(cwd), "--sandbox", sandbox, *skill_switches(),
+           "--skip-git-repo-check", "-C", str(cwd), "--sandbox", sandbox,
            "-c", 'web_search="disabled"', "-c", f"developer_instructions={json.dumps(dev)}",
            "-o", str(dest / "answer.md")]
     for feature in ("memories", "apps", "plugins", "hooks", "skill_search", "multi_agent",
@@ -91,7 +101,7 @@ def codex(cwd, prompt, dest, sandbox, schema=None, dev=DEV):
     with (dest / "events.jsonl").open("w") as out, (dest / "stderr.txt").open("w") as err:
         try:
             code = subprocess.run(cmd + ["-"], input=prompt, text=True, stdout=out, stderr=err,
-                                  timeout=300).returncode
+                                  timeout=300, env=ENV or None).returncode
         except subprocess.TimeoutExpired:
             code = 124
     answer = (dest / "answer.md").read_text() if (dest / "answer.md").exists() else ""
@@ -156,7 +166,8 @@ def trace(dest, w):
                     continue
                 inp = part.get("input", {})
                 if part["name"] in ("Write", "Edit"):
-                    cmds.append(f"FILE {part['name'].lower()} {inp.get('file_path', '').replace(str(w) + '/', '')}")
+                    path = inp.get("file_path", "").replace("/private/var/", "/var/")
+                    cmds.append(f"FILE {part['name'].lower()} {path.replace(str(w).replace('/private/var/', '/var/') + '/', '')}")
                 else:
                     cmds.append(f"{part['name']} {inp.get('command') or inp.get('file_path') or inp.get('pattern', '')} {inp.get('path', '')}".strip())
         if ev.get("type") == "result":
@@ -228,7 +239,8 @@ def context_fixture(base, name, rules, files):
 
 
 def context_turn(out, w, files, step, rep, prompt, conversation=""):
-    dest = out / f"{CONTEXT[step]}.{rep}"
+    case_id = CONTEXT.get(step, step)
+    dest = out / f"{case_id}.{rep}"
     dest.mkdir(parents=True)
     conv = w / "conversation.md"
     if conversation:
@@ -244,10 +256,12 @@ def context_turn(out, w, files, step, rep, prompt, conversation=""):
         (dest / "saved-note.md").write_text(note_after)
     fixtures = {str(p.relative_to(w)): p.read_text() for p in sorted((w / ".local").rglob("*.md"))
                 if "tickets" not in p.parts}
-    return record(dest, CONTEXT[step], w, files, before, code, secs, answer,
+    written = {str(p.relative_to(w)): p.read_text() for p in sorted((w / ".local").rglob("*"))
+               if p.is_file() and ("glossary" in p.name or "scenarios" in p.parts)}
+    return record(dest, case_id, w, files, before, code, secs, answer,
                   {"note_changed": note_before != note_after, "note": note_after,
                    "note_before": note_before, "conversation": conversation,
-                   "fixtures": fixtures})
+                   "fixtures": fixtures, "written": written})
 
 
 def context_chain(base, out, rules, files, rep):
@@ -272,6 +286,35 @@ def context_chain(base, out, rules, files, rep):
                                 "TEST-42: Abnahme der Favoriten. .local/product/spec.md ist die "
                                 "Quelle. Noch keine Tests. Umgebung unbekannt."))
     return results
+
+
+# Real engine schema and docs are copied into the fixture at run time: nearest sibling `fvk` checkout.
+PRODUCT = next((p / "fvk" for p in HERE.parents if (p / "fvk/docs/end2end").is_dir()), HERE.parent / "fvk")
+ENGINE_FILES = ("docs/end2end/scenario-engine/scenario-engine.md",
+                "deployables/frontend-journey/e2e-scenario-engine/schema/scenario.schema.json",
+                "deployables/frontend-journey/e2e-scenario-engine/scenarios/used-bike-refined.ts")
+
+
+def file_chain(base, out, rules, files, rep):
+    g = context_fixture(base, f"glossary.{rep}", rules, files)
+    put(g, ".local/product/spec-payout.md", "# Auszahlungen\nStand 2026-08-01.\n\n## Begriffe\n\n- **Kulanz:** "
+        "freiwillige Zahlung an Kunden ohne Rechtsanspruch, höchstens 50 € je Vertrag und Jahr.\n")
+    put(g, ".local/knowledge/payout.md", "# Auszahlungen (Meeting 2026-09-10)\n\nKulanz umfasst auch Gutscheine "
+        "bis 100 €; noch nicht mit der Spec abgestimmt.\n")
+    put(g, ".local/knowledge/CONTEXT.md", "# Wissenseinstieg\nAuszahlungen und Kulanz: [Kapitel](payout.md). "
+        "Original: [Spec](../product/spec-payout.md).\n")
+    context_turn(out, g, files, "glossary-save", rep, "Was bedeutet Kulanz bei uns?")
+    context_turn(out, g, files, "glossary-reuse", rep, "Kurz: Was war nochmal Kulanz?")
+    s = context_fixture(base, f"scenario.{rep}", rules, files)
+    for rel in ENGINE_FILES:
+        if (PRODUCT / rel).is_file():
+            put(s, ".local/product/" + rel, (PRODUCT / rel).read_text())
+    context_turn(out, s, files, "scenario-draft", rep,
+                 "Kann ich das Ticket TEST-50 mit der Engine prüfen? Mach mir einen Entwurf.",
+                 "Ticket TEST-50 wurde gelesen: Gebrauchtes E-Bike, Kaufpreis 3.000 €, vor 14 Monaten gekauft, "
+                 "PLZ 50667, Kunde 42 Jahre. Akzeptanzkriterien: 1) Der Vergleich zeigt mindestens 5 Tarife. "
+                 "2) Der günstigste Tarif kostet höchstens 20 € im Monat. 3) Oberhalb der Liste steht der "
+                 "Hinweis „Preise inkl. Versicherungssteuer“. Engine laut Doctor: vorhanden, nicht installiert.")
 
 
 SCHEMA = {
@@ -304,12 +347,14 @@ def grade(base, out, result, grader):
                            "Dateien im Arbeitsordner vor; Links darauf sind echte Quellenlinks, auch "
                            "wenn der Pfad vom Bewertungsordner abweicht. Anleitungen aus den "
                            "Paketdokumenten (etwa Menüschritte zur Jira-Verbindung) und Hinweise "
-                           "auf die Testumgebung selbst sind keine erfundenen Fakten.",
+                           "auf die Testumgebung selbst sind keine erfundenen Fakten. Der Arbeitsordner des "
+                           "Assistenten ist ein Git-Repo.",
                 "antwort": answer}
     if "note" in result:
         material.update({"bisheriger_gespraechsstand": result["conversation"] or None,
                          "lokale_quelldateien_im_arbeitsordner": result["fixtures"],
                          "notiz_vor_dem_zug": result["note_before"],
+                         "geschriebene_glossar_und_szenario_dateien": result.get("written"),
                          "gespeicherte_notiz_nach_dem_zug": result["note"],
                          "notiz_in_diesem_zug_geaendert": result["note_changed"],
                          "ausgefuehrte_befehle_und_dateiaenderungen": result["commands"]})
@@ -352,8 +397,8 @@ def report(out):
     rows, invalid = [], []
     for run in sorted(out.glob("*/run.json")):
         r = json.loads(run.read_text())
-        if '"turn.failed"' in (run.parent / "events.jsonl").read_text():
-            invalid.append(run.parent.name)  # client aborted (quota, crash): no answer to judge
+        if '"turn.failed"' in (run.parent / "events.jsonl").read_text() or (r["exit_code"] == 124 and not r["words"]):
+            invalid.append(run.parent.name)  # client aborted or timed out (quota, crash, network): no answer to judge
             continue
         gpath = out / "grades" / run.parent.name / "grade.json"
         g = json.loads(gpath.read_text()) if gpath.exists() else {"passed": None, "criteria": []}
@@ -396,6 +441,7 @@ def main():
     a = ap.parse_args()
     if a.report:
         return report(a.report)
+    ENV.update(isolated_env())
     if a.regrade:
         return grade_all(a.regrade, a.grader, a.jobs)
     CLIENT[0] = a.client
@@ -409,11 +455,14 @@ def main():
         "rules": str(rules), "head": sha, "files": digest(rules, files),
         "client": subprocess.check_output([a.client, "--version"], text=True).strip(),
         "reps": a.reps, "workspaces": str(base)}, indent=2))
-    wanted = a.only or list(CASES) + ["context"]
-    answers = [c for c in wanted if c in CASES and not c.startswith(("context-", "knowledge-"))]
+    wanted = a.only or list(CASES) + ["context", "files"]
+    answers = [c for c in wanted if c in CASES and not c.startswith(("context-", "knowledge-"))
+               and c not in FILE_CASES]
     with ThreadPoolExecutor(a.jobs) as pool:
         jobs = [pool.submit(answer_case, base, out, rules, files, c, r)
                 for r in range(a.reps) for c in answers]
+        if "files" in wanted:
+            jobs += [pool.submit(file_chain, base, out, rules, files, r) for r in range(a.reps)]
         if "context" in wanted:
             jobs += [pool.submit(context_chain, base, out, rules, files, r) for r in range(a.reps)]
         for j in jobs:

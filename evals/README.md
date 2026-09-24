@@ -1,6 +1,6 @@
 # Antwortqualität und Setup messen
 
-Paketprüfungen, Quellenzugriff und Produktnutzen sind getrennte Messungen. Die 28 [synthetischen Fälle](cases.json) definieren Aufgaben und Erwartungen; ihre Anzahl ist keine Erfolgsquote. Aktuelle Durchläufe, Fehlversuche und Grenzen stehen im [Prüfbericht](../docs/VALIDATION.md), die [Bewertung vom 17.09.2026](results/2026-09-17-v1.md) ist eine ältere Baseline. Die [Stilbeispiele](../examples/pm.md) sind redaktionell geschriebene Beispiele, keine Benchmark-Ausgaben.
+Paketprüfungen, Quellenzugriff und Produktnutzen sind getrennte Messungen. Die 42 [synthetischen Fälle](cases.json) definieren Aufgaben und Erwartungen; ihre Anzahl ist keine Erfolgsquote. Aktuelle Durchläufe, Fehlversuche und Grenzen stehen im [Prüfbericht](../docs/VALIDATION.md), die [Bewertung vom 17.09.2026](results/2026-09-17-v1.md) ist eine ältere Baseline. Die [Stilbeispiele](../examples/pm.md) sind redaktionell geschriebene Beispiele, keine Benchmark-Ausgaben.
 
 ## Automatischer Lauf
 
@@ -9,6 +9,18 @@ Paketprüfungen, Quellenzugriff und Produktnutzen sind getrennte Messungen. Die 
 Ein separater Codex-Kontext bewertet jede Antwort anhand von `must_include`, `must_not` und dem gemeinsamen Kriterium „nichts erfunden“; er sieht nicht, welcher Regelstand die Antwort erzeugt hat. Zusätzlich deterministisch: Exitcode, unveränderte Betriebsdateien, Befehle außerhalb des Fallordners und Kurzform (über 180 Wörter nur bei ausdrücklich langen Aufgaben). Ein Lauf besteht nur, wenn alles erfüllt ist. `--report <ordner>` fasst einen Lauf neu zusammen.
 
 Grenzen: Antwort- und Bewertungsmodell stammen aus demselben Client; das ersetzt keine menschliche PM-Bewertung und prüft kein Laden der Anweisungen in anderen Clients. Für einen Vergleich zweier Regelstände beide Läufe mit denselben Fällen, Wiederholungen und derselben Clientversion ausführen.
+
+## Frische Umgebung
+
+Drei Wege, je nach Zweck:
+
+| Weg | Zweck | So geht es |
+| --- | --- | --- |
+| Wegwerf-Arbeitsordner | Setup-Dialog von null, wiederholbar, offline | `python3 tools/fresh_env.py` baut `fvk-powers` und ein synthetisches `fvk` nebeneinander und einen lokalen Jira-Stub (`tools/jira_stub.py`, Tickets aus `evals/fixtures/tickets.json`), dann den ausgegebenen `claude`- oder `codex`-Befehl starten. `--product ../fvk` nimmt statt der Fixture einen lokalen Klon des echten Repos. Der Stub liefert wie der echte Atlassian-Server ohne Feldauswahl keine Custom Fields; die Akzeptanzkriterien findet nur, wer die Feldbeschreibung nutzt. Ohne Bildschirm: `codex exec` braucht zusätzlich `-c approval_policy="never" -c mcp_servers.atlassian.default_tools_approval_mode="approve"` und `< /dev/null`, sonst wird der Jira-Aufruf abgebrochen bzw. wartet auf Eingabe. |
+| Eigener macOS-Benutzer | Beobachteter Erststart eines echten PMs | `sudo sysadminctl -addUser pmtest -fullName "PM Test" -password -`, abmelden, als `pmtest` anmelden, Assistent nach [DEPENDENCIES](../docs/DEPENDENCIES.md) installieren, README befolgen, Bildschirm aufnehmen. Danach `sudo sysadminctl -deleteUser pmtest`. Nur so ist ausgeschlossen, dass eigene Skills, Anmeldungen oder Pfade mitwirken. |
+| Eval-Lauf | Regeländerung vorher/nachher | `python3 evals/run.py`, siehe oben. |
+
+Der Wegwerf-Ordner prüft Regeln und Ablauf, nicht Installation und echte Jira-Anmeldung; dafür ist der eigene Benutzer da.
 
 ## Vor dem Teamstart
 

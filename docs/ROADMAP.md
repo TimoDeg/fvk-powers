@@ -14,6 +14,18 @@ Ausgangspunkt ist der Pilotstand auf `optimize/pm-rules`: ein Belegmodell, blind
 
 Phase 1 ist in etwa zwei Wochen zu zweit machbar; sie enthält alles, was der beobachtete PM-Erststart braucht.
 
+**Stand 24.09.2026** (Belege im [Prüfstand](VALIDATION.md)):
+
+| # | Stand |
+| --- | --- |
+| A | Gebaut: `tools/doctor.py`, festes `sources.md`-Schema samt Akzeptanzkriterien-Feld, Repo-Landkarte. Isolierter Codex-Erststart ok. |
+| B | Gebaut: „Umfang und Dev-Frage“ im PM-Profil, drei Eval-Fälle 2/2. Dev-Bewertung an echten Tickets offen. |
+| C | Gebaut: Profil mit zwei Setup-Fragen nach dem ersten Abgleich. `profile-detail` und `profile-secret` je 1/2. |
+| D | D2 und D3 (ohne Container) gebaut: `fresh_env.py`, realistischer Jira-Stub, leeres HOME. D1 mit echtem PM offen. |
+| E | Gebaut, Eval 1/2 bzw. 2/2. Zehn-Ticket-Durchsicht offen. |
+| F | Stufe 1 als Regel (`SCENARIOS.md`), Eval `scenario-draft` 0/2. Stufe 2 und echte Tickets offen. |
+| G | Nicht begonnen; hängt an den Entscheidungen unten. |
+
 ## A. Setup mit fester Struktur und Repo-Landkarte
 
 **Problem:** Heute rät der Assistent den Produktpfad (`../fvk`) und der PM weiß nicht, welcher Ordner wofür da ist.

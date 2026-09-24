@@ -71,7 +71,7 @@ Vorgeschlagene Prüfschritte sind noch keine ausgeführten Tests, und einzelne b
 
 ## Stand und Grenzen
 
-Pilotphase. Die Regeln werden mit 28 synthetischen Fällen automatisch und blind bewertet; Ergebnisse und offene Nachweise stehen im [Prüfstand](docs/VALIDATION.md). Ein echter PM hat den Ablauf noch nicht von Anfang bis Ende genutzt, und native Tests in Claude und Cursor stehen aus. Die Regeln helfen, garantieren aber keine fehlerfreie Antwort.
+Pilotphase. Die Regeln werden mit 42 synthetischen Fällen automatisch und blind bewertet; Ergebnisse und offene Nachweise stehen im [Prüfstand](docs/VALIDATION.md). Ein echter PM hat den Ablauf noch nicht von Anfang bis Ende genutzt, und native Tests in Claude und Cursor stehen aus. Die Regeln helfen, garantieren aber keine fehlerfreie Antwort.
 
 ## Wie das Paket arbeitet
 

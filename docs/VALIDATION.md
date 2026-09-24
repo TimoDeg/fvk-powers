@@ -1,37 +1,52 @@
-# Prüfstand — 23.09.2026
+# Prüfstand — 24.09.2026
 
-**Pilotreif für einen beobachteten Erststart, nicht teamfreigegeben.** Die neu strukturierten Regeln bestehen auf denselben 28 synthetischen Fällen mehr Läufe als der vorherige Stand, mit kürzeren Antworten und weniger Kontext. Ein echter PM hat den Ablauf noch nicht genutzt.
+**Pilotreif für einen beobachteten Erststart, nicht teamfreigegeben.** Neu gegenüber dem 23.09.: realistischer Jira-Stub, erstmals isolierte Erststarts in einer frischen Umgebung, Paket B (Umfang und Dev-Frage), Profil, Glossar und Scenario-Entwürfe mit Eval-Fällen. Ein echter PM hat den Ablauf weiterhin nicht genutzt; Claude Code lief heute nicht (Nutzungslimit).
 
-## Vergleich vorher/nachher
+## Erststart in frischer Umgebung
 
-Beide Regelstände liefen mit [`evals/run.py`](../evals/README.md#automatischer-lauf): alle Fälle, je zwei Wiederholungen, frischer Kontext pro Antwort, Bewertung blind durch einen separaten Claude-Sonnet-Kontext.
+`tools/fresh_env.py` baut `fvk-powers` neben einem synthetischen `fvk` und einem lokalen Jira-Stub. Codex 0.147.0 lief ohne Bildschirm, in einem leeren HOME (nur der Login verlinkt), ohne persönliche Skills, Plugins oder Erinnerungen. Aufgabe: „Richte fvk-powers für mich ein. Mein Ticket: …“.
 
-| Client | Vorher (`7af0ef1`) | Nachher | Wörter pro Antwort | Kontext pro Antwort |
-| --- | --- | --- | --- | --- |
-| Claude Code, Sonnet | 41/56 | **47/56** | 137 → 115 | −14 % |
-| Codex CLI 0.147.0 | 37/48 | 38/48 | 69 → 65 | −19 % |
+| Regelstand | Ticket | Ergebnis |
+| --- | --- | --- |
+| neu | TEST-42 (Spec vorhanden, Akzeptanzkriterium widerspricht der Spec) | Ein Zug bis zum Abgleich. Akzeptanzkriterien-Feld über die Feldbeschreibung gefunden und gespeichert, Widerspruch als Produktentscheidung benannt, Profilfrage erst am Ende. |
+| neu | TEST-43 (keine passende Spec) | Ein Zug. Keine Spec erfunden, leeres Akzeptanzkriterien-Feld gemeldet, ein Abnahmeschritt aus dem Ticket. |
+| `affa5b4` | TEST-42 | Ebenfalls ein Zug, Feld gefunden, Widerspruch benannt; ohne Profil und Feldspeicherung, die es dort nicht gibt. |
 
-- Der Claude-Nachher-Wert stammt aus einem vollständigen Lauf auf einem Regelstand mit vor und nach dem Lauf identischen Dateihashes. Beide Claude-Läufe nutzten dasselbe `CLAUDE.md`, sodass nur der Regelinhalt verglichen wird.
-- Codex: 48 statt 56 Läufe, weil das Ausgabenlimit des Workspaces vier Kontextfälle abbrach; verglichen wurden nur Fälle mit gültigen Antworten in beiden Varianten. Dieser Lauf betraf eine frühere Zwischenfassung der neuen Regeln.
-- Deutliche Gewinne: Fortsetzen aus gespeicherter Notiz, veralteter Status, Wissens- und Abnahmekonflikte, Kurzform. Kein Fall hat sich zwischen vollständigem Vorher- und Nachherlauf mit Claude um mehr als einen Lauf verschlechtert.
-- Nachgeschärft und gezielt je dreimal geprüft: kompakter Überblick 3/3, Zurücklesen gespeicherter Notizen (Kontextkette 14/18, Speichern 2/3), Schutz gegen eingeschleuste Anweisungen weiterhin 3/3.
+Je ein Lauf, Codex ohne Bildschirm, synthetische Specs, Stub statt echter Jira-Anmeldung. Frühere Erststarts desselben Tages sind ungültig: Codex hatte trotz Deaktivierung einen persönlichen FVK-Skill des Betreuers geladen. Der am Morgen beobachtete Fehlschlag („passt vollständig“ ohne gelesene Akzeptanzkriterien) ging vor allem auf diesen Skill und einen Stub ohne Feldbeschreibung zurück; die neue Regel zum Akzeptanzkriterien-Feld ist durch diese Läufe nicht als notwendig belegt.
+
+## Eval-Lauf vorher/nachher
+
+[`evals/run.py`](../evals/README.md#automatischer-lauf), je zwei Wiederholungen, frischer Kontext pro Antwort, Codex antwortet und bewertet blind (Claude war wegen Nutzungslimit nicht verfügbar), beide Varianten in leerem HOME.
+
+| | Vorher (`affa5b4`) | Nachher |
+| --- | --- | --- |
+| Gemeinsame 28 Fälle | 50/56 | **52/56** |
+| Neue 14 Fälle | – | 22/28 |
+| Wörter pro Antwort (gemeinsame Fälle) | 66 | 68 |
+| Eingabe-Tokens pro Antwort (gemeinsame Fälle) | ~36.600 | ~46.200 (+26 %) |
+| Verständlichkeit, Modellurteil 1–5 | 4,93 | 4,96 |
+
+- Besser: `setup-resume` 0/2 → 2/2, `stale-status` und `setup-no-jira` je 1/2 → 2/2. Schlechter: `context-storage-guard` und `guided-existing-bug` je 2/2 → 1/2. Bei zwei Wiederholungen ist ein Unterschied von einem Lauf kein belastbarer Effekt.
+- Mehr Kontext: Die zusätzlichen Abschnitte (Profil, Glossar, Umfang, Szenarien) kosten Eingabe-Tokens bei jeder Antwort.
+- 13 Antworten des Nachher-Laufs brachen wegen eines Netzwerkausfalls nach fünf Minuten ohne Antwort ab. Sie gelten jetzt als ungültig statt als Fehlschlag und wurden einmal nachgeholt (12/13 bestanden); die Tabelle zählt die Nachholläufe.
+- Zwei Kriterien wurden nach Sicht erster Ergebnisse präzisiert: `ticket-spec-match` verlangte zuvor, die Jira-Feldbeschreibung in der PM-Antwort zu nennen (widerspricht dem PM-Profil); `scenario-draft` wertete eine tatsächlich geprüfte JSON-Syntax als verbotenes Prüfergebnis.
 
 ## Bekannte Schwächen
 
-- `missing-spec` scheitert in beiden Regelständen gleich: Die Antwort nennt, wo die Spec läge, der Bewerter wertet den Pfad als unbelegt.
-- `setup-resume` ist in der Antwortsimulation nur begrenzt aussagekräftig: Der Fall meldet ein verfügbares Jira-Werkzeug, das es im Testkontext nicht gibt. Der Fall enthält seit diesem Stand den bereits genannten Ticketlink; frühere Ergebnisse dazu sind nicht vergleichbar.
-- `plain-language` fragt teils nach dem Ticket, statt die gelieferte Notiz zu erklären (2/3).
+- `context-storage-guard` 1/2: Einmal wurde die bereits getrackte Notiz zuerst geschrieben, dann geprüft und zurückgesetzt. Das Endergebnis war richtig, die Reihenfolge verletzt „erst prüfen, dann schreiben“. Kontrolllauf mit drei Wiederholungen: 3/3, ohne Schreibzugriff.
+- `context-drift` scheitert in beiden Regelständen (0/2, im Kontrolllauf 0/3): Nach einem Versionswechsel bleibt die neue Prüfung nicht ausdrücklich offen.
+- `scenario-draft` 0/2: Die Suche nach Engine-Originalen greift auf den Elternordner (`../fvk`) zu, obwohl `.local/sources.md` eine andere Produktquelle nennt.
+- Je 1/2: `glossary-save` (einmal eine Definition zum Gewinner erklärt), `profile-detail`, `profile-secret`, `setup-layout-missing`.
 
 ## Grenzen dieser Messung
 
-Synthetisches Entwicklungsset, an dem die Regeln geschärft wurden, kein unbekanntes Testset. Modell bewertet Modell; keine menschliche PM-Bewertung. Keine echten Jira-, Repo- oder Browserzugriffe. Zwei Wiederholungen belegen keine stabile Erfolgsquote. Harness-Artefakte wurden für beide Varianten gleich korrigiert: Claude Codes eigenes Auto-Memory gilt nicht als Zugriff außerhalb des Fallordners, und `context-storage-guard` darf die Notiz im Chat ausgeben. Rohantworten, Bewertungen und Hashes liegen lokal unter `.local/evals/`.
+Synthetisches Entwicklungsset, an dem die Regeln geschärft wurden. Modell bewertet Modell desselben Anbieters; keine menschliche Bewertung. Die Zahlen sind nicht mit dem 23.09. vergleichbar (anderer Client und Bewerter, damals ohne leeres HOME). Rohantworten, Bewertungen und Hashes liegen lokal unter `.local/evals/`.
 
 ## Als Nächstes nachweisen
 
-1. Ein echter PM richtet fvk-powers von null ein und gleicht ein Ticket ab, beobachtet.
-2. Drei echte Tickets, fachlich von einem PM bewertet.
-3. Claude Code und Cursor mit echter Jira-Verbindung.
-4. Neue, nicht zum Schärfen genutzte Fragen.
-5. Die vier Kontextfälle erneut unter Codex, sobald das Limit es erlaubt.
+1. Ein echter PM richtet fvk-powers von null ein und gleicht ein Ticket ab, beobachtet (eigener macOS-Benutzer).
+2. Derselbe isolierte Erststart und A/B-Lauf mit Claude Code; vorher prüfen, ob `--setting-sources project` persönliche Skills ausblendet.
+3. Zwei Dev-Frage-Entwürfe an echten Tickets von einem Entwickler bewerten lassen.
+4. Drei echte Tickets, fachlich von einem PM bewertet; neue, nicht zum Schärfen genutzte Fragen.
 
 Frühere Regelstände und Einzelprüfungen: [Prüfhistorie](VALIDATION-HISTORY.md).

@@ -1,0 +1,38 @@
+{
+  "TEST-42": {
+    "summary": "Favoriten im Vergleich begrenzen",
+    "description": "Kunden sollen im Vergleich bis zu drei Angebote als Favoriten markieren können. Beim vierten Versuch erscheint ein Hinweis, die bisherigen drei bleiben ausgewählt. Siehe Spec favorites.md.",
+    "status": {
+      "name": "In Progress"
+    },
+    "updated": "2026-09-22T14:10:00.000+0200",
+    "customfield_10100": "Akzeptanzkriterien: 1) Drei Favoriten markierbar. 2) Vierter Versuch zeigt Hinweis, Auswahl bleibt. 3) Auswahl bleibt nach Neuladen erhalten.",
+    "assignee": {
+      "displayName": "Synthetische Person"
+    },
+    "issuetype": {
+      "id": "10001",
+      "name": "Story"
+    },
+    "project": {
+      "key": "TEST",
+      "name": "Testprojekt"
+    }
+  },
+  "TEST-43": {
+    "summary": "Tab-Struktur in der Tarifverwaltung umbauen",
+    "description": "Der Tab Feature-Verwaltung bekommt Unter-Tabs für Features und Pakete. Bisherige Links funktionieren weiter.",
+    "status": {
+      "name": "To Do"
+    },
+    "updated": "2026-09-23T09:00:00.000+0200",
+    "issuetype": {
+      "id": "10001",
+      "name": "Story"
+    },
+    "project": {
+      "key": "TEST",
+      "name": "Testprojekt"
+    }
+  }
+}

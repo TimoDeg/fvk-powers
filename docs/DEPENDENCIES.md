@@ -68,6 +68,10 @@ Die Projektanweisungen stehen in `AGENTS.md`; Claude Code lädt sie über `CLAUD
 
 Danach wie oben einen neuen Chat starten und „Setup weiter“ mit dem Ticketlink schreiben. In diesen Clients ist der vollständige Ablauf noch nicht nativ geprüft; [Prüfstand](VALIDATION.md).
 
+### Ordner und Selbstcheck
+
+Lege `fvk-powers` neben das Rewrite-Repo `fvk` (und optional `fvk-infrastructure`) in denselben Arbeitsordner; die Struktur steht in [SETUP](../SETUP.md#arbeitsordner). `python3 tools/doctor.py` prüft anschließend Ordner, Repos, lokalen Speicher, Profil und Glossar, ohne etwas zu ändern.
+
 ### Rewrite-Specs anbinden
 
 Nenne dem Assistenten den vorhandenen Produktrepo-Ordner oder den internen Repo-Link. Liegt noch keine lokale Kopie vor, prüft er zuerst verfügbaren Lesezugriff. Wenn ein Download nötig ist, klärt er mit dir den Zielordner und führt den beauftragten Schritt aus. Interne Berechtigungen muss gegebenenfalls das Team freischalten.
