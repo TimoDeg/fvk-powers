@@ -100,7 +100,7 @@ Claude Code, ohne persönliche Einstellungen, nur mit dem Jira-Stub:
   cd {env['powers']} && claude --setting-sources project --strict-mcp-config --mcp-config {env['mcp']}
 
 Codex, ohne persönliche Konfiguration und Skills, nur mit dem Jira-Stub:
-  cd {env['powers']} && HOME={env['home']} CODEX_HOME={env['home']}/.codex codex --ignore-user-config --disable plugins --disable memories -c {codex_mcp}
+  cd {env['powers']} && HOME={env['home']} CODEX_HOME={env['home']}/.codex codex --ignore-user-config --disable plugins --disable apps --disable memories -c {codex_mcp}
 
 Dann: „Richte fvk-powers für mich ein. Mein Ticket: https://example.atlassian.net/browse/TEST-42“
 Aufgerufene Jira-Tools stehen danach in {env['calls']}. Aufräumen: rm -rf {env['dest']}""")
