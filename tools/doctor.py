@@ -69,8 +69,8 @@ def check(root=ROOT):
     product = resolve(root, sources.get("Produktrepo", DEFAULTS["Produktrepo"]))
     state = repo_state(product) if product.is_dir() else None
     if state is None:
-        row("Produktrepo", "FEHLT", f"{product} ist kein Git-Checkout; erwartet als Ordner fvk direkt neben fvk-powers",
-            required=True)
+        row("Produktrepo", "FEHLT", f"{product} ist vorhanden, aber kein eigener Git-Checkout" if product.is_dir()
+            else f"{product} fehlt; erwartet als Ordner fvk direkt neben fvk-powers", required=True)
     else:
         missing = [m for m in REWRITE_MARKERS if not (product / m).exists()]
         unreadable = [e for e in SPEC_ENTRIES

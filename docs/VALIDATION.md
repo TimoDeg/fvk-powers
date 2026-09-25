@@ -15,6 +15,8 @@
 | Gedächtnis | Notiz über vier Chats samt wörtlicher Beobachtung, Personalisierung im neuen Chat, einmaliger Wunsch, „vergiss“ | 4/4 |
 | Rückfragen | fachlich, mit Optionen und Entscheider | 1/1 |
 
+**Wiederholung:** Zwei weitere vollständige Durchläufe ergaben je 18/20. `code-explicit` scheiterte beide Male; `not-git` und `product-question` je einmal. Ursachen: Die Doctor-Meldung unterschied nicht zwischen fehlendem Repo und Ordner ohne Git, und offene Entscheidungen anderer standen nicht als weitergebbare Frage da. Nach beiden Korrekturen bestanden `not-git`, `no-product` und `product-question` in zwei Nachläufen je 3/3.
+
 In keinem Szenario wurden das Produktrepo (außer dem erlaubten Branch), fvk-powers oder `.gitignore` verändert, Pakete installiert, Commits, Pushes oder Clones ausgeführt, Zugangsdaten gelesen oder ein Konto-Connector genutzt. Stand nach den letzten Regeländerungen; einzelne Szenarien wurden nach Korrekturen gezielt wiederholt, je ein Lauf pro Szenario.
 
 Gefundene und behobene Testlücken: Codex bot einen echten Atlassian-Connector des Kontos auch in leerem HOME an (jetzt `--disable apps`); drei Textprüfungen waren zu eng bzw. zu weit.
@@ -29,11 +31,10 @@ Gefundene und behobene Testlücken: Codex bot einen echten Atlassian-Connector d
 | Alle 42 Fälle | – | 74/84 | 73/84 |
 | Eingabe-Tokens pro Antwort, alle Fälle | – | ~48.900 | ~58.100 |
 
-Die automatische Gedächtnispflege hat im Eval nichts messbar verschlechtert; Unterschiede je Fall liegen bei einem Lauf. Sie kostet Kontext, weil Profil und Notizen gelesen und Regeln mitgeladen werden. Nach dem Lauf wurde das pauschale Laden aller `.local/`-Dateien ausdrücklich ausgeschlossen; Kontextkette danach 11/12 (nur `context-drift` offen).
+Die automatische Gedächtnispflege hat im Eval nichts messbar verschlechtert; Unterschiede je Fall liegen bei einem Lauf. Sie kostet Kontext, weil Profil und Notizen gelesen und Regeln mitgeladen werden. Nach dem Lauf wurde das pauschale Laden aller `.local/`-Dateien ausdrücklich ausgeschlossen, und die Fortsetzung verlangt, einen unbekannten heutigen Zustand zu erfragen oder herzustellen. Kontextkette danach mit drei Wiederholungen 18/18, einschließlich `context-drift`. Die beiden letzten Formulierungsänderungen (Doctor-Meldung, Entscheidung als Frage) sind nicht mehr durch einen vollständigen Eval-Lauf gedeckt.
 
 ## Bekannte Schwächen
 
-- `context-drift` scheitert in allen Regelständen: Nach einem Versionswechsel bleibt die neue Prüfung nicht ausdrücklich offen.
 - Coden auf Auftrag: Produktregeln werden gesucht, ihr Fehlen aber nicht genannt. Gehört zum späteren PM-Coding-Harness.
 - `scenario-draft` 0/2 bis 1/2, `profile-detail` 0/2 bis 1/2, `profile-secret` 1/2.
 - Mehr Kontext pro Antwort als am 23.09.
@@ -46,7 +47,7 @@ Synthetische Fälle und Fixtures, an denen die Regeln geschärft wurden; Modell 
 
 1. Ein echter PM richtet fvk-powers von null ein und gleicht ein Ticket ab, beobachtet.
 2. Setup-Matrix und Eval mit Claude Code; vorher prüfen, ob `--setting-sources project` persönliche Skills ausblendet.
-3. Setup-Matrix mehrfach wiederholen, um Streuung zu sehen.
+3. Vollständiger Eval-Lauf auf dem letzten Regelstand.
 4. Drei echte Tickets, fachlich von einem PM bewertet.
 
 Frühere Regelstände und Einzelprüfungen: [Prüfhistorie](VALIDATION-HISTORY.md).

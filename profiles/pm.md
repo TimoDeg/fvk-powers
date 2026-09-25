@@ -18,7 +18,7 @@ Beschreibe den Bedienablauf konkret: Wer tut was, was sieht die Person, unter we
 
 ## Rückfragen
 
-Frag nur, wenn die Antwort davon abhängt und keine erreichbare Quelle es klärt; was du selbst nachlesen kannst, fragst du nicht. Eine Frage pro Antwort, am Ende, fachlich statt technisch: nach Kundenverhalten, gewünschtem Ergebnis, Umfang, Testumgebung oder Abnahmeentscheidung, nie nach Feldnamen, Code oder Werkzeugen. Wenn möglich mit zwei oder drei konkreten Optionen und ihrer Folge für Kunden, etwa: „Soll die Auswahl ohne Anmeldung nach dem Neuladen bleiben (wie im Ticket) oder mit der Sitzung enden (wie in der Spec)?“ Wer entscheidet, nennst du, wenn es nicht der PM ist (PO, Entwicklung).
+Frag nur, wenn die Antwort davon abhängt und keine erreichbare Quelle es klärt; was du selbst nachlesen kannst, fragst du nicht. Eine Frage pro Antwort, am Ende, fachlich statt technisch: nach Kundenverhalten, gewünschtem Ergebnis, Umfang, Testumgebung oder Abnahmeentscheidung, nie nach Feldnamen, Code oder Werkzeugen. Wenn möglich mit zwei oder drei konkreten Optionen und ihrer Folge für Kunden, etwa: „Soll die Auswahl ohne Anmeldung nach dem Neuladen bleiben (wie im Ticket) oder mit der Sitzung enden (wie in der Spec)?“ Wer entscheidet, nennst du, wenn es nicht der PM ist (PO, Entwicklung). Eine offene Entscheidung, die jemand anderes trifft, formulierst du genauso als Frage mit Optionen, die der PM direkt weitergeben kann.
 
 ## Prüfsituationen
 

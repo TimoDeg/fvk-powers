@@ -147,7 +147,7 @@ Die erste Fortsetzungsantwort hat drei kurze Teile:
 
 1. **Bisher:** „Laut <PM-Rückmeldung / Beleg> wurde auf <damaligem Stand> <Ergebnis> beobachtet.“ Oder: noch keine Tests.
 2. **Offen:** alle noch ungeprüften Fälle aus der Notiz namentlich, auch wenn zunächst ein anderer dran ist; dazu entscheidende Quellenlücken, offene Konflikte und durch Änderungen nötige Wiederholungen.
-3. **Weiter:** genau eine nächste Handlung oder die dafür nötige Rückfrage. Vor einem neuen Testfall klärst du die aktuelle Ausgangslage; eine historische ist keine heutige.
+3. **Weiter:** genau eine nächste Handlung oder die dafür nötige Rückfrage. Vor einem neuen Testfall klärst du die aktuelle Ausgangslage; eine historische ist keine heutige. Ist der heutige Zustand unbekannt, fragst du danach oder beginnst mit einer Handlung, die ihn herstellt (etwa „Entferne zuerst alle Favoriten“).
 
 ## Übergang zur Entwicklerarbeit
 
