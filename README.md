@@ -71,7 +71,7 @@ Nach dem ersten belegten Ticket-Spec-Abgleich legt der Assistent eine Notiz unte
 
 Im neuen Chat liest der Assistent das Profil und **nur die Notiz zum genannten Ticket**, nicht pauschal alle Dateien unter `.local/`. Geänderte Anforderungen oder eine neue Version machen alte Tests nicht automatisch wieder gültig. Eine interne Wissensbasis kannst du beim Setup als Datei oder internen Link anbinden; entscheidende Aussagen werden an Originalquellen geprüft.
 
-`.local/` wird nur beschrieben, wenn der Ordner sicher von Git ausgeschlossen und die Zieldatei nicht getrackt ist. Dort gehören **keine** Passwörter, Tokens oder Ticketkopien hinein. Notizen gelten nur für diesen Checkout und werden nicht mit Git an Kollegen übertragen. [Regeln für Ticketnotizen, Profil und Glossar](CONTEXT.md#lokales-gedächtnis).
+Für das lokale Gedächtnis ist `tools/remember.py` vorgesehen. Das Werkzeug verweigert das Schreiben, wenn `.local/` nicht von Git ausgeschlossen oder die Zieldatei getrackt ist. Dort gehören **keine** Passwörter, Tokens oder Ticketkopien hinein. Notizen gelten nur für diesen Checkout und werden nicht mit Git an Kollegen übertragen. [Regeln für Ticketnotizen, Profil und Glossar](CONTEXT.md#lokales-gedächtnis).
 
 ## Wenn beim Setup etwas fehlt
 
@@ -81,7 +81,7 @@ Im neuen Chat liest der Assistent das Profil und **nur die Notiz zum genannten T
 
 ## Grenze bei Codearbeit
 
-**Das Setup legt keinen Branch an und ändert keinen Produktcode**, auch wenn das Ticket oder derselbe Setup-Prompt eine Umsetzung verlangt. Die PM-Version auf `main` behandelt einen späteren ausdrücklichen Codeauftrag gesondert. Dieser Übergang ist noch **nicht** als zuverlässiger PM-Ablauf bestätigt: In der Setup-Matrix wurde einmal ein Branch angelegt, ohne die fehlenden Produktregeln zu benennen. Für Codearbeit wird die [Entwickler-Variante](https://github.com/TimoDeg/fvk-powers/tree/codex/developer) separat entwickelt; auch sie ist noch keine vollständige Rewrite-Abnahme. [Befund](docs/VALIDATION.md#bekannte-schwächen).
+**Das Setup legt keinen Branch an und ändert keinen Produktcode**, auch wenn das Ticket oder derselbe Setup-Prompt eine Umsetzung verlangt. Die PM-Version auf `main` behandelt einen späteren ausdrücklichen Codeauftrag gesondert. Dieser Übergang ist noch **nicht** als zuverlässiger PM-Ablauf bestätigt: In drei Setup-Läufen wurde auf ausdrücklichen Folgeauftrag ein Branch angelegt, ohne die fehlenden Produktregeln zu benennen. Für Codearbeit wird die [Entwickler-Variante](https://github.com/TimoDeg/fvk-powers/tree/codex/developer) separat entwickelt; auch sie ist noch keine vollständige Rewrite-Abnahme. [Befund](docs/VALIDATION.md#bekannte-schwächen).
 
 Jira-Kommentare, neue Tickets, Nachrichten, Commits, Pushes und Deployments brauchen jeweils einen ausdrücklichen Auftrag. Grüne Paketchecks oder einzelne bestandene Prüffälle sind keine Produktfreigabe.
 
@@ -89,12 +89,12 @@ Jira-Kommentare, neue Tickets, Nachrichten, Commits, Pushes und Deployments brau
 
 | Prüfung auf dem veröffentlichten PM-Stand | Ergebnis | Aussagegrenze |
 | --- | --- | --- |
-| Setup in frischen Wegwerf-Umgebungen | **19/20** Grenzfälle | Synthetisches Rewrite-Repo und Jira-Stub, je Fall ein Lauf; der Code-Folgefall scheiterte. |
-| Antwort-Eval | **73/84** gegenüber 74/84 am Vortag; gemeinsame 28 Fälle **52/56** in beiden Ständen | Zwei Wiederholungen pro Fall, Codex bewertet Codex; keine menschliche PM-Abnahme. |
-| Gedächtnis-Szenarien | **4/4**; Kontextkette anschließend **11/12** | `context-drift` bleibt offen: Nach Versionswechsel wird eine Prüfung nicht zuverlässig erneut als offen genannt. |
-| Aufwand | Rund **19 % mehr Eingabe-Kontext** pro Antwort | Gemessener Mehraufwand der Gedächtnis-Regeln, kein allgemeiner Kostenwert. |
+| Setup in frischen Wegwerf-Umgebungen | **19/20** im ersten Lauf, **18/20** in zwei Wiederholungen | Synthetisches Rewrite-Repo und Jira-Stub; der Code-Folgefall scheiterte jedes Mal. Nach Korrekturen bestanden gezielte Nachläufe, ein neuer vollständiger Lauf fehlt. |
+| Antwort-Eval | **70/84** insgesamt; gemeinsame 28 Fälle **53/56** | Zwei Wiederholungen pro Fall auf `026f609`, Codex bewertet Codex; keine menschliche PM-Abnahme. |
+| Gedächtnis und Fortsetzen | Alle Kontext- und Speicherfälle im letzten vollständigen Eval bestanden, einschließlich `context-drift`; Speicherschutz gezielt **8/8** | Das Glossar schwankt bei widersprüchlichen Quellen; vereinzelt wurde noch direkt statt über das geschützte Werkzeug geschrieben. |
+| Aufwand | Rund **57.000 Eingabe-Tokens pro Antwort** im letzten Eval | Gemessener Durchschnitt dieser synthetischen Fälle, kein allgemeiner Kostenwert. |
 
-Die Setup-Matrix prüfte unter anderem fehlendes Jira, ein verschobenes oder falsches Produktrepo, Fortsetzung im neuen Chat, nicht ignorierten lokalen Speicher und Anweisungen in einem Ticket. `scenario-draft`, `profile-detail` und `profile-secret` bestehen noch nicht zuverlässig. Die Zahlen gelten nur für diese synthetischen Läufe; daraus folgt keine Zuverlässigkeitsquote für echte PM-Arbeit. Ein vollständiger PM-Erststart, aktuelle native Prüfreihen in Claude Code, Claude Desktop und Cursor sowie drei echte, fachlich bewertete Tickets stehen aus. [Vollständiger Prüfstand](docs/VALIDATION.md) · [Methodik](evals/README.md) · [Ausbauplan](docs/ROADMAP.md).
+Die Setup-Matrix prüfte unter anderem fehlendes Jira, ein verschobenes oder falsches Produktrepo, Fortsetzung im neuen Chat, nicht ignorierten lokalen Speicher und Anweisungen in einem Ticket. `scenario-draft`, `profile-detail`, `profile-secret` und `ticket-spec-match` bestehen noch nicht zuverlässig. Die Zahlen gelten nur für diese synthetischen Läufe; daraus folgt keine Zuverlässigkeitsquote für echte PM-Arbeit. Ein vollständiger PM-Erststart, aktuelle native Prüfreihen in Claude Code, Claude Desktop und Cursor sowie drei echte, fachlich bewertete Tickets stehen aus. [Vollständiger Prüfstand](docs/VALIDATION.md) · [Methodik](evals/README.md) · [Ausbauplan](docs/ROADMAP.md).
 
 ## Wie das Paket arbeitet
 
