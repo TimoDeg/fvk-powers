@@ -25,7 +25,18 @@ Gefundene und behobene Testlücken: Codex bot einen echten Atlassian-Connector d
 
 Ein vollständiger Eval-Lauf auf `0ca47c0` ergab 69/84 (gemeinsame Fälle 51/56). Einzelprüfungen zeigten zwei Muster. Erstens schrieb das Modell bei automatischer Gedächtnispflege gelegentlich in eine bereits von Git verfolgte Notiz: Es führte die Prüfung aus, ignorierte ihr Ergebnis, schrieb und setzte teils zurück; einmal blieb die Änderung stehen und die Antwort behauptete das Gegenteil (heute 5/7, Kontrolllauf mit dem Regelstand vom 25.09. 3/3). Zweitens schwankt das Glossar beim Widerspruch zwischen Spec und Meetingnotiz, im selben Maß auch auf dem Stand vom 25.09.
 
-Reine Textregeln hielten den Speicherschutz nicht zuverlässig. Seitdem schreibt das Gedächtnis ausschließlich über `tools/remember.py`: Das Werkzeug schreibt nur unter `.local/`, nur wenn Git den Pfad ignoriert und nicht verfolgt, sonst nichts (drei Unit-Tests). Danach: `context-storage-guard` 8/8 in zwei Läufen, Kontextkette sonst 23/24, Gedächtnis-Szenarien der Setup-Matrix 5/5 mit Schreibzugriffen nur über das Werkzeug. Glossar weiterhin schwankend (save 2/4, reuse 3/4); vereinzelt schreibt das Modell das Glossar noch direkt oder legt Hilfsdateien unter `/tmp` ab. Ein vollständiger Eval-Lauf auf diesem Stand steht aus.
+Reine Textregeln hielten den Speicherschutz nicht zuverlässig. Seitdem schreibt das Gedächtnis ausschließlich über `tools/remember.py`: Das Werkzeug schreibt nur unter `.local/`, nur wenn Git den Pfad ignoriert und nicht verfolgt, sonst nichts (drei Unit-Tests). Danach: `context-storage-guard` 8/8 in zwei Läufen, Kontextkette sonst 23/24, Gedächtnis-Szenarien der Setup-Matrix 5/5 mit Schreibzugriffen nur über das Werkzeug. Glossar weiterhin schwankend (save 2/4, reuse 3/4); vereinzelt schreibt das Modell das Glossar noch direkt oder legt Hilfsdateien unter `/tmp` ab.
+
+Vollständiger Eval-Lauf auf `026f609` (je zwei Wiederholungen, Codex antwortet und bewertet, leeres HOME):
+
+| Regelstand | Alle 42 Fälle | Gemeinsame 28 Fälle | Neue 14 Fälle | Eingabe-Tokens pro Antwort |
+| --- | --- | --- | --- | --- |
+| `affa5b4` (23.09.) | – | 50/56 | – | ~36.600 |
+| 25.09. | 73/84 | 52/56 | 21/28 | ~58.100 |
+| `0ca47c0` | 69/84 | 51/56 | 18/28 | ~60.200 |
+| `026f609` | 70/84 | **53/56** | 17/28 | ~57.000 |
+
+Alle Kontext- und Speicherfälle bestanden, einschließlich `context-storage-guard` und `context-drift`. Die neuen Fälle schwanken zwischen Läufen um drei bis vier; wiederkehrend schwach sind `profile-detail` (0/2), `ticket-spec-match` (0/2 beim Verbot, die Speicherregelung des Tickets als gesichert zu verneinen) und die Setup-Antwortfälle `setup-layout-missing` und `setup-resume`, die in der Setup-Matrix mit echten Dateien dagegen bestehen.
 
 ## Eval-Lauf (25.09.)
 
