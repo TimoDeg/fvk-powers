@@ -38,6 +38,8 @@ Vollständiger Eval-Lauf auf `026f609` (je zwei Wiederholungen, Codex antwortet 
 
 Alle Kontext- und Speicherfälle bestanden, einschließlich `context-storage-guard` und `context-drift`. Die neuen Fälle schwanken zwischen Läufen um drei bis vier; wiederkehrend schwach sind `profile-detail` (0/2), `ticket-spec-match` (0/2 beim Verbot, die Speicherregelung des Tickets als gesichert zu verneinen) und die Setup-Antwortfälle `setup-layout-missing` und `setup-resume`, die in der Setup-Matrix mit echten Dateien dagegen bestehen.
 
+Nachschärfung danach: „nur die Spec regelt X“ gilt als Aussage über ungelesene Ticketteile (Prinzip 1), und Detailgrad `ausführlich` verlangt jeden belegten Fall einschließlich Normalfall. Gezielt mit vier Wiederholungen: `profile-detail` liefert jetzt vier Fälle (2/4; beanstandet wurde „Tarife“ statt „Favoriten“), `ticket-spec-match` 2/4, `profile-short` ohne Abfärben 7/8, `acceptance` 4/4.
+
 ## Eval-Lauf (25.09.)
 
 [`evals/run.py`](../evals/README.md#automatischer-lauf), je zwei Wiederholungen, Codex antwortet und bewertet blind, leeres HOME.
