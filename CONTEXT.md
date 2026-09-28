@@ -51,7 +51,7 @@ Lies bei einer passenden Frage den Einstieg und dann nur die relevanten Kapitel 
 
 `.local/` ist das Gedächtnis dieses Checkouts: `sources.md` (Quellen), `profile.md` (die Person), `glossary.md` (Begriffe) und `tickets/<TICKET>.md` (Arbeitsstand je Ticket). Es ist von Git ausgeschlossen und gilt nur hier. Du hältst es selbst aktuell, damit die Person nichts zweimal erklären muss.
 
-**Lesen, ohne Aufforderung.** Zu Beginn jeder Aufgabe liest du `.local/profile.md`, falls vorhanden. Taucht ein Ticketschlüssel auf, öffnest du `.local/tickets/<TICKET>.md` direkt über den Pfad, bevor du antwortest; Dateisuchen blenden ignorierte Dateien aus. Andere Ticketnotizen, Wissenskapitel oder `.local/` als Ganzes lädst du nicht pauschal. Eine Notiz ist ein datierter Stand, keine Originalquelle ([Fortsetzen](#in-einem-neuen-chat-fortsetzen)).
+**Lesen, ohne Aufforderung.** Zu Beginn jeder Aufgabe liest du `.local/profile.md`, falls vorhanden. Taucht ein Ticketschlüssel auf, öffnest du `.local/tickets/<TICKET>.md` direkt über den Pfad, bevor du antwortest; Dateisuchen blenden ignorierte Dateien aus. Andere Ticketnotizen oder `.local/` als Ganzes lädst du nicht pauschal; zur Frage passende Wissenskapitel und Glossareinträge liest du wie in [Gemeinsames Wissen](#gemeinsames-wissen) und [Glossar](#glossar) beschrieben. Eine Notiz ist ein datierter Stand, keine Originalquelle ([Fortsetzen](#in-einem-neuen-chat-fortsetzen)).
 
 **Schreiben, ohne Einzelauftrag.** Sobald es etwas Neues und Belegtes gibt:
 
@@ -62,7 +62,7 @@ Lies bei einer passenden Frage den Einstieg und dann nur die relevanten Kapitel 
 | Eine Definition in einer Quelle gelesen | `glossary.md` ([Glossar](#glossar)) |
 | Erster Ticket-Spec-Abgleich, bestätigte Entscheidung, Beobachtung der Person, Umfangsliste, neuer oder erledigter offener Punkt | `tickets/<TICKET>.md` nach [Stand speichern](#stand-speichern) |
 
-Einmalige Wünsche („diesmal ausführlich“), eigene Vermutungen, Angaben über andere Personen, Zugangsdaten und Ticketkopien schreibst du nicht. Vor jedem Schreiben gilt die Zielprüfung aus [Stand speichern](#stand-speichern); ist das Ziel nicht sicher, schreibst du nicht und sagst es einmal. Jede Speicherung nennst du in genau einer letzten Zeile, etwa „Gemerkt: TEST-42 (Neuladen ohne Anmeldung offen); Profil: Bereich Checkout.“ „Nicht merken“ oder „Vergiss …“ befolgst du sofort, entfernst den genannten Eintrag und bestätigst es in einem Satz; danach schreibst du dazu nichts mehr.
+Einmalige Wünsche („diesmal ausführlich“), eigene Vermutungen, Angaben über andere Personen, Zugangsdaten und Ticketkopien schreibst du nicht. **Geschrieben wird nur über** `python3 tools/remember.py <pfad>` mit dem vollständigen neuen Dateiinhalt auf der Standardeingabe (etwa per `<<'EOF'`), nie mit einem Editier- oder Patchwerkzeug. Das Werkzeug schreibt nur unter `.local/`, nur wenn Git den Pfad ignoriert und nicht verfolgt. Meldet es „NICHT GESPEICHERT“, schreibst du auf keinem anderen Weg, änderst nichts an Git, sagst es einmal und gibst den Stand im Chat aus. Ohne Python prüfst du dasselbe vorher von Hand ([Stand speichern](#stand-speichern)). Jede Speicherung nennst du in genau einer letzten Zeile, etwa „Gemerkt: TEST-42 (Neuladen ohne Anmeldung offen); Profil: Bereich Checkout.“ „Nicht merken“ oder „Vergiss …“ befolgst du sofort, entfernst den genannten Eintrag und bestätigst es in einem Satz; danach schreibst du dazu nichts mehr.
 
 ## Glossar
 
@@ -70,7 +70,7 @@ Einmalige Wünsche („diesmal ausführlich“), eigene Vermutungen, Angaben üb
 
 **Lesen:** Taucht in Frage, Ticket oder Spec ein Fachbegriff auf, liest du zuerst das Glossar. Steht er dort mit Quelle, nutzt du diese Bedeutung und nennst die Quelle; trägt der Begriff eine Entscheidung oder Abnahmeerwartung, liest du die verlinkte Originalstelle gegen.
 
-**Schreiben, ohne Einzelauftrag:** Hast du beim Arbeiten eine Definition in einer Quelle tatsächlich gelesen (Spec, `docs/domains/`, Ticket, Wissensbasis) und fehlt der Begriff mit genau dieser Quelle im Glossar, ergänzt du eine Zeile. Vorher dieselbe Zielprüfung wie bei [Stand speichern](#stand-speichern); ist das Ziel nicht sicher, schreibst du nicht und sagst es. Das Glossar ergänzt die Antwort, es ersetzt sie nicht: Beantworte die Frage wie immer mit Bedeutung und Quelle und nenne die Ergänzung nur in der Gemerkt-Zeile („Gemerkt: Glossar Kulanz.“).
+**Schreiben, ohne Einzelauftrag:** Hast du beim Arbeiten eine Definition in einer Quelle tatsächlich gelesen (Spec, `docs/domains/`, Ticket, Wissensbasis) und fehlt der Begriff mit genau dieser Quelle im Glossar, ergänzt du in derselben Antwort eine Zeile, über `tools/remember.py` wie im [lokalen Gedächtnis](#lokales-gedächtnis) (ganze Datei mit der neuen Zeile). Das Glossar ergänzt die Antwort, es ersetzt sie nicht: Beantworte die Frage wie immer mit Bedeutung und Quelle und nenne die Ergänzung nur in der Gemerkt-Zeile („Gemerkt: Glossar Kulanz.“).
 
 ```markdown
 # Glossar
@@ -111,7 +111,7 @@ Im laufenden Gespräch führst du Ticket, Frage, gelesene Quellen mit Stand, bes
 
 Automatisch bei den Anlässen aus [Lokales Gedächtnis](#lokales-gedächtnis) und auf Auftrag („Stand speichern“, „Kontextdatei anlegen“, „Notiz zum Ticket“, Übergabe). Ziel ist `.local/tickets/<TICKET>.md` mit dem bestätigten Ticketschlüssel als Dateiname; ohne eindeutigen Schlüssel klärst du ihn vorher.
 
-**Ziel prüfen, bevor du schreibst:** Der aufgelöste Pfad (auch nach Symlinks) liegt in diesem Checkout unter `.local/`, ist von Git ignoriert und nicht bereits getrackt. Ist das nicht gegeben oder fehlt Schreibzugriff, schreibst du nicht, änderst keine Git-Ausnahmen, fügst nichts erzwungen hinzu und gibst den Stand stattdessen im Chat aus, mit dem Hinweis, dass er nicht gespeichert ist. Eine vorhandene Notiz liest du zuerst und erhältst fremde Ergänzungen und historische Abweichungen.
+**Ziel prüfen, bevor du schreibst** (erledigt `tools/remember.py`; ohne Python von Hand): Der aufgelöste Pfad (auch nach Symlinks) liegt in diesem Checkout unter `.local/`, ist von Git ignoriert und nicht bereits getrackt. Ist das nicht gegeben oder fehlt Schreibzugriff, schreibst du nicht, änderst keine Git-Ausnahmen, fügst nichts erzwungen hinzu und gibst den Stand stattdessen im Chat aus, mit dem Hinweis, dass er nicht gespeichert ist. Eine vorhandene Notiz liest du zuerst und erhältst fremde Ergänzungen und historische Abweichungen.
 
 **Beobachtungen wörtlich sichern.** Zusammenfassungen verlieren erfahrungsgemäß genau die Angaben, die später zählen: frühere Umgebung, Version, wer was gemeldet hat. Deshalb kopierst du pro früherer Beobachtung die ursprünglichen Sätze aus dem Gespräch als **Originalbeleg**, einschließlich Umgebung, Version, Herkunft, Handlung und Ergebnis. Sensible Angaben schwärzt du ausdrücklich. Bewertung und heutiger Stand stehen außerhalb des Zitats; „heute unbekannt“ ändert den historischen Beleg nicht.
 

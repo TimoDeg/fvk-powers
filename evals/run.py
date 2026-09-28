@@ -110,7 +110,7 @@ def codex(cwd, prompt, dest, sandbox, schema=None, dev=DEV):
 
 CLAUDE_READ = ["Read", "Glob", "Grep"]
 CLAUDE_WRITE = CLAUDE_READ + ["Write", "Edit"] + [f"Bash({c}:*)" for c in
-                                                ("git", "ls", "shasum", "date", "find", "stat", "readlink", "realpath")]
+                                                ("git", "ls", "shasum", "date", "find", "stat", "readlink", "realpath", "python3 tools/remember.py")]
 
 
 def claude(cwd, prompt, dest, sandbox, dev=DEV):

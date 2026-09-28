@@ -1,4 +1,4 @@
-# Prüfstand — 25.09.2026
+# Prüfstand — 28.09.2026
 
 **Pilotreif für einen beobachteten Erststart, nicht teamfreigegeben.** Neu gegenüber dem 24.09.: automatisches lokales Gedächtnis (Ticketnotiz, Profil, Glossar ohne Einzelauftrag), fachliche Rückfragen mit Optionen und eine Setup-Matrix mit 20 Grenzfällen über mehrere Chats. Ein echter PM hat den Ablauf weiterhin nicht genutzt; Claude Code lief nicht (Nutzungslimit bis 01.10.).
 
@@ -21,7 +21,13 @@ In keinem Szenario wurden das Produktrepo (außer dem erlaubten Branch), fvk-pow
 
 Gefundene und behobene Testlücken: Codex bot einen echten Atlassian-Connector des Kontos auch in leerem HOME an (jetzt `--disable apps`); drei Textprüfungen waren zu eng bzw. zu weit.
 
-## Eval-Lauf
+## Nachtrag 28.09.: Speicherschutz über ein Werkzeug
+
+Ein vollständiger Eval-Lauf auf `0ca47c0` ergab 69/84 (gemeinsame Fälle 51/56). Einzelprüfungen zeigten zwei Muster. Erstens schrieb das Modell bei automatischer Gedächtnispflege gelegentlich in eine bereits von Git verfolgte Notiz: Es führte die Prüfung aus, ignorierte ihr Ergebnis, schrieb und setzte teils zurück; einmal blieb die Änderung stehen und die Antwort behauptete das Gegenteil (heute 5/7, Kontrolllauf mit dem Regelstand vom 25.09. 3/3). Zweitens schwankt das Glossar beim Widerspruch zwischen Spec und Meetingnotiz, im selben Maß auch auf dem Stand vom 25.09.
+
+Reine Textregeln hielten den Speicherschutz nicht zuverlässig. Seitdem schreibt das Gedächtnis ausschließlich über `tools/remember.py`: Das Werkzeug schreibt nur unter `.local/`, nur wenn Git den Pfad ignoriert und nicht verfolgt, sonst nichts (drei Unit-Tests). Danach: `context-storage-guard` 8/8 in zwei Läufen, Kontextkette sonst 23/24, Gedächtnis-Szenarien der Setup-Matrix 5/5 mit Schreibzugriffen nur über das Werkzeug. Glossar weiterhin schwankend (save 2/4, reuse 3/4); vereinzelt schreibt das Modell das Glossar noch direkt oder legt Hilfsdateien unter `/tmp` ab. Ein vollständiger Eval-Lauf auf diesem Stand steht aus.
+
+## Eval-Lauf (25.09.)
 
 [`evals/run.py`](../evals/README.md#automatischer-lauf), je zwei Wiederholungen, Codex antwortet und bewertet blind, leeres HOME.
 
